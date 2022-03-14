@@ -1,0 +1,114 @@
+<template>
+  <div
+      class="custom-container mx-auto"
+  >
+    <LoginForm :show="showLoginForm" @onFormClose="showLoginForm = false"/>
+    <v-card dark flat>
+      <v-card-title class="pa-2 red lighten-1">
+        <v-menu offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn v-on="on" v-bind="attrs" icon>
+              <v-icon>mdi-menu</v-icon>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item
+                v-for="(item, index) in menuItems"
+                :key="index"
+                @click="processMenuAction(item.name)"
+            >
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+
+
+        <h3 class="text-h6 font-weight-light text-center grow">
+          Frontend developer
+        </h3>
+        <v-avatar @click="showLoginForm = true" class="login-avatar">
+          <v-img
+              src="https://avataaars.io/?accessoriesType=Prescription02&avatarStyle=Circle&clotheType=BlazerShirt&eyeType=Squint&eyebrowType=Default&facialHairColor=Brown&facialHairType=BeardLight&hairColor=BlondeGolden&mouthType=Smile&skinColor=Light&topType=ShortHairShortCurly"></v-img>
+        </v-avatar>
+      </v-card-title>
+      <v-img
+          src="https://cdn.vuetifyjs.com/images/cards/forest.jpg"
+          gradient="to top, rgba(0,0,0,.44), rgba(0,0,0,.44)"
+      >
+        <v-container class="fill-height">
+          <v-row align="center">
+            <strong class="text-h1 font-weight-regular mr-5">JS</strong>
+            <v-row justify="end">
+              <div class="text-h5 font-weight-light">
+                Vue.js
+              </div>
+              <div class="mr-2 text-uppercase font-weight-light">
+                React
+              </div>
+            </v-row>
+          </v-row>
+        </v-container>
+      </v-img>
+    </v-card>
+    <v-card>
+      <v-card-text class="py-0">
+        <v-timeline
+            align-top
+            dense
+        >
+          <v-timeline-item
+              v-for="(item, index) in workPlaces"
+              :key="index"
+              :color="index % 2 === 1 ? 'teal lighten-3' : 'pink'"
+              small
+          >
+            <v-row class="pt-1">
+              <v-col cols="3">
+                <strong>{{ item.date }}</strong>
+              </v-col>
+              <v-col>
+                <strong><a :href="item.link" target="blank">{{ item.name }}</a></strong>
+                <div class="text-caption">
+                  {{ item.text }}
+                </div>
+              </v-col>
+            </v-row>
+          </v-timeline-item>
+        </v-timeline>
+      </v-card-text>
+    </v-card>
+  </div>
+</template>
+<script>
+import WORK_PLACES from "@/settings/workPlaces";
+import LoginForm from "@/components/Login/LoginForm";
+
+export default {
+  name: "HomePage",
+  components: {LoginForm},
+  data() {
+    return {
+      menuItems: [
+        {title: 'Binance Emulator', name: 'binanceEmulator'},
+      ],
+      showLoginForm: false,
+      workPlaces: WORK_PLACES,
+    }
+  },
+  mounted() {
+  },
+  methods: {
+    processMenuAction(name) {
+      console.log(name)
+    },
+  }
+}
+</script>
+<style lang="scss" scoped>
+.custom-container {
+  max-width: 450px;
+}
+.login-avatar {
+  cursor: pointer;
+}
+</style>
