@@ -92,8 +92,8 @@ export default {
     async sendPassphrase() {
       try {
         this.isPassphraseSending = true;
-        const res = await this.$axios.$get(apiRoutes.CREATE_PASSPHRASE);
-        if (res.success) {
+        const res = await this.$http.get(apiRoutes.CREATE_PASSPHRASE);
+        if (res.data?.success) {
           this.isPassphraseSent = true;
           this.isPassphraseSending = false;
           this.$toast.success(Lang.PASSPHRASE_WAS_SENT_SUCCESSFULLY);
@@ -108,8 +108,8 @@ export default {
     async checkPassphrase() {
       if (!this.$refs.loginForm.validate()) return;
       try {
-        const res = await this.$axios.$get(`${apiRoutes.CHECK_PASSPHRASE}/${this.passPhrase}`);
-        if (res.success) {
+        const res = await this.$http.get(`${apiRoutes.CHECK_PASSPHRASE}/${this.passPhrase}`);
+        if (res.data?.success) {
           // TODO Possibly, I need to enable this toast in future
           // this.$toast.success(Lang.LOGIN_SUCCESSFULLY);
           await this.$router.push(routes.CABINET);
