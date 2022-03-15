@@ -6,7 +6,7 @@ import axios from 'axios';
 import '@/plugins/toast';
 
 const base = axios.create({
-  baseURL: 'http://localhost:3000'
+  baseURL: 'http://localhost:3040'
 });
 
 Vue.config.productionTip = false
