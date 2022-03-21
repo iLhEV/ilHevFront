@@ -4,8 +4,8 @@
       Cabinet
     </v-card-title>
     <v-card-text>
-      <v-btn @click="addArticle" @onClose="onCloseAddArticle" small depressed>Add article</v-btn>
-      <AddArticle :show="showAddArticle"/>
+      <v-btn @click="addArticle" small depressed>Add article</v-btn>
+      <AddArticle v-model="showAddArticle"/>
     </v-card-text>
   </v-card>
 </template>
@@ -18,14 +18,16 @@ export default {
   data() {
     return {
       showAddArticle: false,
+      myVal: '',
     }
   },
   methods: {
     addArticle() {
       this.showAddArticle = true;
     },
-    onCloseAddArticle() {
-      this.showAddArticle = false;
+    onCloseAddArticle(newVal) {
+      console.log('newVal', newVal)
+      this.showAddArticle = newVal;
     }
   }
 }

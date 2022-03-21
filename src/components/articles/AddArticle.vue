@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="isShow" max-width="800">
+  <v-dialog :value="value" @input="$emit('input', $event)" max-width="800">
     <v-card>
       <v-card-title>
         Add article
@@ -17,21 +17,18 @@
 export default {
   name: "AddArticle",
   props: {
-    show: Boolean,
+    value: Boolean,
   },
   data() {
     return {
-      isShow: false,
     }
   },
   watch: {
-    show() {
-      this.isShow = this.show;
+    myValue(newVal) {
+      this.$emit('update', newVal)
     },
-    isShow(newVal) {
-
-      !newVal && this.$emit('onClose');
-    }
+  },
+  methods: {
   }
 }
 </script>
