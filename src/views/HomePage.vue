@@ -1,6 +1,6 @@
 <template>
   <div
-      class="custom-container mx-auto"
+      class="home-page mx-auto"
   >
     <LoginForm :show="showLoginForm" @onFormClose="showLoginForm = false"/>
     <v-card dark flat>
@@ -105,8 +105,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.custom-container {
+.home-page {
   max-width: 450px;
+  background: red;
 }
 .login-avatar {
   cursor: pointer;
