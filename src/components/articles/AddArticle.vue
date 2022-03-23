@@ -2,15 +2,22 @@
   <v-dialog
     :value="value"
     @input="$emit('input', $event)"
-    max-width="800"
+    max-width="750"
     overlay-color="brown"
-    overlay-opacity="0.95"
+    overlay-opacity="0.99"
+    persistent
   >
-    <v-card>
+    <v-card class="pb-3 pr-2">
       <v-card-title> Add article </v-card-title>
       <v-card-text>
-        <v-form> Add article form </v-form>
+        <v-form>
+          <v-textarea rows="10" class="pt-0" />
+        </v-form>
       </v-card-text>
+      <v-card-actions class="d-flex justify-end">
+        <v-btn depressed small class="mr-5" @click="close">Close</v-btn>
+        <v-btn depressed small>Save</v-btn>
+      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
@@ -24,12 +31,12 @@ export default {
   data() {
     return {};
   },
-  watch: {
-    myValue(newVal) {
-      this.$emit("update", newVal);
+  watch: {},
+  methods: {
+    close() {
+      this.$emit("input", false);
     },
   },
-  methods: {},
 };
 </script>
 
