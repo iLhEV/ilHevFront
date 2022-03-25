@@ -1,55 +1,67 @@
 <template>
   <v-dialog
-      transition="dialog-top-transition"
-      max-width="450"
-      v-model="showForm"
-      overlay-color="brown"
-      overlay-opacity="0.95"
-      persistent
+    transition="dialog-top-transition"
+    max-width="450"
+    v-model="showForm"
+    overlay-color="brown"
+    overlay-opacity="0.95"
+    persistent
   >
-    <v-form v-model="valid" ref="loginForm" class="pa-0 rounded-0" lazy-validation>
+    <v-form
+      v-model="valid"
+      ref="loginForm"
+      class="pa-0 rounded-0"
+      lazy-validation
+    >
       <v-card>
-        <v-card-title>
-          Login
-        </v-card-title>
+        <v-card-title> Login </v-card-title>
         <v-card-text>
-          <v-btn @click="sendPassphrase" class="mt-1"
-                 :class="isPassphraseSent || isPassphraseSending ? 'd-none' : ''"
-                 color="primary" small depressed>
+          <v-btn
+            @click="sendPassphrase"
+            class="mt-1"
+            :class="isPassphraseSent || isPassphraseSending ? 'd-none' : ''"
+            color="primary"
+            small
+            depressed
+          >
             Send passphrase
           </v-btn>
-          <v-text-field v-model="passPhrase"
-                        maxlength="30"
-                        :rules="[rules.passPhrase]"
-                        label="Enter passphrase" class="pt-0 mt-0"
-                        :class="isPassphraseSent ? '' : 'd-none'"
-                        single-line required></v-text-field>
+          <v-text-field
+            v-model="passPhrase"
+            maxlength="30"
+            :rules="[rules.passPhrase]"
+            label="Enter passphrase"
+            class="pt-0 mt-0"
+            :class="isPassphraseSent ? '' : 'd-none'"
+            single-line
+            required
+          ></v-text-field>
           <v-progress-circular
-              color="primary"
-              size="26"
-              class="mt-1"
-              :class="isPassphraseSending ? '' : 'd-none'"
-              indeterminate
+            color="primary"
+            size="26"
+            class="mt-1"
+            :class="isPassphraseSending ? '' : 'd-none'"
+            indeterminate
           ></v-progress-circular>
         </v-card-text>
         <v-card-actions class="justify-end pb-5">
           <v-btn
-              @click="close"
-              class="mr-5"
-              color="gray"
-              width="100"
-              depressed
-              small
-          >Close
+            @click="close"
+            class="mr-5"
+            color="gray"
+            width="100"
+            depressed
+            small
+            >Close
           </v-btn>
           <v-btn
-              :disabled="!valid || !isPassphraseSent"
-              color="success"
-              class="mr-4"
-              @click="checkPassphrase"
-              width="100"
-              depressed
-              small
+            :disabled="!valid || !isPassphraseSent"
+            color="success"
+            class="mr-4"
+            @click="checkPassphrase"
+            width="100"
+            depressed
+            small
           >
             Login
           </v-btn>
@@ -65,28 +77,26 @@ import apiRoutes from "@/settings/apiRoutes";
 import routes from "@/settings/routes";
 
 export default {
-  name: 'LoginForm',
+  name: "LoginForm",
   props: {
     show: Boolean,
   },
   data() {
     return {
       valid: true,
-      passPhrase: '',
+      passPhrase: "",
       isPassphraseSent: false,
       rules: RULES,
       isPassphraseSending: false,
       showForm: false,
-    }
+    };
   },
-  mounted() {
-
-  },
+  mounted() {},
   computed: {},
   watch: {
     show(val) {
       this.showForm = val;
-    }
+    },
   },
   methods: {
     async sendPassphrase() {
@@ -108,7 +118,9 @@ export default {
     async checkPassphrase() {
       if (!this.$refs.loginForm.validate()) return;
       try {
-        const res = await this.$http.get(`${apiRoutes.CHECK_PASSPHRASE}/${this.passPhrase}`);
+        const res = await this.$http.get(
+          `${apiRoutes.CHECK_PASSPHRASE}/${this.passPhrase}`
+        );
         if (res.data?.success) {
           // TODO Possibly, I need to enable this toast in future
           // this.$toast.success(Lang.LOGIN_SUCCESSFULLY);
@@ -121,8 +133,8 @@ export default {
       this.$toast.error(Lang.PASSPHRASE_IS_INVALID);
     },
     close() {
-      this.$emit('onFormClose')
-    }
-  }
-}
+      this.$emit("onFormClose");
+    },
+  },
+};
 </script>
