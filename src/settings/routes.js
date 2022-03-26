@@ -1,3 +1,3 @@
 export default {
-  CABINET: '/cabinet'
-}
+  CABINET: "/cabinet",
+};
