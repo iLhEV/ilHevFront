@@ -51,6 +51,7 @@ export default {
           text: this.text,
         });
         if (res.data?.success) {
+          this.$emit("update");
           this.$toast.success(Lang.ARTICLE_CREATE_SUCCESS);
           this.close();
         }

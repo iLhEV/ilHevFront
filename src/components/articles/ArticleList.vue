@@ -3,7 +3,9 @@
     <v-card-title> {{ $lang.TITLE_ARTICLES }} </v-card-title>
     <v-card-text>
       <v-btn @click="addArticle" small depressed>Add article</v-btn>
-      <ArticleCard v-model="articleDialog" />
+      <v-btn small depressed class="ml-5" @click="update"
+        ><v-icon small>mdi-cached</v-icon></v-btn
+      >
       <v-list>
         <template v-if="articles.length">
           <v-list-item v-for="item in articles" :key="item.id">
@@ -19,6 +21,7 @@
         </div>
       </v-list>
     </v-card-text>
+    <ArticleCard v-model="articleDialog" @update="update" />
   </v-card>
 </template>
 
@@ -54,6 +57,9 @@ export default {
         this.$toast.error(Lang.GET_DATA_ERROR);
       }
     },
+    update() {
+      this.getArticles();
+    },
   },
 };
 </script>
@@ -65,5 +71,13 @@ export default {
 .v-list-item {
   border-bottom: 1px solid #ddd;
   padding: 20px 0;
+}
+.v-list-item:first-child {
+  border-top: 1px dashed #ddd;
+  margin-top: 20px;
+}
+.v-list-item:last-child {
+  border-bottom: 1px dashed #ddd;
+  margin-top: 20px;
 }
 </style>
