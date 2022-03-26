@@ -6,11 +6,11 @@
       <ArticleCard v-model="articleDialog" />
       <v-list>
         <template v-if="articles.length">
-          <v-list-item>
+          <v-list-item v-for="item in articles" :key="item.id">
             <v-list-item-avatar>
               <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
             </v-list-item-avatar>
-            <v-list-item-content>-</v-list-item-content>
+            <v-list-item-content v-html="item.text" />
             <v-list-item-action></v-list-item-action>
           </v-list-item>
         </template>
@@ -27,7 +27,7 @@ import ArticleCard from "@/components/articles/ArticleCard";
 import apiRoutes from "@/settings/apiRoutes";
 import Lang from "@/settings/lang";
 export default {
-  name: "CabinetPage",
+  name: "ArticleList",
   components: { ArticleCard },
   data() {
     return {
@@ -47,6 +47,8 @@ export default {
         const res = await this.$http.get(`${apiRoutes.ARTICLES}`);
         if (res.data?.success) {
           this.articles = res.data.data;
+        } else {
+          this.$toast.error(Lang.UNKNOWN_ERROR);
         }
       } catch (e) {
         this.$toast.error(Lang.GET_DATA_ERROR);
@@ -59,5 +61,9 @@ export default {
 <style lang="scss" scoped>
 .cabinet-page {
   margin-top: 100px;
+}
+.v-list-item {
+  border-bottom: 1px solid #ddd;
+  padding: 20px 0;
 }
 </style>
