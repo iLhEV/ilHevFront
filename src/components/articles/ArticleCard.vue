@@ -66,4 +66,11 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+.ql-syntax {
+  background: lightslategray;
+  padding: 15px 0 20px 15px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+</style>
