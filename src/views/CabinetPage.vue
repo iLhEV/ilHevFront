@@ -1,27 +1,56 @@
 <template>
   <v-card width="600" class="cabinet-page mx-auto" min-height="700">
-    <v-card-title> Cabinet </v-card-title>
+    <v-card-title> {{ $lang.TITLE_ARTICLES }} </v-card-title>
     <v-card-text>
       <v-btn @click="addArticle" small depressed>Add article</v-btn>
       <ArticleCard v-model="articleDialog" />
+      <v-list>
+        <template v-if="articles.length">
+          <v-list-item>
+            <v-list-item-avatar>
+              <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
+            </v-list-item-avatar>
+            <v-list-item-content>-</v-list-item-content>
+            <v-list-item-action></v-list-item-action>
+          </v-list-item>
+        </template>
+        <div v-else class="pt-3">
+          {{ $lang.INFO_NO_ARTICLES }}
+        </div>
+      </v-list>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
 import ArticleCard from "@/components/articles/ArticleCard";
+import apiRoutes from "@/settings/apiRoutes";
+import Lang from "@/settings/lang";
 export default {
   name: "CabinetPage",
   components: { ArticleCard },
   data() {
     return {
       articleDialog: false,
-      myVal: "",
+      articles: [],
     };
+  },
+  async mounted() {
+    await this.getArticles();
   },
   methods: {
     addArticle() {
       this.articleDialog = true;
+    },
+    async getArticles() {
+      try {
+        const res = await this.$http.get(`${apiRoutes.ARTICLES}`);
+        if (res.data?.success) {
+          this.articles = res.data.data;
+        }
+      } catch (e) {
+        this.$toast.error(Lang.GET_DATA_ERROR);
+      }
     },
   },
 };

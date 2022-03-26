@@ -5,4 +5,7 @@ export default {
   LOGIN_SUCCESSFULLY: "Login successfully!",
   ARTICLE_CREATE_SUCCESS: "Article created successfully!",
   UNKNOWN_ERROR: "Unknown error.",
+  GET_DATA_ERROR: "Error get data.",
+  TITLE_ARTICLES: "Articles",
+  INFO_NO_ARTICLES: "No articles yet.",
 };
