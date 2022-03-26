@@ -3,7 +3,7 @@
     <v-card-title> Cabinet </v-card-title>
     <v-card-text>
       <v-btn @click="addArticle" small depressed>Add article</v-btn>
-      <AddArticle v-model="showAddArticle" />
+      <AddArticle v-model="articleDialog" />
     </v-card-text>
   </v-card>
 </template>
@@ -15,17 +15,17 @@ export default {
   components: { AddArticle },
   data() {
     return {
-      showAddArticle: false,
+      articleDialog: false,
       myVal: "",
     };
   },
   methods: {
     addArticle() {
-      this.showAddArticle = true;
+      this.articleDialog = true;
     },
     onCloseAddArticle(newVal) {
       console.log("newVal", newVal);
-      this.showAddArticle = newVal;
+      this.articleDialog = newVal;
     },
   },
 };

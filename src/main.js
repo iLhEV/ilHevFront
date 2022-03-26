@@ -6,10 +6,11 @@ import axios from "axios";
 import "@/plugins/toast";
 
 const base = axios.create({
-  baseURL: "http://localhost:3040",
+  baseURL: "http://localho.st:3040",
 });
 
 Vue.prototype.$http = base;
+Vue.$http = base;
 
 new Vue({
   router,
