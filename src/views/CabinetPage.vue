@@ -3,16 +3,16 @@
     <v-card-title> Cabinet </v-card-title>
     <v-card-text>
       <v-btn @click="addArticle" small depressed>Add article</v-btn>
-      <AddArticle v-model="articleDialog" />
+      <ArticleCard v-model="articleDialog" />
     </v-card-text>
   </v-card>
 </template>
 
 <script>
-import AddArticle from "@/components/articles/AddArticle";
+import ArticleCard from "@/components/articles/ArticleCard";
 export default {
   name: "CabinetPage",
-  components: { AddArticle },
+  components: { ArticleCard },
   data() {
     return {
       articleDialog: false,
@@ -22,10 +22,6 @@ export default {
   methods: {
     addArticle() {
       this.articleDialog = true;
-    },
-    onCloseAddArticle(newVal) {
-      console.log("newVal", newVal);
-      this.articleDialog = newVal;
     },
   },
 };

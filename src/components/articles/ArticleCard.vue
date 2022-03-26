@@ -54,7 +54,7 @@ export default {
           return;
         }
       } catch (e) {
-        // This planned to be empty
+        this.$toast.error(Lang.UNKNOWN_ERROR);
       }
     },
   },
