@@ -13,7 +13,14 @@
               <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
             </v-list-item-avatar>
             <v-list-item-content v-html="item.text" />
-            <v-list-item-action></v-list-item-action>
+            <v-list-item-action class="d-inline-block">
+              <v-btn @click="editArticle(item)" icon>
+                <v-icon size="20">mdi-pencil</v-icon>
+              </v-btn>
+              <v-btn @click="deleteArticle(item)" icon>
+                <v-icon size="20">mdi-delete</v-icon>
+              </v-btn>
+            </v-list-item-action>
           </v-list-item>
         </template>
         <div v-else class="pt-3">
@@ -21,7 +28,11 @@
         </div>
       </v-list>
     </v-card-text>
-    <ArticleCard v-model="articleDialog" @update="update" />
+    <ArticleCard
+      v-model="articleDialog"
+      :id.sync="operationId"
+      @update="update"
+    />
   </v-card>
 </template>
 
@@ -36,6 +47,7 @@ export default {
     return {
       articleDialog: false,
       articles: [],
+      operationId: null,
     };
   },
   async mounted() {
@@ -59,6 +71,12 @@ export default {
     },
     update() {
       this.getArticles();
+    },
+    async deleteArticle(item) {
+      this.operationId = item.id;
+    },
+    async editArticle(item) {
+      this.operationId = item.id;
     },
   },
 };

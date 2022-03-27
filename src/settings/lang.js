@@ -8,4 +8,6 @@ export default {
   GET_DATA_ERROR: "Error get data.",
   TITLE_ARTICLES: "Articles",
   INFO_NO_ARTICLES: "No articles yet.",
+  TITLE_ADD_ARTICLE: "Add article",
+  TITLE_EDIT_ARTICLE: "Edit article",
 };

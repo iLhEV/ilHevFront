@@ -7,8 +7,7 @@ import lang from "@/settings/lang";
 import "@/plugins/toast";
 
 const base = axios.create({
-  baseURL: "http://localho.st:3040",
-  // baseURL: "https://ilya-bear-app.herokuapp.com",
+  baseURL: process.env.VUE_APP_API_BASE_URL,
 });
 
 Vue.prototype.$http = base;
