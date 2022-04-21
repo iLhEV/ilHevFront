@@ -18,8 +18,12 @@
           </v-form>
         </v-card-text>
         <v-card-actions class="d-flex justify-end pr-6">
-          <v-btn depressed small class="mr-5" @click="close">Close</v-btn>
-          <v-btn @click="save" depressed small>Save</v-btn>
+          <v-btn depressed small class="mr-5" @click="close">
+            {{ $lang.BUTTON_CLOSE }}
+          </v-btn>
+          <v-btn @click="save" color="primary" depressed small>{{
+            $lang.BUTTON_SAVE
+          }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-form>
@@ -63,8 +67,10 @@ export default {
           text: this.text,
         });
         if (res.data?.success) {
-          this.$emit("update");
-          this.$toast.success(Lang.ARTICLE_CREATE_SUCCESS);
+          this.$emit("updateList");
+          this.$toast.success(
+            this.id ? Lang.ARTICLE_UPDATE_SUCCESS : Lang.ARTICLE_CREATE_SUCCESS
+          );
           this.close();
         }
       } catch (e) {

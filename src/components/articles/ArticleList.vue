@@ -3,7 +3,7 @@
     <v-card-title> {{ $lang.TITLE_ARTICLES }} </v-card-title>
     <v-card-text>
       <v-btn @click="addArticle" small depressed>Add article</v-btn>
-      <v-btn small depressed class="ml-5" @click="update"
+      <v-btn small depressed class="ml-5" @click="updateList"
         ><v-icon small>mdi-cached</v-icon></v-btn
       >
       <v-list>
@@ -30,24 +30,28 @@
     </v-card-text>
     <ArticleCard
       v-model="articleDialog"
-      :id.sync="operationId"
-      @update="update"
+      :id.sync="editId"
+      @updateList="updateList"
     />
+    <ArticleDelete v-model="articleDelete" @updateList="updateList" />
   </v-card>
 </template>
 
 <script>
 import ArticleCard from "@/components/articles/ArticleCard";
+import ArticleDelete from "@/components/articles/ArticleDelete";
 import apiRoutes from "@/settings/apiRoutes";
 import Lang from "@/settings/lang";
+
 export default {
   name: "ArticleList",
-  components: { ArticleCard },
+  components: { ArticleCard, ArticleDelete },
   data() {
     return {
       articleDialog: false,
       articles: [],
-      operationId: null,
+      editId: null,
+      articleDelete: null,
     };
   },
   async mounted() {
@@ -69,14 +73,14 @@ export default {
         this.$toast.error(Lang.GET_DATA_ERROR);
       }
     },
-    update() {
+    updateList() {
       this.getArticles();
     },
-    async deleteArticle(item) {
-      this.operationId = item.id;
-    },
     async editArticle(item) {
-      this.operationId = item.id;
+      this.editId = item.id;
+    },
+    async deleteArticle(item) {
+      this.articleDelete = item;
     },
   },
 };
