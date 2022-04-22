@@ -6,6 +6,7 @@ export default {
   ARTICLE_CREATE_SUCCESS: "Article created successfully!",
   ARTICLE_UPDATE_SUCCESS: "Article updated successfully!",
   ARTICLE_DELETE_SUCCESS: "Article deleted successfully!",
+  ARTICLES_LIST_UPDATED: "List updated",
   UNKNOWN_ERROR: "Unknown error.",
   GET_DATA_ERROR: "Error get data.",
   TITLE_ARTICLES: "Articles",

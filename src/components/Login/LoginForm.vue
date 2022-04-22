@@ -14,7 +14,12 @@
       lazy-validation
     >
       <v-card>
-        <v-card-title> Login </v-card-title>
+        <v-card-title style="align-items: flex-end">
+          <div class="form-title">Login</div>
+          <div class="register-link">
+            or <a @click="openRegistration">register</a>
+          </div>
+        </v-card-title>
         <v-card-text>
           <v-btn
             @click="sendPassphrase"
@@ -88,7 +93,7 @@ export default {
       isPassphraseSent: false,
       rules: RULES,
       isPassphraseSending: false,
-      showForm: false,
+      showForm: true,
     };
   },
   mounted() {},
@@ -135,6 +140,23 @@ export default {
     close() {
       this.$emit("onFormClose");
     },
+    openRegistration() {
+      console.log("register");
+    },
   },
 };
 </script>
+<style lang="scss" scoped>
+.form-title {
+  line-height: 0.75em;
+}
+.register-link {
+  //vertical-align: bottom;
+  line-height: 10px;
+
+  padding-left: 5px;
+  margin-top: 0px;
+  display: block;
+  font-size: 12px !important;
+}
+</style>
