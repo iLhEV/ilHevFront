@@ -10,6 +10,8 @@ export default {
   UNKNOWN_ERROR: "Unknown error.",
   GET_DATA_ERROR: "Error get data.",
   TITLE_ARTICLES: "Articles",
+  TITLE_LOGIN: "Login",
+  TITLE_REGISTER: "Register",
   INFO_NO_ARTICLES: "No articles yet.",
   TITLE_ADD_ARTICLE: "Add article",
   TITLE_EDIT_ARTICLE: "Edit article",

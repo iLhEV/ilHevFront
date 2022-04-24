@@ -1,6 +1,6 @@
 <template>
   <div class="home-page mx-auto">
-    <LoginForm :show="showLoginForm" @onFormClose="showLoginForm = false" />
+    <AuthDialog :show="showAuthDialog" @onFormClose="showAuthDialog = false" />
     <v-card dark flat>
       <v-card-title class="pa-2 red lighten-1">
         <v-menu offset-y>
@@ -23,7 +23,7 @@
         <h3 class="text-h6 font-weight-light text-center grow">
           Frontend developer
         </h3>
-        <v-avatar @click="showLoginForm = true" class="login-avatar">
+        <v-avatar @click="showAuthDialog = true" class="login-avatar">
           <v-img
             src="https://avataaars.io/?accessoriesType=Prescription02&avatarStyle=Circle&clotheType=BlazerShirt&eyeType=Squint&eyebrowType=Default&facialHairColor=Brown&facialHairType=BeardLight&hairColor=BlondeGolden&mouthType=Smile&skinColor=Light&topType=ShortHairShortCurly"
           ></v-img>
@@ -76,15 +76,15 @@
 </template>
 <script>
 import WORK_PLACES from "@/settings/workPlaces";
-import LoginForm from "@/components/Login/LoginForm";
+import AuthDialog from "@/components/auth/AuthDialog";
 
 export default {
   name: "HomePage",
-  components: { LoginForm },
+  components: { AuthDialog },
   data() {
     return {
       menuItems: [{ title: "Binance Emulator", name: "binanceEmulator" }],
-      showLoginForm: false,
+      showAuthDialog: false,
       workPlaces: WORK_PLACES,
     };
   },
