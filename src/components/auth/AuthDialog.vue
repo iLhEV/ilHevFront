@@ -24,8 +24,11 @@
         </div>
       </v-card-title>
       <div class="pl-2">
-        <LoginForm v-if="mode === modes.login" />
-        <RegistrationForm v-if="mode === modes.registration" />
+        <LoginForm v-if="mode === modes.login" @closeDialog="closeDialog" />
+        <RegistrationForm
+          v-if="mode === modes.registration"
+          @closeDialog="closeDialog"
+        />
       </div>
     </v-card>
   </v-dialog>
@@ -44,7 +47,7 @@ export default {
   },
   data() {
     return {
-      showDialog: true,
+      showDialog: false,
       modes: MODES,
       mode: MODES.login,
     };
@@ -62,6 +65,10 @@ export default {
     },
     openLogin() {
       this.mode = MODES.login;
+    },
+    closeDialog() {
+      console.log("close");
+      this.$emit("close");
     },
   },
 };

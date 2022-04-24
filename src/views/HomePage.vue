@@ -1,6 +1,6 @@
 <template>
   <div class="home-page mx-auto">
-    <AuthDialog :show="showAuthDialog" @onFormClose="showAuthDialog = false" />
+    <AuthDialog :show="showAuthDialog" @close="closeAuthDialog" />
     <v-card dark flat>
       <v-card-title class="pa-2 red lighten-1">
         <v-menu offset-y>
@@ -23,7 +23,7 @@
         <h3 class="text-h6 font-weight-light text-center grow">
           Frontend developer
         </h3>
-        <v-avatar @click="showAuthDialog = true" class="login-avatar">
+        <v-avatar @click="openAuthDialog" class="login-avatar">
           <v-img
             src="https://avataaars.io/?accessoriesType=Prescription02&avatarStyle=Circle&clotheType=BlazerShirt&eyeType=Squint&eyebrowType=Default&facialHairColor=Brown&facialHairType=BeardLight&hairColor=BlondeGolden&mouthType=Smile&skinColor=Light&topType=ShortHairShortCurly"
           ></v-img>
@@ -92,6 +92,13 @@ export default {
   methods: {
     processMenuAction(name) {
       console.log(name);
+    },
+    closeAuthDialog() {
+      console.log("close2");
+      this.showAuthDialog = false;
+    },
+    openAuthDialog() {
+      this.showAuthDialog = true;
     },
   },
 };

@@ -26,6 +26,10 @@
         single-line
         required
       ></v-text-field>
+      <div v-if="isPassphraseSent" class="resend-passphrase">
+        <span v-if="timerCount > 0">Resend in {{ timerCount }} seconds</span>
+        <a v-if="timerCount < 1" @click="resendPassphrase">Resend passphrase</a>
+      </div>
       <v-progress-circular
         color="primary"
         size="26"
@@ -36,7 +40,7 @@
     </v-card-text>
     <v-card-actions class="justify-end pb-5">
       <v-btn
-        @click="close"
+        @click="closeDialog"
         class="mr-5"
         color="gray"
         width="100"
@@ -65,6 +69,8 @@ import apiRoutes from "@/settings/apiRoutes";
 import Lang from "@/settings/lang";
 import routes from "@/settings/routes";
 
+const INITIAL_TIMER_COUNT = 30;
+
 export default {
   name: "LoginForm",
   data() {
@@ -74,7 +80,23 @@ export default {
       isPassphraseSent: false,
       rules: RULES,
       isPassphraseSending: false,
+      timerCount: null,
     };
+  },
+  beforeCreate() {
+    this.timerCount = INITIAL_TIMER_COUNT;
+  },
+  watch: {
+    timerCount: {
+      handler(value) {
+        if (value > 0) {
+          setTimeout(() => {
+            this.timerCount--;
+          }, 1000);
+        }
+      },
+      immediate: true, // This ensures the watcher is triggered upon creation
+    },
   },
   methods: {
     async sendPassphrase() {
@@ -85,6 +107,7 @@ export default {
           this.isPassphraseSent = true;
           this.isPassphraseSending = false;
           this.$toast.success(Lang.PASSPHRASE_WAS_SENT_SUCCESSFULLY);
+          this.timerCount = INITIAL_TIMER_COUNT;
           return;
         }
       } catch (e) {
@@ -110,11 +133,19 @@ export default {
       }
       this.$toast.error(Lang.PASSPHRASE_IS_INVALID);
     },
-    close() {
-      this.$emit("onFormClose");
+    closeDialog() {
+      this.$emit("closeDialog");
+    },
+    async resendPassphrase() {
+      console.log("resend");
+      await this.sendPassphrase();
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.resend-passphrase {
+  font-size: 12px;
+}
+</style>
