@@ -4,11 +4,16 @@
     ref="loginForm"
     class="pa-0 rounded-0"
     lazy-validation
+    @submit.p.prevent
   >
-    <v-card-text>
+    <v-card-text class="pt-2">
+      <ol class="pt-0">
+        <li>Send passphrase to our authorize bot.</li>
+        <li>Enter the received passphrase.</li>
+      </ol>
       <v-btn
         @click="sendPassphrase"
-        class="mt-1"
+        class="mt-4 mb-1"
         :class="isPassphraseSent || isPassphraseSending ? 'd-none' : ''"
         color="primary"
         small
@@ -20,8 +25,8 @@
         v-model="passPhrase"
         maxlength="30"
         :rules="[rules.passPhrase]"
-        label="Enter passphrase"
-        class="pt-0 mt-0"
+        label="Enter received passphrase"
+        class="pt-4 mt-0"
         :class="isPassphraseSent ? '' : 'd-none'"
         single-line
         required

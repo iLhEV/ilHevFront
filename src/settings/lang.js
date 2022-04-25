@@ -21,4 +21,5 @@ export default {
   BUTTON_DELETE: "Delete",
   BUTTON_LOGIN: "Login",
   BUTTON_REGISTER: "Register",
+  BUTTON_FINISH_REGISTRATION: "Finish registration",
 };
