@@ -26,7 +26,7 @@
             small
             depressed
           >
-            {{ $lang.BUTTON_FINISH_REGISTRATION }}
+            {{ $lang.BUTTON_ENTER_REGISTRATION_CODE }}
           </v-btn>
           <ol v-if="isStarted">
             <li>After you clicked "Start", bot sended you a <b>code</b>.</li>
@@ -37,12 +37,12 @@
             v-model="regCode"
             maxlength="30"
             :rules="[rules.passPhrase]"
-            label="Enter received code"
+            label="Registration code"
             class="pt-4 mt-0"
             single-line
             required
           ></v-text-field>
-          <div class="pt-3">
+          <div v-if="isStarted" class="pt-3">
             <b>Note:</b> To login you will get codes from the same bot.
           </div>
         </v-list>
