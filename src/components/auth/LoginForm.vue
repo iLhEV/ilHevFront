@@ -46,7 +46,8 @@
         width="100"
         depressed
         small
-        >Close
+      >
+        {{ $lang.BUTTON_CLOSE }}
       </v-btn>
       <v-btn
         :disabled="!valid || !isPassphraseSent"
@@ -57,7 +58,7 @@
         depressed
         small
       >
-        Login
+        {{ $lang.BUTTON_LOGIN }}
       </v-btn>
     </v-card-actions>
   </v-form>
@@ -123,7 +124,6 @@ export default {
           `${apiRoutes.CHECK_PASSPHRASE}/${this.passPhrase}`
         );
         if (res.data?.success) {
-          // TODO Possibly, I need to enable this toast in future
           this.$toast.success(Lang.LOGIN_SUCCESSFULLY);
           await this.$router.push(routes.CABINET);
           return;

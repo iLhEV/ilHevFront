@@ -19,4 +19,6 @@ export default {
   BUTTON_CLOSE: "Close",
   BUTTON_SAVE: "Save",
   BUTTON_DELETE: "Delete",
+  BUTTON_LOGIN: "Login",
+  BUTTON_REGISTER: "Register",
 };
