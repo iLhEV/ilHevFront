@@ -38,6 +38,7 @@
       <v-btn
         @click="backToLogin"
         color="green lighten-4"
+        class="ibv-dimmed"
         width="140"
         small
         depressed

@@ -46,6 +46,7 @@
         label="Authorization passphrase"
         class="pt-0 mt-0 passphrase-input"
         :class="showEnterPassphrase ? '' : 'd-none'"
+        @input="startInput = true"
         single-line
         required
       ></v-text-field>
@@ -62,9 +63,9 @@
         Close window
       </v-btn>
       <v-btn
-        :disabled="!valid || !showEnterPassphrase"
-        color="success"
-        class="mr-4"
+        :disabled="!valid || !startInput"
+        color="green lighten-4"
+        class="mr-4 ibv-dimmed"
         @click="checkPassphrase"
         width="140"
         depressed
@@ -92,6 +93,7 @@ export default {
       rules: RULES,
       isPassphraseSending: false,
       showInstructions: false,
+      startInput: false,
     };
   },
   computed: {
@@ -125,6 +127,7 @@ export default {
         this.showEnterPassphrase = false;
         this.showInstructions = false;
         this.passPhrase = "";
+        this.$refs.loginForm.resetValidation();
       }, 500);
     },
   },

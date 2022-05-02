@@ -116,8 +116,8 @@ export default {
 }
 .stack-box {
   position: absolute;
-  margin-left: 38%;
-  top: 30px;
+  margin-left: 41%;
+  top: 50px;
   &__frontend {
     font-size: 0.92em;
     line-height: 1.2em;

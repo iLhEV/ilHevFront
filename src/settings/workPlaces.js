@@ -1,9 +1,9 @@
 export default [
   {
-    name: "BrainTech",
+    name: "SteppeChange",
     text: "Vue.js apps development",
     date: "Since Nov 2021",
-    link: "http://www.braintech.com/",
+    link: "http://steppechange.com/",
   },
   {
     name: "Wati",
