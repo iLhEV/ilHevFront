@@ -16,13 +16,13 @@
       </ol>
       <v-btn
         @click="sendPassphrase"
-        class="mt-4 mb-1"
+        class="mt-5 mb-1"
         :class="isPassphraseSent || isPassphraseSending ? 'd-none' : ''"
-        color="primary"
+        color="blue lighten-3"
         small
         depressed
       >
-        Send passphrase
+        Enter passphrase
       </v-btn>
       <v-text-field
         v-model="passPhrase"

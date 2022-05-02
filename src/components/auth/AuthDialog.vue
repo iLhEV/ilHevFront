@@ -27,6 +27,7 @@
         <LoginForm v-if="mode === modes.login" @closeDialog="closeDialog" />
         <RegistrationForm
           v-if="mode === modes.registration"
+          @backToLogin="openLogin"
           @closeDialog="closeDialog"
         />
       </div>
