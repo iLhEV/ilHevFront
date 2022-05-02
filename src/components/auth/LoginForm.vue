@@ -8,7 +8,10 @@
   >
     <v-card-text class="pt-2">
       <ol class="pt-0">
-        <li>Send passphrase to our authorize bot.</li>
+        <li>
+          Send <b>/login</b> command to our
+          <a :href="authorizeBotLink" target="_blank">Telegram Bot</a>.
+        </li>
         <li>Enter the received passphrase.</li>
       </ol>
       <v-btn
@@ -91,6 +94,11 @@ export default {
   },
   beforeCreate() {
     this.timerCount = INITIAL_TIMER_COUNT;
+  },
+  computed: {
+    authorizeBotLink() {
+      return process.env.VUE_APP_AUTHORIZE_BOT_LINK;
+    },
   },
   watch: {
     timerCount: {
