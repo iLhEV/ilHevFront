@@ -4,17 +4,19 @@
       <v-list class="pt-0">
         <ol>
           <li>
-            Add our
+            Open
             <a :href="authorizeBotLink" target="_blank"
               >AuthorizationTelegramBot</a
             >
-            to your telegram application.
+            in your telegram application.
             <div class="ibv-small-caption mt-2">
-              If you asked, then approve confirmation to open your Telegram
-              app/desktop.
+              Approve confirmation to open your Telegram app/desktop if you were
+              asked.
             </div>
           </li>
-          <li class="mt-4">Click <b>"Start"</b> in the opened chat.</li>
+          <li class="mt-4">
+            Click <b>"Start"</b> button in the opened chat to join the bot.
+          </li>
         </ol>
         <div class="pl-2 mt-2">
           <b>Note:</b> To get login passphrase in the future just send

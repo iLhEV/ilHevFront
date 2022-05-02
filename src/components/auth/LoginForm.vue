@@ -9,22 +9,25 @@
     <v-card-text class="pt-0">
       <v-switch
         v-model="showInstructions"
-        label="Show authorization instructions"
+        :label="
+          showInstructions
+            ? 'Authorization instructions are shown'
+            : 'Authorization instructions are hidden'
+        "
         class="mt-0"
       />
       <ol v-if="showInstructions" class="pt-0 mb-5">
         <li>
-          Authorize with our
+          Send <b>/login</b> command to
           <a :href="authorizeBotLink" target="_blank"
             >AuthorizationTelegramBot</a
-          >
-          by sending <b>/login</b> command.
+          >.
           <div class="ibv-small-caption mt-2">
             See instructions how to add authorization bot on the
             <a @click="$emit('openRegistration')">registration</a> page.
           </div>
         </li>
-        <li class="mt-4">Enter the received passphrase.</li>
+        <li class="mt-4">Enter the received authorization passphrase.</li>
       </ol>
       <v-btn
         v-if="!showEnterPassphrase"
@@ -34,13 +37,13 @@
         small
         depressed
       >
-        Enter passphrase
+        I'm ready to enter passphrase
       </v-btn>
       <v-text-field
         v-model="passPhrase"
         maxlength="30"
         :rules="[rules.passPhrase]"
-        label="Enter authorization passphrase"
+        label="Authorization passphrase"
         class="pt-0 mt-0 passphrase-input"
         :class="showEnterPassphrase ? '' : 'd-none'"
         single-line
@@ -52,22 +55,22 @@
         @click="closeDialog"
         class="mr-5"
         color="gray"
-        width="100"
+        width="140"
         depressed
         small
       >
-        {{ $lang.BUTTON_CLOSE }}
+        Close window
       </v-btn>
       <v-btn
         :disabled="!valid || !showEnterPassphrase"
         color="success"
         class="mr-4"
         @click="checkPassphrase"
-        width="100"
+        width="140"
         depressed
         small
       >
-        {{ $lang.BUTTON_LOGIN }}
+        Authorize me
       </v-btn>
     </v-card-actions>
   </v-form>
@@ -118,6 +121,11 @@ export default {
     },
     closeDialog() {
       this.$emit("closeDialog");
+      setTimeout(() => {
+        this.showEnterPassphrase = false;
+        this.showInstructions = false;
+        this.passPhrase = "";
+      }, 500);
     },
   },
 };

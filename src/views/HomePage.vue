@@ -20,7 +20,9 @@
           </v-list>
         </v-menu>
 
-        <h3 class="text-h6 font-weight-light text-center grow">iBear V</h3>
+        <h3 class="text-h6 font-weight-light text-center grow">
+          __iBear__deVeloper__
+        </h3>
         <v-avatar @click="openAuthDialog" class="login-avatar">
           <v-img
             src="https://avataaars.io/?accessoriesType=Prescription02&avatarStyle=Circle&clotheType=BlazerShirt&eyeType=Squint&eyebrowType=Default&facialHairColor=Brown&facialHairType=BeardLight&hairColor=BlondeGolden&mouthType=Smile&skinColor=Light&topType=ShortHairShortCurly"
@@ -117,11 +119,11 @@ export default {
   margin-left: 38%;
   top: 30px;
   &__frontend {
-    font-size: 0.9em;
+    font-size: 0.92em;
     line-height: 1.2em;
   }
   &__backend {
-    font-size: 0.9em;
+    font-size: 0.92em;
     line-height: 1em;
     padding-left: 15px;
   }

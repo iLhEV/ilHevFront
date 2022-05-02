@@ -10,7 +10,7 @@
     <v-card>
       <v-card-title class="pb-3 d-block">
         <div>
-          {{ mode === modes.login ? $lang.TITLE_LOGIN : "" }}
+          {{ mode === modes.login ? "Log-in" : "" }}
           {{ mode === modes.registration ? $lang.TITLE_REGISTER : "" }}
         </div>
         <div class="register-link">
