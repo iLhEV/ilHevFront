@@ -6,24 +6,25 @@
           <li>
             Add our
             <a :href="authorizeBotLink" target="_blank"
-              >Authorize My Site Bot</a
+              >Authorization Telegram Bot</a
             >
-            to your Telegram.
-            <div class="custom-caption">
-              If you are asked, approve confirmation to open your Telegram.
+            to your telegram application.
+            <div class="ibv-small-caption mt-2">
+              If you are asked, approve confirmation to open your Telegram
+              app/desktop.
             </div>
           </li>
-          <li>Click <b>"Start"</b> in the opened chat.</li>
+          <li class="mt-4">Click <b>"Start"</b> in the opened chat.</li>
         </ol>
-        <div class="pl-2 pt-1">
-          <b>Note:</b> To login in the future just send <b>/login</b> command to
-          the bot and you will get the login passphrase.
+        <div class="pl-2 mt-2">
+          <b>Note:</b> To get login passphrase in the future just send
+          <b>/login</b> command.
         </div>
       </v-list>
     </v-card-text>
     <v-card-actions class="justify-end pb-5 pr-5">
       <v-btn @click="backToLogin" color="green lighten-2" small depressed>
-        Done. Login
+        Done, Login
       </v-btn>
     </v-card-actions>
   </div>
@@ -52,13 +53,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
-.v-list li {
-  padding-bottom: 10px;
-}
-.custom-caption {
-  font-size: 0.95em;
-  font-style: italic;
-}
+@import "~/src/assets/scss/texts.scss";
 </style>

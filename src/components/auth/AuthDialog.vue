@@ -68,7 +68,6 @@ export default {
       this.mode = MODES.login;
     },
     closeDialog() {
-      console.log("close");
       this.$emit("close");
     },
   },

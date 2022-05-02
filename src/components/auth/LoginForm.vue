@@ -9,42 +9,40 @@
     <v-card-text class="pt-2">
       <ol class="pt-0">
         <li>
-          Send <b>/login</b> command to our
-          <a :href="authorizeBotLink" target="_blank">Telegram Bot</a>.
+          Authorize with our
+          <a :href="authorizeBotLink" target="_blank"
+            >Authorization Telegram Bot</a
+          >
+          by sending <b>/login</b> command.
+          <div class="ibv-small-caption mt-2">
+            See instructions how to add authorization bot on the
+            <a @click="true">registration</a> page.
+          </div>
         </li>
-        <li>Enter the received passphrase.</li>
+        <li class="mt-4">
+          Enter the received passphrase.
+          <v-btn
+            v-if="!showEnterPassphrase"
+            @click="enterPassphrase"
+            class="mt-2 mb-1 d-block"
+            color="blue lighten-3"
+            small
+            depressed
+          >
+            Enter passphrase
+          </v-btn>
+          <v-text-field
+            v-model="passPhrase"
+            maxlength="30"
+            :rules="[rules.passPhrase]"
+            label="Passphrase"
+            class="pt-4 mt-0 mr-10"
+            :class="showEnterPassphrase ? '' : 'd-none'"
+            single-line
+            required
+          ></v-text-field>
+        </li>
       </ol>
-      <v-btn
-        @click="sendPassphrase"
-        class="mt-5 mb-1"
-        :class="isPassphraseSent || isPassphraseSending ? 'd-none' : ''"
-        color="blue lighten-3"
-        small
-        depressed
-      >
-        Enter passphrase
-      </v-btn>
-      <v-text-field
-        v-model="passPhrase"
-        maxlength="30"
-        :rules="[rules.passPhrase]"
-        label="Enter received passphrase"
-        class="pt-4 mt-0"
-        :class="isPassphraseSent ? '' : 'd-none'"
-        single-line
-        required
-      ></v-text-field>
-      <div v-if="isPassphraseSent" class="resend-passphrase">
-        <span v-if="timerCount > 0">Resend in {{ timerCount }} seconds</span>
-        <a v-if="timerCount < 1" @click="resendPassphrase">Resend passphrase</a>
-      </div>
-      <v-progress-circular
-        color="primary"
-        size="26"
-        class="mt-1"
-        :class="isPassphraseSending ? '' : 'd-none'"
-        indeterminate
-      ></v-progress-circular>
     </v-card-text>
     <v-card-actions class="justify-end pb-5">
       <v-btn
@@ -58,7 +56,7 @@
         {{ $lang.BUTTON_CLOSE }}
       </v-btn>
       <v-btn
-        :disabled="!valid || !isPassphraseSent"
+        :disabled="!valid || !showEnterPassphrase"
         color="success"
         class="mr-4"
         @click="checkPassphrase"
@@ -86,7 +84,7 @@ export default {
     return {
       valid: true,
       passPhrase: "",
-      isPassphraseSent: false,
+      showEnterPassphrase: false,
       rules: RULES,
       isPassphraseSending: false,
       timerCount: null,
@@ -113,22 +111,8 @@ export default {
     },
   },
   methods: {
-    async sendPassphrase() {
-      try {
-        this.isPassphraseSending = true;
-        const res = await this.$http.get(apiRoutes.CREATE_PASSPHRASE);
-        if (res.data?.success) {
-          this.isPassphraseSent = true;
-          this.isPassphraseSending = false;
-          this.$toast.success(Lang.PASSPHRASE_WAS_SENT_SUCCESSFULLY);
-          this.timerCount = INITIAL_TIMER_COUNT;
-          return;
-        }
-      } catch (e) {
-        // This planned to be empty
-      }
-      this.isPassphraseSending = false;
-      this.$toast.error(Lang.ERROR_WHEN_TRY_TO_SEND_PASSPHRASE);
+    async enterPassphrase() {
+      this.showEnterPassphrase = true;
     },
     async checkPassphrase() {
       if (!this.$refs.loginForm.validate()) return;
@@ -149,16 +133,10 @@ export default {
     closeDialog() {
       this.$emit("closeDialog");
     },
-    async resendPassphrase() {
-      console.log("resend");
-      await this.sendPassphrase();
-    },
   },
 };
 </script>
 
 <style scoped>
-.resend-passphrase {
-  font-size: 12px;
-}
+@import "~/src/assets/scss/texts.scss";
 </style>
