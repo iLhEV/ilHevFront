@@ -20,9 +20,7 @@
           </v-list>
         </v-menu>
 
-        <h3 class="text-h6 font-weight-light text-center grow">
-          Frontend developer
-        </h3>
+        <h3 class="text-h6 font-weight-light text-center grow">iBear V</h3>
         <v-avatar @click="openAuthDialog" class="login-avatar">
           <v-img
             src="https://avataaars.io/?accessoriesType=Prescription02&avatarStyle=Circle&clotheType=BlazerShirt&eyeType=Squint&eyebrowType=Default&facialHairColor=Brown&facialHairType=BeardLight&hairColor=BlondeGolden&mouthType=Smile&skinColor=Light&topType=ShortHairShortCurly"
@@ -33,14 +31,14 @@
         src="https://cdn.vuetifyjs.com/images/cards/forest.jpg"
         gradient="to top, rgba(0,0,0,.44), rgba(0,0,0,.44)"
       >
-        <v-container class="fill-height">
-          <v-row align="center">
-            <strong class="text-h1 font-weight-regular mr-5">JS</strong>
-            <v-row justify="end">
-              <div class="text-h5 font-weight-light">Vue.js</div>
-              <div class="mr-2 text-uppercase font-weight-light">React</div>
-            </v-row>
-          </v-row>
+        <v-container class="picture-box fill-height">
+          <div class="stack-box">
+            <div class="stack-box__frontend">Front-End</div>
+            <div class="stack-box__backend">Back-End</div>
+          </div>
+          <div class="js-box">JS</div>
+          <div class="vue-box">Vue.js</div>
+          <div class="react-box">React</div>
         </v-container>
       </v-img>
     </v-card>
@@ -110,5 +108,37 @@ export default {
 }
 .login-avatar {
   cursor: pointer;
+}
+.picture-box {
+  position: relative;
+}
+.stack-box {
+  position: absolute;
+  margin-left: 38%;
+  top: 30px;
+  &__frontend {
+    font-size: 0.9em;
+    line-height: 1.2em;
+  }
+  &__backend {
+    font-size: 0.9em;
+    line-height: 1em;
+    padding-left: 15px;
+  }
+}
+.js-box {
+  position: absolute;
+  font-size: 2em;
+  top: 120px;
+}
+.vue-box {
+  position: absolute;
+  top: 143px;
+  left: 60px;
+}
+.react-box {
+  position: absolute;
+  top: 160px;
+  left: 40px;
 }
 </style>

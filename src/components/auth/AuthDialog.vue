@@ -24,10 +24,14 @@
         </div>
       </v-card-title>
       <div class="pl-2">
-        <LoginForm v-if="mode === modes.login" @closeDialog="closeDialog" />
+        <LoginForm
+          v-if="mode === modes.login"
+          @closeDialog="closeDialog"
+          @openRegistration="openRegistration"
+        />
         <RegistrationForm
           v-if="mode === modes.registration"
-          @backToLogin="openLogin"
+          @openLogin="openLogin"
           @closeDialog="closeDialog"
         />
       </div>

@@ -6,11 +6,11 @@
           <li>
             Add our
             <a :href="authorizeBotLink" target="_blank"
-              >Authorization Telegram Bot</a
+              >AuthorizationTelegramBot</a
             >
             to your telegram application.
             <div class="ibv-small-caption mt-2">
-              If you are asked, approve confirmation to open your Telegram
+              If you asked, then approve confirmation to open your Telegram
               app/desktop.
             </div>
           </li>
@@ -18,13 +18,29 @@
         </ol>
         <div class="pl-2 mt-2">
           <b>Note:</b> To get login passphrase in the future just send
-          <b>/login</b> command.
+          <b>/login</b> command to the bot.
         </div>
       </v-list>
     </v-card-text>
     <v-card-actions class="justify-end pb-5 pr-5">
-      <v-btn @click="backToLogin" color="green lighten-2" small depressed>
-        Done, Login
+      <v-btn
+        @click="closeDialog"
+        class="mr-5"
+        color="gray"
+        width="140"
+        depressed
+        small
+      >
+        Close window
+      </v-btn>
+      <v-btn
+        @click="backToLogin"
+        color="green lighten-4"
+        width="140"
+        small
+        depressed
+      >
+        Back to login
       </v-btn>
     </v-card-actions>
   </div>
@@ -46,13 +62,16 @@ export default {
   methods: {
     closeDialog() {
       this.$emit("closeDialog");
+      setTimeout(() => {
+        this.$emit("openLogin");
+      }, 500);
     },
     backToLogin() {
-      this.$emit("backToLogin");
+      this.$emit("openLogin");
     },
   },
 };
 </script>
-<style scoped>
-@import "~/src/assets/scss/texts.scss";
+<style lang="scss" scoped>
+@import "../../assets/scss/texts.scss";
 </style>
