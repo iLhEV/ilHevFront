@@ -1,6 +1,5 @@
 <template>
   <v-dialog
-    transition="dialog-top-transition"
     max-width="450"
     v-model="showDialog"
     overlay-color="brown"

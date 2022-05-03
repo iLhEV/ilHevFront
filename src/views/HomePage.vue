@@ -21,7 +21,7 @@
         </v-menu>
 
         <h3 class="text-h6 font-weight-light text-center grow">
-          __iBear__deVeloper__
+          ...iBear...deVeloper...
         </h3>
         <v-avatar @click="openAuthDialog" class="login-avatar">
           <v-img
