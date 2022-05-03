@@ -35,8 +35,8 @@
       >
         <v-container class="picture-box fill-height">
           <div class="stack-box">
-            <div class="stack-box__frontend">Front-End</div>
             <div class="stack-box__point">.</div>
+            <div class="stack-box__frontend">Front-End</div>
             <div class="stack-box__backend">Back-End</div>
           </div>
           <div class="js-box">
@@ -129,15 +129,17 @@ export default {
 }
 .stack-box {
   position: absolute;
-  margin-left: 41%;
+  margin-left: 41.8%;
   top: 50px;
   &__frontend {
+    position: relative;
+    top: -4px;
     font-size: 0.92em;
     line-height: 1.2em;
   }
   &__point {
     position: absolute;
-    top: 2px;
+    top: 0;
     left: 38px;
   }
   &__backend {
