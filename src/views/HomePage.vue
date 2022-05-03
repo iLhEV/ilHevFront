@@ -20,9 +20,9 @@
           </v-list>
         </v-menu>
 
-        <h3 class="text-h6 font-weight-light text-center grow">
-          ...iBear...deVeloper...
-        </h3>
+        <h1 class="title-box font-weight-light text-center grow">
+          ...de... <span class="title-box__middle">iBearV</span> ...eloper ...
+        </h1>
         <v-avatar @click="openAuthDialog" class="login-avatar">
           <v-img
             src="https://avataaars.io/?accessoriesType=Prescription02&avatarStyle=Circle&clotheType=BlazerShirt&eyeType=Squint&eyebrowType=Default&facialHairColor=Brown&facialHairType=BeardLight&hairColor=BlondeGolden&mouthType=Smile&skinColor=Light&topType=ShortHairShortCurly"
@@ -36,11 +36,15 @@
         <v-container class="picture-box fill-height">
           <div class="stack-box">
             <div class="stack-box__frontend">Front-End</div>
+            <div class="stack-box__point">.</div>
             <div class="stack-box__backend">Back-End</div>
           </div>
-          <div class="js-box">JS</div>
+          <div class="js-box">
+            JS
+            <div class="js-box__point">.</div>
+          </div>
           <div class="vue-box">Vue.js</div>
-          <div class="react-box">React</div>
+          <div class="react-box">React.js</div>
         </v-container>
       </v-img>
     </v-card>
@@ -108,6 +112,15 @@ export default {
   max-width: 450px;
   background: red;
 }
+.title-box {
+  font-size: 0.65em;
+  color: #eee;
+  &__middle {
+    font-size: 1em;
+    font-weight: 400;
+  }
+}
+
 .login-avatar {
   cursor: pointer;
 }
@@ -122,16 +135,25 @@ export default {
     font-size: 0.92em;
     line-height: 1.2em;
   }
+  &__point {
+    position: absolute;
+    top: 2px;
+    left: 38px;
+  }
   &__backend {
     font-size: 0.92em;
-    line-height: 1em;
-    padding-left: 15px;
+    padding-left: 13px;
   }
 }
 .js-box {
   position: absolute;
   font-size: 2em;
   top: 120px;
+  &__point {
+    position: absolute;
+    top: 8px;
+    left: 37px;
+  }
 }
 .vue-box {
   position: absolute;
@@ -140,7 +162,7 @@ export default {
 }
 .react-box {
   position: absolute;
-  top: 160px;
-  left: 40px;
+  top: 163px;
+  left: 35px;
 }
 </style>
