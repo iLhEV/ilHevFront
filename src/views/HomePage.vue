@@ -35,13 +35,13 @@
       >
         <v-container class="picture-box fill-height">
           <div class="stack-box">
-            <div class="stack-box__point">.</div>
             <div class="stack-box__frontend">Front-End</div>
+            <div class="stack-box__cross">+</div>
             <div class="stack-box__backend">Back-End</div>
           </div>
           <div class="js-box">
             JS
-            <div class="js-box__point">.</div>
+            <div class="js-box__cross">+</div>
           </div>
           <div class="vue-box">Vue.js</div>
           <div class="react-box">React.js</div>
@@ -133,14 +133,15 @@ export default {
   top: 50px;
   &__frontend {
     position: relative;
-    top: -4px;
+    top: -6px;
     font-size: 0.92em;
     line-height: 1.2em;
   }
-  &__point {
+  &__cross {
     position: absolute;
-    top: 0;
-    left: 38px;
+    top: 6px;
+    left: 37px;
+    font-size: 12px;
   }
   &__backend {
     font-size: 0.92em;
@@ -151,10 +152,11 @@ export default {
   position: absolute;
   font-size: 2em;
   top: 120px;
-  &__point {
+  &__cross {
     position: absolute;
-    top: 8px;
-    left: 37px;
+    top: 30px;
+    left: 38px;
+    font-size: 15px;
   }
 }
 .vue-box {

@@ -5,9 +5,7 @@
         <ol>
           <li>
             Open
-            <a :href="authorizeBotLink" target="_blank"
-              >AuthorizationTelegramBot</a
-            >
+            <a :href="authorizeBotLink" target="_blank">AuthorizeTelegramBot</a>
             in your telegram application.
             <div class="ibv-small-caption mt-2">
               Approve confirmation to open your Telegram app/desktop if you were

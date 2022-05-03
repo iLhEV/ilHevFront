@@ -45,6 +45,6 @@ export default [
     name: "Psysreda",
     text: "Create single-page application for psychologist Tatyna G. (Front - Nuxt.js)",
     date: "Aug 2020",
-    link: "Create single-page application for psychologist Tatyna G. (Front - Nuxt.js)",
+    link: "https://psysreda.ru",
   },
 ];

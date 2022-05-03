@@ -19,9 +19,7 @@
       <ol v-if="showInstructions" class="pt-0 mb-5">
         <li>
           Send <b>/login</b> command to
-          <a :href="authorizeBotLink" target="_blank"
-            >AuthorizationTelegramBot</a
-          >.
+          <a :href="authorizeBotLink" target="_blank">AuthorizeTelegramBot</a>.
           <div class="ibv-small-caption mt-2">
             See instructions how to add authorization bot on the
             <a @click="$emit('openRegistration')">registration</a> page.
