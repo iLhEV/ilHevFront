@@ -3,7 +3,7 @@
     <v-card-title> {{ $lang.TITLE_ARTICLES }} </v-card-title>
     <v-card-text>
       <v-btn @click="addArticle" small depressed>Add article</v-btn>
-      <v-btn small depressed class="ml-5" @click="updateList"
+      <v-btn small depressed class="ml-5" @click="updateListManually"
         ><v-icon small>mdi-cached</v-icon></v-btn
       >
       <v-list>
@@ -75,6 +75,10 @@ export default {
     },
     updateList() {
       this.getArticles();
+    },
+    updateListManually() {
+      this.updateList();
+      this.$toast.success(Lang.ARTICLES_LIST_UPDATED);
     },
     async editArticle(item) {
       this.editId = item.id;

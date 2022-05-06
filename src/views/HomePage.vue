@@ -1,6 +1,6 @@
 <template>
   <div class="home-page mx-auto">
-    <LoginForm :show="showLoginForm" @onFormClose="showLoginForm = false" />
+    <AuthDialog :show="showAuthDialog" @close="closeAuthDialog" />
     <v-card dark flat>
       <v-card-title class="pa-2 red lighten-1">
         <v-menu offset-y>
@@ -20,10 +20,10 @@
           </v-list>
         </v-menu>
 
-        <h3 class="text-h6 font-weight-light text-center grow">
-          Frontend developer
-        </h3>
-        <v-avatar @click="showLoginForm = true" class="login-avatar">
+        <h1 class="title-box font-weight-light text-center grow">
+          ...de... <span class="title-box__middle">iBearV</span> ...eloper ...
+        </h1>
+        <v-avatar @click="openAuthDialog" class="login-avatar">
           <v-img
             src="https://avataaars.io/?accessoriesType=Prescription02&avatarStyle=Circle&clotheType=BlazerShirt&eyeType=Squint&eyebrowType=Default&facialHairColor=Brown&facialHairType=BeardLight&hairColor=BlondeGolden&mouthType=Smile&skinColor=Light&topType=ShortHairShortCurly"
           ></v-img>
@@ -33,14 +33,18 @@
         src="https://cdn.vuetifyjs.com/images/cards/forest.jpg"
         gradient="to top, rgba(0,0,0,.44), rgba(0,0,0,.44)"
       >
-        <v-container class="fill-height">
-          <v-row align="center">
-            <strong class="text-h1 font-weight-regular mr-5">JS</strong>
-            <v-row justify="end">
-              <div class="text-h5 font-weight-light">Vue.js</div>
-              <div class="mr-2 text-uppercase font-weight-light">React</div>
-            </v-row>
-          </v-row>
+        <v-container class="picture-box fill-height">
+          <div class="stack-box">
+            <div class="stack-box__frontend">Front-End</div>
+            <div class="stack-box__cross">+</div>
+            <div class="stack-box__backend">Back-End</div>
+          </div>
+          <div class="js-box">
+            JS
+            <div class="js-box__cross">+</div>
+          </div>
+          <div class="vue-box">Vue.js</div>
+          <div class="react-box">React.js</div>
         </v-container>
       </v-img>
     </v-card>
@@ -76,15 +80,15 @@
 </template>
 <script>
 import WORK_PLACES from "@/settings/workPlaces";
-import LoginForm from "@/components/Login/LoginForm";
+import AuthDialog from "@/components/auth/AuthDialog";
 
 export default {
   name: "HomePage",
-  components: { LoginForm },
+  components: { AuthDialog },
   data() {
     return {
       menuItems: [{ title: "Binance Emulator", name: "binanceEmulator" }],
-      showLoginForm: false,
+      showAuthDialog: false,
       workPlaces: WORK_PLACES,
     };
   },
@@ -92,6 +96,13 @@ export default {
   methods: {
     processMenuAction(name) {
       console.log(name);
+    },
+    closeAuthDialog() {
+      console.log("close2");
+      this.showAuthDialog = false;
+    },
+    openAuthDialog() {
+      this.showAuthDialog = true;
     },
   },
 };
@@ -101,7 +112,61 @@ export default {
   max-width: 450px;
   background: red;
 }
+.title-box {
+  font-size: 0.65em;
+  color: #eee;
+  &__middle {
+    font-size: 1em;
+    font-weight: 400;
+  }
+}
+
 .login-avatar {
   cursor: pointer;
+}
+.picture-box {
+  position: relative;
+}
+.stack-box {
+  position: absolute;
+  margin-left: 41.8%;
+  top: 50px;
+  &__frontend {
+    position: relative;
+    top: -6px;
+    font-size: 0.92em;
+    line-height: 1.2em;
+  }
+  &__cross {
+    position: absolute;
+    top: 6px;
+    left: 37px;
+    font-size: 12px;
+  }
+  &__backend {
+    font-size: 0.92em;
+    padding-left: 13px;
+  }
+}
+.js-box {
+  position: absolute;
+  font-size: 2em;
+  top: 120px;
+  &__cross {
+    position: absolute;
+    top: 30px;
+    left: 38px;
+    font-size: 15px;
+  }
+}
+.vue-box {
+  position: absolute;
+  top: 143px;
+  left: 60px;
+}
+.react-box {
+  position: absolute;
+  top: 163px;
+  left: 35px;
 }
 </style>
