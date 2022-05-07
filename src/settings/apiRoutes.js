@@ -1,6 +1,5 @@
 export default {
-  CREATE_PASSPHRASE: "/createPassphrase",
-  CHECK_PASSPHRASE: "/checkPassphrase",
+  AUTH: "/auth",
   ARTICLE: "/article",
   ARTICLES: "/articles",
 };

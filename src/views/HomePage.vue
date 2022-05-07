@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div class="home-page mx-auto">
     <AuthDialog :show="showAuthDialog" @close="closeAuthDialog" />
     <v-card dark flat>
