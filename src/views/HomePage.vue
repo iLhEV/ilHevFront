@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div class="home-page mx-auto">
     <AuthDialog :show="showAuthDialog" @close="closeAuthDialog" />
     <v-card dark flat>
@@ -21,7 +21,7 @@
         </v-menu>
 
         <h1 class="title-box font-weight-light text-center grow">
-          ...de... <span class="title-box__middle">iBearV</span> ...eloper ...
+          <span class="title-box__middle">~~~ ilHev ~~~</span>
         </h1>
         <v-avatar @click="openAuthDialog" class="login-avatar">
           <v-img
@@ -35,9 +35,7 @@
       >
         <v-container class="picture-box fill-height">
           <div class="stack-box">
-            <div class="stack-box__frontend">Front-End</div>
-            <div class="stack-box__cross">+</div>
-            <div class="stack-box__backend">Back-End</div>
+            <div class="stack-box__backend">Front / Back</div>
           </div>
           <div class="js-box">
             JS
@@ -116,7 +114,7 @@ export default {
   font-size: 0.65em;
   color: #eee;
   &__middle {
-    font-size: 1em;
+    font-size: 1.1em;
     font-weight: 400;
   }
 }
@@ -130,21 +128,10 @@ export default {
 .stack-box {
   position: absolute;
   margin-left: 41.8%;
-  top: 50px;
-  &__frontend {
-    position: relative;
-    top: -6px;
-    font-size: 0.92em;
-    line-height: 1.2em;
-  }
-  &__cross {
-    position: absolute;
-    top: 6px;
-    left: 37px;
-    font-size: 12px;
-  }
+  top: 60px;
+  color: #ddd;
   &__backend {
-    font-size: 0.92em;
+    font-size: 0.95em;
     padding-left: 13px;
   }
 }
@@ -152,6 +139,7 @@ export default {
   position: absolute;
   font-size: 2em;
   top: 120px;
+  color: #ccc !important;
   &__cross {
     position: absolute;
     top: 30px;
@@ -163,10 +151,12 @@ export default {
   position: absolute;
   top: 143px;
   left: 60px;
+  color: #ddd !important;
 }
 .react-box {
   position: absolute;
   top: 163px;
   left: 35px;
+  color: #ddd !important;
 }
 </style>

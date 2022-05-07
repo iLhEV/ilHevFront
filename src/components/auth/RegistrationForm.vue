@@ -17,7 +17,7 @@
           </li>
         </ol>
         <div class="pl-2 mt-2">
-          <b>Note:</b> To get login passphrase in the future just send
+          <b>Note:</b> To get one-time login token in the future just send
           <b>/login</b> command to the bot.
         </div>
       </v-list>

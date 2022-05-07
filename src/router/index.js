@@ -23,7 +23,6 @@ const routes = [
 
 const router = new VueRouter({
   mode: "history",
-  base: process.env.BASE_URL,
   routes,
 });
 
@@ -31,7 +30,7 @@ router.afterEach((to) => {
   // Use next tick to handle router history correctly
   // see: https://github.com/vuejs/vue-router/issues/914#issuecomment-384477609
   Vue.nextTick(() => {
-    document.title = to.meta.title || "iBearV - JS, Vue.js, React.js";
+    document.title = to.meta.title || "ilHev - JS, Vue, React";
   });
 });
 

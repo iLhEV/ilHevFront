@@ -11,8 +11,8 @@
         v-model="showInstructions"
         :label="
           showInstructions
-            ? 'Authorization instructions are shown'
-            : 'Authorization instructions are hidden'
+            ? 'Instructions are shown'
+            : 'Instructions are hidden'
         "
         class="mt-0"
       />
@@ -25,25 +25,25 @@
             <a @click="$emit('openRegistration')">registration</a> page.
           </div>
         </li>
-        <li class="mt-4">Enter the received authorization passphrase.</li>
+        <li class="mt-4">Enter the received one-time authorization token.</li>
       </ol>
       <v-btn
-        v-if="!showEnterPassphrase"
-        @click="enterPassphrase"
+        v-if="!showEnterToken"
+        @click="enterToken"
         class="mt-0 mb-1 d-block"
         color="blue lighten-3"
         small
         depressed
       >
-        I'm ready to enter passphrase
+        I'm ready to enter one-time token
       </v-btn>
       <v-text-field
-        v-model="passPhrase"
+        v-model="token"
         maxlength="30"
-        :rules="[rules.passPhrase]"
-        label="Authorization passphrase"
-        class="pt-0 mt-0 passphrase-input"
-        :class="showEnterPassphrase ? '' : 'd-none'"
+        :rules="[rules.token]"
+        label="One-time token"
+        class="pt-0 mt-0 token-input"
+        :class="showEnterToken ? '' : 'd-none'"
         @input="startInput = true"
         single-line
         required
@@ -64,7 +64,7 @@
         :disabled="!valid || !startInput"
         color="green lighten-4"
         class="mr-4 ibv-dimmed"
-        @click="checkPassphrase"
+        @click="checkToken"
         width="140"
         depressed
         small
@@ -86,10 +86,9 @@ export default {
   data() {
     return {
       valid: true,
-      passPhrase: "",
-      showEnterPassphrase: false,
+      token: "",
+      showEnterToken: false,
       rules: RULES,
-      isPassphraseSending: false,
       showInstructions: false,
       startInput: false,
     };
@@ -100,31 +99,31 @@ export default {
     },
   },
   methods: {
-    async enterPassphrase() {
-      this.showEnterPassphrase = true;
+    async enterToken() {
+      this.showEnterToken = true;
     },
-    async checkPassphrase() {
+    async checkToken() {
       if (!this.$refs.loginForm.validate()) return;
       try {
-        const res = await this.$http.get(
-          `${apiRoutes.CHECK_PASSPHRASE}/${this.passPhrase}`
-        );
+        const res = await this.$http.post(apiRoutes.AUTH_WITH_ONE_TIME_TOKEN, {
+          token: this.token,
+        });
         if (res.data?.success) {
           this.$toast.success(Lang.LOGIN_SUCCESSFULLY);
           await this.$router.push(routes.CABINET);
           return;
         }
       } catch (e) {
-        // This planned to be empty
+        console.error(e);
       }
-      this.$toast.error(Lang.PASSPHRASE_IS_INVALID);
+      this.$toast.error(Lang.TOKEN_IS_INVALID);
     },
     closeDialog() {
       this.$emit("closeDialog");
       setTimeout(() => {
-        this.showEnterPassphrase = false;
+        this.showEnterToken = false;
         this.showInstructions = false;
-        this.passPhrase = "";
+        this.token = "";
         this.$refs.loginForm.resetValidation();
       }, 500);
     },
@@ -139,7 +138,7 @@ export default {
     font-size: 0.9em;
   }
 }
-.passphrase-input {
+.token-input {
   max-width: 300px;
 }
 </style>

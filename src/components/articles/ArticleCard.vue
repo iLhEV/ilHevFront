@@ -62,7 +62,7 @@ export default {
     },
     async save() {
       try {
-        const res = await this.$http.post(`${apiRoutes.ARTICLE}`, {
+        const res = await this.$http.post(apiRoutes.ARTICLE, {
           id: this.id,
           text: this.text,
         });
