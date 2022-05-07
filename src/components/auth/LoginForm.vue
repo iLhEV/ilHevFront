@@ -105,7 +105,7 @@ export default {
     async checkToken() {
       if (!this.$refs.loginForm.validate()) return;
       try {
-        const res = await this.$http.post(`${apiRoutes.AUTH}`, {
+        const res = await this.$http.post(apiRoutes.AUTH_WITH_ONE_TIME_TOKEN, {
           token: this.token,
         });
         if (res.data?.success) {
