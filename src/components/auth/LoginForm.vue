@@ -11,8 +11,8 @@
         v-model="showInstructions"
         :label="
           showInstructions
-            ? 'Authorization instructions are shown'
-            : 'Authorization instructions are hidden'
+            ? 'Instructions are shown'
+            : 'Instructions are hidden'
         "
         class="mt-0"
       />
@@ -41,7 +41,7 @@
         v-model="token"
         maxlength="30"
         :rules="[rules.token]"
-        label="Authorization one-time token"
+        label="One-time token"
         class="pt-0 mt-0 token-input"
         :class="showEnterToken ? '' : 'd-none'"
         @input="startInput = true"
@@ -105,14 +105,16 @@ export default {
     async checkToken() {
       if (!this.$refs.loginForm.validate()) return;
       try {
-        const res = await this.$http.post(`${apiRoutes.AUTH}/${this.token}`);
+        const res = await this.$http.post(`${apiRoutes.AUTH}`, {
+          token: this.token,
+        });
         if (res.data?.success) {
           this.$toast.success(Lang.LOGIN_SUCCESSFULLY);
           await this.$router.push(routes.CABINET);
           return;
         }
       } catch (e) {
-        // This planned to be empty
+        console.error(e);
       }
       this.$toast.error(Lang.TOKEN_IS_INVALID);
     },
