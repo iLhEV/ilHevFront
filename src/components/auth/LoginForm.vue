@@ -80,6 +80,7 @@ import RULES from "@/settings/rules";
 import apiRoutes from "@/settings/apiRoutes";
 import Lang from "@/settings/lang";
 import routes from "@/settings/routes";
+import { mapMutations } from "vuex";
 
 export default {
   name: "LoginForm",
@@ -99,6 +100,7 @@ export default {
     },
   },
   methods: {
+    ...mapMutations("auth", ["setToken"]),
     async enterToken() {
       this.showEnterToken = true;
     },
@@ -109,6 +111,8 @@ export default {
           token: this.token,
         });
         if (res.data?.success) {
+          this.setToken(res.data.permanentToken);
+          localStorage.setItem("token", res.data.permanentToken);
           this.$toast.success(Lang.LOGIN_SUCCESSFULLY);
           await this.$router.push(routes.CABINET);
           return;
