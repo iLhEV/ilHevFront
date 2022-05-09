@@ -32,8 +32,9 @@
 
 <script>
 import { VueEditor } from "vue2-editor";
-import apiRoutes from "@/settings/apiRoutes";
 import Lang from "@/settings/lang";
+import { apiRequest } from "@/api/Api";
+import { API_ROUTES } from "@/settings/api";
 export default {
   name: "AddArticle",
   components: { VueEditor },
@@ -62,11 +63,15 @@ export default {
     },
     async save() {
       try {
-        const res = await this.$http.post(apiRoutes.ARTICLE, {
-          id: this.id,
-          text: this.text,
+        const res = await apiRequest({
+          path: API_ROUTES.ARTICLE,
+          method: "post",
+          data: {
+            id: this.id,
+            text: this.text,
+          },
         });
-        if (res.data?.success) {
+        if (res.success) {
           this.$emit("updateList");
           this.$toast.success(
             this.id ? Lang.ARTICLE_UPDATE_SUCCESS : Lang.ARTICLE_CREATE_SUCCESS
@@ -82,9 +87,11 @@ export default {
     },
     async getArticle() {
       try {
-        const res = await this.$http.get(`${apiRoutes.ARTICLE}/${this.id}`);
-        if (res.data?.success) {
-          this.text = res.data.data.text;
+        const res = await apiRequest({
+          path: `${API_ROUTES.ARTICLE}/${this.id}`,
+        });
+        if (res.success) {
+          this.text = res.data.text;
         } else {
           this.$toast.error(Lang.UNKNOWN_ERROR);
         }
@@ -97,6 +104,7 @@ export default {
 </script>
 
 <style>
+/*noinspection CssUnusedSymbol*/
 .ql-syntax {
   background: lightslategray;
   padding: 15px 0 20px 15px;

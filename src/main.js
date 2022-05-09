@@ -7,11 +7,25 @@ import axios from "axios";
 import lang from "@/settings/lang";
 import "@/plugins/toast";
 
-const base = axios.create({
+const axiosApi = axios.create({
   baseURL: process.env.VUE_APP_API_BASE_URL,
 });
 
-Vue.prototype.$http = base;
+const token = localStorage.getItem("token");
+console.log("axios", token);
+axios.interceptors.request.use(
+  (config) => {
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+Vue.prototype.$http = axiosApi;
 Vue.prototype.$lang = lang;
 
 new Vue({
