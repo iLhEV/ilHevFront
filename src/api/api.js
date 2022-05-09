@@ -21,11 +21,9 @@ export const apiRequest = async (config) => {
   const data = config.data || {};
   let headers = {};
   const bearerToken = localStorage.getItem(LOCAL_STORAGE_TOKEN_FIELD);
-  // TODO Let's finish with bearer token
-  console.log(bearerToken);
-  // if (bearerToken) {
-  //   headers = { Authorization: `Bearer ${bearerToken}` };
-  // }
+  if (bearerToken) {
+    headers = { Authorization: `Bearer ${bearerToken}` };
+  }
   let configAxios;
   if (method === AXIOS_METHODS.get || method === AXIOS_METHODS.delete) {
     configAxios = { params: data, headers };
