@@ -33,7 +33,7 @@
 <script>
 import { VueEditor } from "vue2-editor";
 import Lang from "@/settings/lang";
-import { apiRequest } from "@/api/Api";
+import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
 export default {
   name: "AddArticle",

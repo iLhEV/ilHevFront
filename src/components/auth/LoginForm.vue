@@ -80,7 +80,7 @@ import RULES from "@/settings/rules";
 import Lang from "@/settings/lang";
 import routes from "@/settings/routes";
 import { mapMutations } from "vuex";
-import { apiRequest } from "@/api/Api";
+import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
 
 export default {
