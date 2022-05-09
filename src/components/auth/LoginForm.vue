@@ -77,10 +77,11 @@
 
 <script>
 import RULES from "@/settings/rules";
-import apiRoutes from "@/settings/apiRoutes";
 import Lang from "@/settings/lang";
 import routes from "@/settings/routes";
 import { mapMutations } from "vuex";
+import { apiRequest } from "@/api/Api";
+import { API_ROUTES } from "@/settings/api";
 
 export default {
   name: "LoginForm",
@@ -106,21 +107,22 @@ export default {
     },
     async checkToken() {
       if (!this.$refs.loginForm.validate()) return;
-      try {
-        const res = await this.$http.post(apiRoutes.AUTH_WITH_ONE_TIME_TOKEN, {
+      const res = await apiRequest({
+        path: API_ROUTES.AUTH_WITH_ONE_TIME_TOKEN,
+        method: "post",
+        data: {
           token: this.token,
-        });
-        if (res.data?.success) {
-          this.setToken(res.data.permanentToken);
-          localStorage.setItem("token", res.data.permanentToken);
-          this.$toast.success(Lang.LOGIN_SUCCESSFULLY);
-          await this.$router.push(routes.CABINET);
-          return;
-        }
-      } catch (e) {
-        console.error(e);
+        },
+      });
+      if (res.success) {
+        this.setToken(res.permanentToken);
+        localStorage.setItem("token", res.permanentToken);
+        this.$toast.success(Lang.LOGIN_SUCCESSFULLY);
+        await this.$router.push(routes.CABINET);
+        return;
+      } else {
+        this.$toast.error(Lang.TOKEN_IS_INVALID);
       }
-      this.$toast.error(Lang.TOKEN_IS_INVALID);
     },
     closeDialog() {
       this.$emit("closeDialog");

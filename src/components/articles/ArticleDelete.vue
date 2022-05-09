@@ -37,9 +37,9 @@
 </template>
 
 <script>
-import apiRoutes from "@/settings/apiRoutes";
 import Lang from "@/settings/lang";
 import { apiRequest } from "@/api/Api";
+import { API_ROUTES } from "@/settings/api";
 
 export default {
   name: "DeleteDelete",
@@ -69,7 +69,7 @@ export default {
     },
     async deleteArticle() {
       const res = await apiRequest({
-        path: `${apiRoutes.ARTICLE}/${this.article.id}`,
+        path: `${API_ROUTES.ARTICLE}/${this.article.id}`,
         method: "delete",
       });
       if (res.data?.success) {

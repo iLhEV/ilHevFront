@@ -62,41 +62,33 @@ export default {
       this.$emit("update:id", null);
     },
     async save() {
-      try {
-        const res = await apiRequest({
-          path: API_ROUTES.ARTICLE,
-          method: "post",
-          data: {
-            id: this.id,
-            text: this.text,
-          },
-        });
-        if (res.success) {
-          this.$emit("updateList");
-          this.$toast.success(
-            this.id ? Lang.ARTICLE_UPDATE_SUCCESS : Lang.ARTICLE_CREATE_SUCCESS
-          );
-          this.close();
-        }
-      } catch (e) {
-        this.$toast.error(Lang.UNKNOWN_ERROR);
+      const res = await apiRequest({
+        path: API_ROUTES.ARTICLE,
+        method: "post",
+        data: {
+          id: this.id,
+          text: this.text,
+        },
+      });
+      if (res.success) {
+        this.$emit("updateList");
+        this.$toast.success(
+          this.id ? Lang.ARTICLE_UPDATE_SUCCESS : Lang.ARTICLE_CREATE_SUCCESS
+        );
+        this.close();
       }
     },
     clean() {
       this.text = "";
     },
     async getArticle() {
-      try {
-        const res = await apiRequest({
-          path: `${API_ROUTES.ARTICLE}/${this.id}`,
-        });
-        if (res.success) {
-          this.text = res.data.text;
-        } else {
-          this.$toast.error(Lang.UNKNOWN_ERROR);
-        }
-      } catch (e) {
-        this.$toast.error(Lang.GET_DATA_ERROR);
+      const res = await apiRequest({
+        path: `${API_ROUTES.ARTICLE}/${this.id}`,
+      });
+      if (res.success) {
+        this.text = res.data.text;
+      } else {
+        this.$toast.error(Lang.UNKNOWN_ERROR);
       }
     },
   },
