@@ -1,4 +1,5 @@
 import axios from "axios";
+import { LOCAL_STORAGE_TOKEN_FIELD } from "@/settings/auth";
 
 const AXIOS_METHODS = {
   get: "get",
@@ -17,24 +18,32 @@ export const apiRequest = async (config) => {
     }
   }
   const url = `${process.env.VUE_APP_API_HOST}${process.env.VUE_APP_API_PATH}${config.path}`;
-  const data = config.data;
+  const data = config.data || {};
+  let headers = {};
+  const bearerToken = localStorage.getItem(LOCAL_STORAGE_TOKEN_FIELD);
+  // TODO Let's finish with bearer token
+  console.log(bearerToken);
+  // if (bearerToken) {
+  //   headers = { Authorization: `Bearer ${bearerToken}` };
+  // }
+  let configAxios;
+  if (method === AXIOS_METHODS.get || method === AXIOS_METHODS.delete) {
+    configAxios = { params: data, headers };
+  } else {
+    configAxios = { headers };
+  }
   let res;
   try {
-    switch (method) {
-      case "post":
-        res = await axios.post(url, data);
-        break;
-      case "put":
-        res = await axios.put(url, data);
-        break;
-      case "patch":
-        res = await axios.put(url, data);
-        break;
-      case "delete":
-        res = await axios.delete(url, data);
-        break;
-      default:
-        res = await axios.get(url, { params: data });
+    if (method === AXIOS_METHODS.post) {
+      res = await axios.post(url, data, configAxios);
+    } else if (method === AXIOS_METHODS.put) {
+      res = await axios.put(url, data, configAxios);
+    } else if (method === AXIOS_METHODS.patch) {
+      res = await axios.put(url, data, configAxios);
+    } else if (method === AXIOS_METHODS.delete) {
+      res = await axios.delete(url, configAxios);
+    } else {
+      res = await axios.get(url, configAxios);
     }
   } catch (e) {
     console.error("Axios error:", e);
