@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div>{{ this.token }}</div>
     <ArticleList />
   </div>
 </template>
