@@ -37,8 +37,9 @@
 </template>
 
 <script>
-import apiRoutes from "@/settings/apiRoutes";
 import Lang from "@/settings/lang";
+import { apiRequest } from "@/api/api";
+import { API_ROUTES } from "@/settings/api";
 
 export default {
   name: "DeleteDelete",
@@ -67,17 +68,14 @@ export default {
       this.dialog = false;
     },
     async deleteArticle() {
-      try {
-        const res = await this.$http.delete(
-          `${apiRoutes.ARTICLE}/${this.article.id}`
-        );
-        if (res.data?.success) {
-          this.$emit("updateList");
-          this.$toast.success(Lang.ARTICLE_DELETE_SUCCESS);
-          this.close();
-        }
-      } catch (e) {
-        this.$toast.error(Lang.UNKNOWN_ERROR);
+      const res = await apiRequest({
+        path: `${API_ROUTES.ARTICLE}/${this.article.id}`,
+        method: "delete",
+      });
+      if (res.data?.success) {
+        this.$emit("updateList");
+        this.$toast.success(Lang.ARTICLE_DELETE_SUCCESS);
+        this.close();
       }
     },
   },

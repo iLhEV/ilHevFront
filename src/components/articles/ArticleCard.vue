@@ -32,8 +32,9 @@
 
 <script>
 import { VueEditor } from "vue2-editor";
-import apiRoutes from "@/settings/apiRoutes";
 import Lang from "@/settings/lang";
+import { apiRequest } from "@/api/api";
+import { API_ROUTES } from "@/settings/api";
 export default {
   name: "AddArticle",
   components: { VueEditor },
@@ -61,35 +62,33 @@ export default {
       this.$emit("update:id", null);
     },
     async save() {
-      try {
-        const res = await this.$http.post(apiRoutes.ARTICLE, {
+      const res = await apiRequest({
+        path: API_ROUTES.ARTICLE,
+        method: "post",
+        data: {
           id: this.id,
           text: this.text,
-        });
-        if (res.data?.success) {
-          this.$emit("updateList");
-          this.$toast.success(
-            this.id ? Lang.ARTICLE_UPDATE_SUCCESS : Lang.ARTICLE_CREATE_SUCCESS
-          );
-          this.close();
-        }
-      } catch (e) {
-        this.$toast.error(Lang.UNKNOWN_ERROR);
+        },
+      });
+      if (res.success) {
+        this.$emit("updateList");
+        this.$toast.success(
+          this.id ? Lang.ARTICLE_UPDATE_SUCCESS : Lang.ARTICLE_CREATE_SUCCESS
+        );
+        this.close();
       }
     },
     clean() {
       this.text = "";
     },
     async getArticle() {
-      try {
-        const res = await this.$http.get(`${apiRoutes.ARTICLE}/${this.id}`);
-        if (res.data?.success) {
-          this.text = res.data.data.text;
-        } else {
-          this.$toast.error(Lang.UNKNOWN_ERROR);
-        }
-      } catch (e) {
-        this.$toast.error(Lang.GET_DATA_ERROR);
+      const res = await apiRequest({
+        path: `${API_ROUTES.ARTICLE}/${this.id}`,
+      });
+      if (res.success) {
+        this.text = res.data.text;
+      } else {
+        this.$toast.error(Lang.UNKNOWN_ERROR);
       }
     },
   },
@@ -97,6 +96,7 @@ export default {
 </script>
 
 <style>
+/*noinspection CssUnusedSymbol*/
 .ql-syntax {
   background: lightslategray;
   padding: 15px 0 20px 15px;

@@ -1,14 +1,20 @@
 <template>
-  <ArticleList />
+  <div>
+    <ArticleList />
+  </div>
 </template>
 
 <script>
 import ArticleList from "@/components/articles/ArticleList";
+import { mapGetters } from "vuex";
 export default {
-  name: "PrivateArea",
+  name: "PrivateZone",
   components: { ArticleList },
   data() {
     return {};
+  },
+  computed: {
+    ...mapGetters("auth", ["token"]),
   },
   mounted() {},
   methods: {},

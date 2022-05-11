@@ -40,8 +40,9 @@
 <script>
 import ArticleCard from "@/components/articles/ArticleCard";
 import ArticleDelete from "@/components/articles/ArticleDelete";
-import apiRoutes from "@/settings/apiRoutes";
 import Lang from "@/settings/lang";
+import { apiRequest } from "@/api/api";
+import { API_ROUTES } from "@/settings/api";
 
 export default {
   name: "ArticleList",
@@ -62,14 +63,10 @@ export default {
       this.articleDialog = true;
     },
     async getArticles() {
-      try {
-        const res = await this.$http.get(`${apiRoutes.ARTICLES}`);
-        if (res.data?.success) {
-          this.articles = res.data.data;
-        } else {
-          this.$toast.error(Lang.UNKNOWN_ERROR);
-        }
-      } catch (e) {
+      const res = await apiRequest({ path: API_ROUTES.ARTICLES });
+      if (res.success) {
+        this.articles = res.data;
+      } else {
         this.$toast.error(Lang.GET_DATA_ERROR);
       }
     },
