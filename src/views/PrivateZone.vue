@@ -9,7 +9,7 @@
 import ArticleList from "@/components/articles/ArticleList";
 import { mapGetters } from "vuex";
 export default {
-  name: "PrivateArea",
+  name: "PrivateZone",
   components: { ArticleList },
   data() {
     return {};
