@@ -73,7 +73,7 @@ export default {
         path: `${API_ROUTES.ARTICLE}/${this.article.id}`,
         method: "delete",
       });
-      if (res.data?.success) {
+      if (res.success) {
         this.$emit("updateList");
         toastSuccess(Lang.ARTICLE_DELETE_SUCCESS);
         this.close();

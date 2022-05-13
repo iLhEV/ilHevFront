@@ -3,10 +3,10 @@ import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
 const toastOptions = {
-  position: "bottom-center",
-  timeout: 4000,
+  position: "top-right",
+  timeout: 1700,
   transition: "Vue-Toastification__fade",
-  hideProgressBar: false,
+  hideProgressBar: true,
   closeButton: false,
   closeOnClick: false,
   draggable: false,
