@@ -4,20 +4,37 @@ import "vue-toastification/dist/index.css";
 
 const toastOptions = {
   position: "bottom-center",
-  timeout: 5000,
+  timeout: 4000,
   transition: "Vue-Toastification__fade",
-  hideProgressBar: true,
+  hideProgressBar: false,
   closeButton: false,
   closeOnClick: false,
   draggable: false,
   icon: false,
-  maxToasts: 3,
-  newestOnTop: true,
-  filterBeforeCreate: (toast, toasts) => {
-    if (toasts.filter((t) => t.type === toast.type).length !== 0) {
-      return false;
-    }
-    return toast;
+  maxToasts: 5,
+  newestOnTop: false,
+  filterToasts: (toasts) => {
+    // Keep track of existing types
+    // const texts = {};
+    let lastText = null;
+    return toasts.reduce((aggToasts, toast) => {
+      if (!lastText) {
+        lastText = toast.content;
+        aggToasts.push(toast);
+      }
+      if (lastText && lastText !== toast.content) {
+        lastText = toast.content;
+        aggToasts.push(toast);
+      }
+
+      // console.log(toast);
+      // // Check if type was not seen before
+      // if (!texts[toast.content]) {
+      //
+      //   texts[toast.content] = true;
+      // }
+      return aggToasts;
+    }, []);
   },
 };
 
