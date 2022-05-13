@@ -4,7 +4,8 @@ import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
 import lang from "@/settings/lang";
-import "@/plugins/toast";
+import "@/plugins/toastification";
+import "@/assets/scss/toasts.scss";
 
 Vue.prototype.$lang = lang;
 

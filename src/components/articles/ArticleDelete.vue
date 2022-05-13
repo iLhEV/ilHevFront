@@ -40,6 +40,7 @@
 import Lang from "@/settings/lang";
 import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
+import { toastSuccess } from "@/helpers/toasts";
 
 export default {
   name: "DeleteDelete",
@@ -72,9 +73,9 @@ export default {
         path: `${API_ROUTES.ARTICLE}/${this.article.id}`,
         method: "delete",
       });
-      if (res.data?.success) {
+      if (res.success) {
         this.$emit("updateList");
-        this.$toast.success(Lang.ARTICLE_DELETE_SUCCESS);
+        toastSuccess(Lang.ARTICLE_DELETE_SUCCESS);
         this.close();
       }
     },

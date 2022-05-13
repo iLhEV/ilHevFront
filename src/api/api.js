@@ -46,7 +46,7 @@ export const apiRequest = async (config) => {
   } catch (e) {
     console.error("Axios error:", e);
     // TODO Need to add right toast call from here
-    // this.$toast.error(Lang.UNKNOWN_ERROR);
+    // this.toastError(Lang.UNKNOWN_ERROR);
   }
   return res.data;
 };

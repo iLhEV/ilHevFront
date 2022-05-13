@@ -1,0 +1,28 @@
+.Vue-Toastification__toast {
+  padding: 0;
+  border-radius: 5px; /*22px*/
+  border: 1px solid #000;
+  min-height: auto;
+  box-shadow: none;
+}
+.Vue-Toastification__toast-body {
+  padding: 7px 15px;
+  color: #222;
+  font-size: 1em;
+  //font-weight: bold;
+  text-align: center;
+  vertical-align: baseline;
+
+
+}
+.Vue-Toastification__progress-bar {
+  background-color: rgba(255, 255, 255, 0.4)
+}
+.Vue-Toastification__toast--success {
+  background-color: #B2FF59;
+}
+
+.Vue-Toastification__toast--error {
+  background-color: #B2FF59;
+}
+
