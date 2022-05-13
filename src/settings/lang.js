@@ -1,6 +1,6 @@
 export default {
   TOKEN_IS_INVALID: "Token is invalid",
-  LOGIN_SUCCESSFULLY: "Login successfully!",
+  LOGIN_SUCCESSFULLY: "Logged in",
   ARTICLE_CREATE_SUCCESS: "Article created",
   ARTICLE_UPDATE_SUCCESS: "Article updated",
   ARTICLE_DELETE_SUCCESS: "Article deleted",
