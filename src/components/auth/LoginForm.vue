@@ -82,6 +82,7 @@ import { ROUTES } from "@/settings/routes";
 import { API_ROUTES } from "@/settings/api";
 import { mapMutations } from "vuex";
 import { apiRequest } from "@/api/api";
+import { toastError, toastSuccess } from "@/helpers/toasts";
 
 export default {
   name: "LoginForm",
@@ -117,11 +118,11 @@ export default {
       if (res.success) {
         this.setToken(res.permanentToken);
         localStorage.setItem("token", res.permanentToken);
-        this.$toast.success(Lang.LOGIN_SUCCESSFULLY);
+        toastSuccess(Lang.LOGIN_SUCCESSFULLY);
         await this.$router.push(ROUTES.PRIVATE_ZONE);
         return;
       } else {
-        this.$toast.error(Lang.TOKEN_IS_INVALID);
+        toastError(Lang.TOKEN_IS_INVALID);
       }
     },
     closeDialog() {

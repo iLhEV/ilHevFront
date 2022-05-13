@@ -43,6 +43,7 @@ import ArticleDelete from "@/components/articles/ArticleDelete";
 import Lang from "@/settings/lang";
 import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
+import { toastError, toastSuccess } from "@/helpers/toasts";
 
 export default {
   name: "ArticleList",
@@ -67,7 +68,7 @@ export default {
       if (res.success) {
         this.articles = res.data;
       } else {
-        this.$toast.error(Lang.GET_DATA_ERROR);
+        toastError(Lang.GET_DATA_ERROR);
       }
     },
     updateList() {
@@ -75,7 +76,7 @@ export default {
     },
     updateListManually() {
       this.updateList();
-      this.$toast.success(Lang.ARTICLES_LIST_UPDATED);
+      toastSuccess(Lang.ARTICLES_LIST_UPDATED);
     },
     async editArticle(item) {
       this.editId = item.id;

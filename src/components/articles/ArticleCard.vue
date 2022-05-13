@@ -35,6 +35,7 @@ import { VueEditor } from "vue2-editor";
 import Lang from "@/settings/lang";
 import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
+import { toastError, toastSuccess } from "@/helpers/toasts";
 export default {
   name: "AddArticle",
   components: { VueEditor },
@@ -72,7 +73,7 @@ export default {
       });
       if (res.success) {
         this.$emit("updateList");
-        this.$toast.success(
+        toastSuccess(
           this.id ? Lang.ARTICLE_UPDATE_SUCCESS : Lang.ARTICLE_CREATE_SUCCESS
         );
         this.close();
@@ -88,7 +89,7 @@ export default {
       if (res.success) {
         this.text = res.data.text;
       } else {
-        this.$toast.error(Lang.UNKNOWN_ERROR);
+        toastError(Lang.UNKNOWN_ERROR);
       }
     },
   },
