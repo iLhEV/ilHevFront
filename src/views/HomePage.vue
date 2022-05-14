@@ -2,7 +2,7 @@
   <div class="home-page mx-auto">
     <AuthDialog :show="showAuthDialog" @close="closeAuthDialog" />
     <v-card dark flat>
-      <v-card-title class="pa-2 red lighten-1">
+      <v-card-title class="pa-2 blue lighten-2">
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn v-on="on" v-bind="attrs" icon>
@@ -108,7 +108,7 @@ export default {
 <style lang="scss" scoped>
 .home-page {
   max-width: 450px;
-  background: red;
+  background: #42a5f5;
 }
 .title-box {
   font-size: 0.65em;
