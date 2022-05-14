@@ -13,6 +13,7 @@
 import ArticleList from "@/components/articles/ArticleList";
 import { mapGetters } from "vuex";
 import { ROUTES } from "@/settings/routes";
+import { LOCAL_STORAGE_TOKEN_FIELD } from "@/settings/auth";
 export default {
   name: "PrivateZone",
   components: { ArticleList },
@@ -25,7 +26,7 @@ export default {
   mounted() {},
   methods: {
     logout() {
-      localStorage.removeItem("token");
+      localStorage.removeItem(LOCAL_STORAGE_TOKEN_FIELD);
       this.$router.push(ROUTES.HOME);
     },
   },
