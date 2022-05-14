@@ -6,6 +6,7 @@ import vuetify from "./plugins/vuetify";
 import lang from "@/settings/lang";
 import "@/plugins/toastification";
 import "@/assets/scss/toasts.scss";
+import "@/assets/scss/links.scss";
 
 Vue.prototype.$lang = lang;
 

@@ -1,8 +1,9 @@
 <template>
   <div>
     <v-card outlined>
-      <v-card-text class="text-right">
-        <a @click="logout">Logout</a>
+      <v-card-text class="text-right d-flex justify-space-between">
+        <a @click="goToPublicArea" class="ilhev-button">Public area</a>
+        <a @click="logout" class="ilhev-button">Logout</a>
       </v-card-text>
     </v-card>
     <ArticleList />
@@ -25,6 +26,9 @@ export default {
   },
   mounted() {},
   methods: {
+    goToPublicArea() {
+      this.$router.push(ROUTES.HOME);
+    },
     logout() {
       localStorage.removeItem(LOCAL_STORAGE_TOKEN_FIELD);
       this.$router.push(ROUTES.HOME);
