@@ -2,7 +2,7 @@
   <div class="home-page mx-auto">
     <AuthDialog :show="showAuthDialog" @close="closeAuthDialog" />
     <v-card dark flat>
-      <v-card-title class="pa-2 red lighten-1">
+      <v-card-title class="pa-2 top-bar">
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn v-on="on" v-bind="attrs" icon>
@@ -30,19 +30,18 @@
         </v-avatar>
       </v-card-title>
       <v-img
-        src="https://cdn.vuetifyjs.com/images/cards/forest.jpg"
+        src="@/assets/forest1.jpg"
         gradient="to top, rgba(0,0,0,.44), rgba(0,0,0,.44)"
       >
         <v-container class="picture-box fill-height">
-          <div class="stack-box">
-            <div class="stack-box__backend">Front / Back</div>
+          <div class="stack-backend">Backend</div>
+          <div class="stack-frontend">Frontend</div>
+          <div class="languages-box">
+            <div class="js">JS</div>
+            <div class="vue">Vue.js</div>
+            <div class="react">React</div>
+            <div class="cross">+</div>
           </div>
-          <div class="js-box">
-            JS
-            <div class="js-box__cross">+</div>
-          </div>
-          <div class="vue-box">Vue.js</div>
-          <div class="react-box">React.js</div>
         </v-container>
       </v-img>
     </v-card>
@@ -108,13 +107,14 @@ export default {
 <style lang="scss" scoped>
 .home-page {
   max-width: 450px;
-  background: red;
+  background: #42a5f5;
 }
 .title-box {
+  padding-top: 3px;
   font-size: 0.65em;
   color: #eee;
   &__middle {
-    font-size: 1.1em;
+    font-size: 1.4em;
     font-weight: 400;
   }
 }
@@ -125,38 +125,53 @@ export default {
 .picture-box {
   position: relative;
 }
-.stack-box {
+.stack-frontend {
   position: absolute;
-  margin-left: 41.8%;
-  top: 60px;
+  top: 26px;
+  left: 183px;
   color: #ddd;
-  &__backend {
-    font-size: 0.95em;
-    padding-left: 13px;
-  }
+  font-size: 0.97em;
+  line-height: 0.95em;
+  border-bottom: 1px dashed #ddd;
 }
-.js-box {
+.stack-backend {
   position: absolute;
-  font-size: 2em;
-  top: 120px;
+  top: 32px;
+  left: 21px;
+  color: #ddd;
+  font-size: 0.9em;
+  line-height: 0.95em;
+  border-bottom: 1px dashed #ddd;
+}
+.languages-box {
+  position: absolute;
+  top: 93px;
+  left: 30px;
   color: #ccc !important;
-  &__cross {
+  .js {
+    font-size: 2em;
+  }
+  .vue {
+    position: absolute;
+    top: 23px;
+    left: 51px;
+    color: #ddd !important;
+  }
+  .react {
+    position: absolute;
+    top: 46px;
+    left: 25px;
+    color: #ddd !important;
+    font-size: 0.84em;
+  }
+  .cross {
     position: absolute;
     top: 30px;
     left: 38px;
     font-size: 15px;
   }
 }
-.vue-box {
-  position: absolute;
-  top: 143px;
-  left: 60px;
-  color: #ddd !important;
-}
-.react-box {
-  position: absolute;
-  top: 163px;
-  left: 35px;
-  color: #ddd !important;
+.top-bar {
+  background-color: #8d6e63;
 }
 </style>
