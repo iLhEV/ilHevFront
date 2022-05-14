@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import HomePage from "@/views/HomePage";
 import { ROUTES } from "@/settings/routes";
+import { LOCAL_STORAGE_TOKEN_FIELD } from "@/settings/auth";
 
 Vue.use(VueRouter);
 
@@ -25,6 +26,17 @@ const routes = [
 const router = new VueRouter({
   mode: "history",
   routes,
+});
+
+// eslint-disable-next-line no-unused-vars
+router.beforeEach(async (to, from, next) => {
+  if (
+    to.path !== ROUTES.HOME &&
+    !localStorage.getItem(LOCAL_STORAGE_TOKEN_FIELD)
+  ) {
+    return next(ROUTES.HOME);
+  }
+  return next();
 });
 
 router.afterEach((to) => {

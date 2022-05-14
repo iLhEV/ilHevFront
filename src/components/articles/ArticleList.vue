@@ -97,7 +97,7 @@ export default {
 
 <style lang="scss" scoped>
 .articles-list {
-  margin-top: 100px;
+  margin-top: 70px;
 }
 .v-list-item {
   border-bottom: 1px solid #ddd;
