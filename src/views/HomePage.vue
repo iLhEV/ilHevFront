@@ -21,7 +21,7 @@
         </v-menu>
 
         <h1 class="title-box font-weight-light text-center grow">
-          <span class="title-box__middle">~ ~ ~ ilHeV ~ ~ ~</span>
+          <span class="title-box__middle">~ ~ ~ ilheV ~ ~ ~</span>
         </h1>
         <v-avatar @click="openAuthDialog" class="login-avatar">
           <v-img

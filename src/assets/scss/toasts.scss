@@ -1,12 +1,12 @@
 .Vue-Toastification__toast {
   padding: 0;
   border-radius: 5px; /*22px*/
-  border: 1px solid #616161;
+  border: 1px dashed #A1887F;
   min-height: auto;
   min-width: 120px;
   box-shadow: none;
   &--error, &--success, &--warning, &--info {
-    background-color: rgba(249, 251, 231, 0.9);
+    background-color: rgba(239, 235, 233, 0.95);
   }
   &--error {
     color: #FF5252;
