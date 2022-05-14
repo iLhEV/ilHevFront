@@ -1,9 +1,16 @@
 <template>
-  <v-card width="600" class="cabinet-page mx-auto" min-height="700">
-    <v-card-title> {{ $lang.TITLE_ARTICLES }} </v-card-title>
+  <v-card width="600" class="articles-list mx-auto" min-height="700">
+    <v-card-title>{{ $lang.TITLE_ARTICLES }} </v-card-title>
     <v-card-text>
-      <v-btn @click="addArticle" small depressed>Add article</v-btn>
-      <v-btn small depressed class="ml-5" @click="updateListManually"
+      <v-btn @click="addArticle" small depressed color="#C5E1A5" class="px-4"
+        >Create</v-btn
+      >
+      <v-btn
+        small
+        depressed
+        color="#EFEBE9"
+        class="ml-5 px-0"
+        @click="updateListManually"
         ><v-icon small>mdi-cached</v-icon></v-btn
       >
       <v-list>
@@ -89,7 +96,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cabinet-page {
+.articles-list {
   margin-top: 100px;
 }
 .v-list-item {
