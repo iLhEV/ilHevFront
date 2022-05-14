@@ -23,7 +23,7 @@
         <h1 class="title-box font-weight-light text-center grow">
           <span class="title-box__middle">~ ~ ~ ilheV ~ ~ ~</span>
         </h1>
-        <v-avatar @click="openAuthDialog" size="38" class="login-avatar">
+        <v-avatar @click="avatarAction" size="38" class="login-avatar">
           <v-img src="@/assets/avatar-volf.png"></v-img>
         </v-avatar>
       </v-card-title>
@@ -76,13 +76,15 @@
 <script>
 import WORK_PLACES from "@/settings/workPlaces";
 import AuthDialog from "@/components/auth/AuthDialog";
+import { isAuth } from "@/helpers/auth";
+import { ROUTES } from "@/settings/routes";
 
 export default {
   name: "HomePage",
   components: { AuthDialog },
   data() {
     return {
-      menuItems: [{ title: "Binance Emulator", name: "binanceEmulator" }],
+      menuItems: [{ title: "Articles", name: "articles" }],
       showAuthDialog: false,
       workPlaces: WORK_PLACES,
     };
@@ -93,11 +95,14 @@ export default {
       console.log(name);
     },
     closeAuthDialog() {
-      console.log("close2");
       this.showAuthDialog = false;
     },
-    openAuthDialog() {
-      this.showAuthDialog = true;
+    avatarAction() {
+      if (isAuth()) {
+        this.$router.push(ROUTES.PRIVATE_ZONE);
+      } else {
+        this.showAuthDialog = true;
+      }
     },
   },
 };

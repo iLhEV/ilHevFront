@@ -20,4 +20,5 @@ export default {
   BUTTON_LOGIN: "Login",
   BUTTON_REGISTER: "Register",
   BUTTON_ENTER_REGISTRATION_CODE: "Enter registration code",
+  RESULT_LOGOUT_SUCCESS: "You were logged out.",
 };

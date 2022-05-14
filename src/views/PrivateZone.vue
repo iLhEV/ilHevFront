@@ -15,6 +15,8 @@ import ArticleList from "@/components/articles/ArticleList";
 import { mapGetters } from "vuex";
 import { ROUTES } from "@/settings/routes";
 import { LOCAL_STORAGE_TOKEN_FIELD } from "@/settings/auth";
+import { toastSuccess } from "@/helpers/toasts";
+import Lang from "@/settings/lang";
 export default {
   name: "PrivateZone",
   components: { ArticleList },
@@ -32,6 +34,7 @@ export default {
     logout() {
       localStorage.removeItem(LOCAL_STORAGE_TOKEN_FIELD);
       this.$router.push(ROUTES.HOME);
+      toastSuccess(Lang.RESULT_LOGOUT_SUCCESS);
     },
   },
 };
