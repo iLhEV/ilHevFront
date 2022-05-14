@@ -3,8 +3,8 @@
     v-model="dialog"
     @input="$emit('input', $event)"
     max-width="450"
-    overlay-color="brown"
-    overlay-opacity="0.99"
+    overlay-color="var(--v-overlay-base)"
+    overlay-opacity="0.3"
     persistent
   >
     <v-card v-if="article">

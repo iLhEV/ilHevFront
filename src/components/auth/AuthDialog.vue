@@ -1,9 +1,9 @@
 <template>
   <v-dialog
-    max-width="450"
+    max-width="490"
     v-model="showDialog"
-    overlay-color="brown"
-    overlay-opacity="0.95"
+    overlay-color="var(--v-overlay-base)"
+    overlay-opacity="0.3"
     persistent
   >
     <v-card>

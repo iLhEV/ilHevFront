@@ -3,8 +3,8 @@
     :value="value"
     @input="$emit('input', $event)"
     max-width="750"
-    overlay-color="brown"
-    overlay-opacity="0.99"
+    overlay-color="var(--v-overlay-base)"
+    overlay-opacity="0.3"
     persistent
   >
     <v-form ref="form">
