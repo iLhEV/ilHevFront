@@ -1,6 +1,7 @@
 export default {
-  TOKEN_IS_INVALID: "Token is invalid",
-  LOGIN_SUCCESSFULLY: "Logged in",
+  TOKEN_IS_INVALID: "Token is invalid.",
+  RESULT_LOGIN_SUCCESS: "You were logged in.",
+  RESULT_LOGOUT_SUCCESS: "You were logged out.",
   ARTICLE_CREATE_SUCCESS: "The article was created.",
   ARTICLE_UPDATE_SUCCESS: "The article was saved.",
   ARTICLE_DELETE_SUCCESS: "The article was deleted.",
@@ -20,5 +21,4 @@ export default {
   BUTTON_LOGIN: "Login",
   BUTTON_REGISTER: "Register",
   BUTTON_ENTER_REGISTRATION_CODE: "Enter registration code",
-  RESULT_LOGOUT_SUCCESS: "You were logged out.",
 };
