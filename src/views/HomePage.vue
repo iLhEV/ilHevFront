@@ -23,10 +23,8 @@
         <h1 class="title-box font-weight-light text-center grow">
           <span class="title-box__middle">~ ~ ~ ilheV ~ ~ ~</span>
         </h1>
-        <v-avatar @click="openAuthDialog" class="login-avatar">
-          <v-img
-            src="https://avataaars.io/?accessoriesType=Prescription02&avatarStyle=Circle&clotheType=BlazerShirt&eyeType=Squint&eyebrowType=Default&facialHairColor=Brown&facialHairType=BeardLight&hairColor=BlondeGolden&mouthType=Smile&skinColor=Light&topType=ShortHairShortCurly"
-          ></v-img>
+        <v-avatar @click="openAuthDialog" size="38" class="login-avatar">
+          <v-img src="@/assets/avatar-volf.png"></v-img>
         </v-avatar>
       </v-card-title>
       <v-img
