@@ -51,7 +51,7 @@
           <v-timeline-item
             v-for="(item, index) in workPlaces"
             :key="index"
-            :color="index % 2 === 1 ? 'teal lighten-3' : 'pink'"
+            :color="index % 2 === 1 ? '#546E7A' : '#BCAAA4'"
             small
           >
             <v-row class="pt-1">
