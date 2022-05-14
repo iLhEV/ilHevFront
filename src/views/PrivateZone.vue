@@ -1,5 +1,10 @@
 <template>
   <div>
+    <v-card outlined>
+      <v-card-text class="text-right">
+        <a @click="logout">Logout</a>
+      </v-card-text>
+    </v-card>
     <ArticleList />
   </div>
 </template>
@@ -7,6 +12,7 @@
 <script>
 import ArticleList from "@/components/articles/ArticleList";
 import { mapGetters } from "vuex";
+import { ROUTES } from "@/settings/routes";
 export default {
   name: "PrivateZone",
   components: { ArticleList },
@@ -17,7 +23,12 @@ export default {
     ...mapGetters("auth", ["token"]),
   },
   mounted() {},
-  methods: {},
+  methods: {
+    logout() {
+      localStorage.removeItem("token");
+      this.$router.push(ROUTES.HOME);
+    },
+  },
 };
 </script>
 
