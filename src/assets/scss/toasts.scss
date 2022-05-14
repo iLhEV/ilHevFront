@@ -6,7 +6,7 @@
   min-width: 120px;
   box-shadow: none;
   &--error, &--success, &--warning, &--info {
-    background-color: #fff;
+    background-color: rgba(249, 251, 231, 0.9);
   }
   &--error {
     color: #FF5252;
