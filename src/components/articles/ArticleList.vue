@@ -1,5 +1,5 @@
 <template>
-  <v-card width="600" class="articles-list mx-auto" min-height="700">
+  <v-card width="750" class="articles-list mx-auto" min-height="700">
     <v-card-title>{{ $lang.TITLE_ARTICLES }} </v-card-title>
     <v-card-text>
       <v-btn @click="addArticle" small depressed color="#C5E1A5" class="px-4"

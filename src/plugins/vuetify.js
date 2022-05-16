@@ -9,6 +9,7 @@ export default new Vuetify({
     themes: {
       light: {
         overlay: "#f9fbe7",
+        chocolate: "#8d6e63",
       },
     },
   },

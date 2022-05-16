@@ -23,8 +23,15 @@
         <h1 class="title-box font-weight-light text-center grow">
           <span class="title-box__middle">~ ~ ~ ilheV ~ ~ ~</span>
         </h1>
-        <v-avatar @click="avatarAction" size="38" class="login-avatar">
-          <v-img src="@/assets/avatar-volf.png"></v-img>
+        <v-avatar
+          @click="avatarAction"
+          @mouseover="bounceAvatar"
+          @mouseout="deBounceAvatar"
+          :size="avatarShift ? 40 : 38"
+          class="login-avatar"
+          :class="avatarShift ? 'login-avatar-bounced' : ''"
+        >
+          <v-img src="@/assets/avatar-volf.png" />
         </v-avatar>
       </v-card-title>
       <v-img
@@ -87,6 +94,7 @@ export default {
       menuItems: [{ title: "Articles", name: "articles" }],
       showAuthDialog: false,
       workPlaces: WORK_PLACES,
+      avatarShift: false,
     };
   },
   mounted() {},
@@ -103,6 +111,12 @@ export default {
       } else {
         this.showAuthDialog = true;
       }
+    },
+    bounceAvatar() {
+      this.avatarShift = true;
+    },
+    deBounceAvatar() {
+      this.avatarShift = false;
     },
   },
 };
@@ -121,12 +135,22 @@ export default {
     font-weight: 400;
   }
 }
-
 .login-avatar {
   cursor: pointer;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+.login-avatar-bounced {
+  margin-left: 0;
+  margin-right: 0;
 }
 .picture-box {
   position: relative;
+}
+.stack-frontend:hover,
+.stack-backend:hover {
+  border-bottom: 0;
+  cursor: default;
 }
 .stack-frontend {
   position: absolute;
@@ -134,7 +158,7 @@ export default {
   left: 183px;
   color: #ddd;
   font-size: 0.97em;
-  line-height: 0.95em;
+  line-height: 1.2em;
   border-bottom: 1px dashed #ddd;
 }
 .stack-backend {
@@ -143,7 +167,7 @@ export default {
   left: 21px;
   color: #ddd;
   font-size: 0.9em;
-  line-height: 0.95em;
+  line-height: 1.2em;
   border-bottom: 1px dashed #ddd;
 }
 .languages-box {
@@ -175,6 +199,7 @@ export default {
   }
 }
 .top-bar {
-  background-color: #8d6e63;
+  background-color: var(--v-chocolate-base);
+  height: 56px;
 }
 </style>

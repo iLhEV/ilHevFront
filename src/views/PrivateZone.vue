@@ -1,7 +1,9 @@
 <template>
   <div>
     <v-card outlined>
-      <v-card-text class="text-right d-flex justify-space-between">
+      <v-card-text
+        class="text-right d-flex justify-space-between navigation-area"
+      >
         <a @click="goToPublicArea" class="ilhev-button">Public area</a>
         <a @click="logout" class="ilhev-button">Logout</a>
       </v-card-text>
@@ -43,5 +45,8 @@ export default {
 <style lang="scss" scoped>
 .cabinet-page {
   margin-top: 100px;
+}
+.navigation-area {
+  min-height: 55px;
 }
 </style>
