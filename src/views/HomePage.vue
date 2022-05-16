@@ -3,7 +3,7 @@
     <AuthDialog :show="showAuthDialog" @close="closeAuthDialog" />
     <v-card dark flat>
       <v-card-title class="pa-2 top-bar">
-        <v-menu offset-y>
+        <v-menu offset-y v-if="false">
           <template v-slot:activator="{ on, attrs }">
             <v-btn v-on="on" v-bind="attrs" icon>
               <v-icon>mdi-menu</v-icon>
@@ -20,19 +20,30 @@
           </v-list>
         </v-menu>
 
-        <h1 class="title-box font-weight-light text-center grow">
-          <span class="title-box__middle">~ ~ ~ ilheV ~ ~ ~</span>
+        <h1 class="title-box font-weight-light text-left grow pl-3">
+          <span class="title-box__middle">iLhEV</span>
         </h1>
         <v-avatar
           @click="avatarAction"
           @mouseover="bounceAvatar"
           @mouseout="deBounceAvatar"
           :size="avatarShift ? 40 : 38"
-          class="login-avatar"
+          class="login-avatar mr-2"
           :class="avatarShift ? 'login-avatar-bounced' : ''"
         >
           <v-img src="@/assets/avatar-volf.png" />
         </v-avatar>
+      </v-card-title>
+      <v-card-title class="links-area">
+        <span
+          :class="articlesLinkActive ? 'pencil-link' : 'pencil-link-active'"
+        ></span>
+        <span
+          class="links-area-element"
+          @mouseover="articlesLinkActive = true"
+          @mouseout="articlesLinkActive = false"
+          >Articles</span
+        >
       </v-card-title>
       <v-img
         src="@/assets/forest1.jpg"
@@ -95,6 +106,7 @@ export default {
       showAuthDialog: false,
       workPlaces: WORK_PLACES,
       avatarShift: false,
+      articlesLinkActive: false,
     };
   },
   mounted() {},
@@ -155,25 +167,31 @@ export default {
 }
 .stack-frontend {
   position: absolute;
-  top: 26px;
-  left: 183px;
+  top: 30px;
+  left: 189px;
   color: #ddd;
-  font-size: 0.97em;
+  font-size: 0.71em;
   line-height: 1.2em;
   border-bottom: 1px dashed #ddd;
 }
 .stack-backend {
   position: absolute;
-  top: 32px;
-  left: 21px;
+  top: 35px;
+  left: 22px;
   color: #ddd;
-  font-size: 0.9em;
+  font-size: 0.65em;
   line-height: 1.2em;
   border-bottom: 1px dashed #ddd;
 }
 .languages-box {
   position: absolute;
   top: 93px;
+  @media (max-width: 400px) {
+    top: 70px;
+  }
+  @media (max-width: 410px) {
+    top: 77px;
+  }
   left: 30px;
   color: #ccc !important;
   .js {
@@ -202,5 +220,25 @@ export default {
 .top-bar {
   background-color: var(--v-chocolate-base);
   height: 56px;
+}
+.links-area {
+  display: block;
+  text-align: center;
+  background-color: #a1887f;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 28px;
+  padding: 0 18px;
+  margin: 0;
+}
+.pencil-link::before {
+  content: "✏";
+}
+.pencil-link-active::before {
+  content: "✎";
+}
+.links-area-element {
+  padding-left: 8px;
+  cursor: pointer;
 }
 </style>
