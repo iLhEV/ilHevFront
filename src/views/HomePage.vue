@@ -140,6 +140,7 @@ export default {
   margin-left: 1px;
   margin-right: 1px;
 }
+/*test commit*/
 .login-avatar-bounced {
   margin-left: 0;
   margin-right: 0;
