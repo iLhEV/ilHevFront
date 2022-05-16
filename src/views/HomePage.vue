@@ -162,7 +162,6 @@ export default {
 }
 .stack-frontend:hover,
 .stack-backend:hover {
-  border-bottom: 0;
   cursor: default;
 }
 .stack-frontend {
