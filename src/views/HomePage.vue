@@ -23,6 +23,7 @@
         <h1 class="title-box font-weight-light text-left grow pl-3">
           <span class="title-box__middle">iLhEV</span>
         </h1>
+
         <v-avatar
           @click="avatarAction"
           @mouseover="bounceAvatar"
@@ -34,22 +35,26 @@
           <v-img src="@/assets/avatar-volf.png" />
         </v-avatar>
       </v-card-title>
-      <v-card-title class="links-area">
-        <span
-          :class="articlesLinkActive ? 'pencil-link' : 'pencil-link-active'"
-        ></span>
-        <span
-          class="links-area-element"
-          @mouseover="articlesLinkActive = true"
-          @mouseout="articlesLinkActive = false"
-          >Articles</span
-        >
+      <v-card-title class="links-area" v-if="false">
+        <span class="links-area__header">~ ~ ~ ~ ~ ~ ~ ~ ~ </span>
+        <span class="links-area__header">~ ~ ~ ~ ~ ~ ~ ~ ~ </span>
       </v-card-title>
       <v-img
         src="@/assets/forest1.jpg"
         gradient="to top, rgba(0,0,0,.44), rgba(0,0,0,.44)"
       >
         <v-container class="picture-box fill-height">
+          <span class="links-area-element">
+            <span
+              :class="articlesLinkActive ? 'pencil-link' : 'pencil-link-active'"
+            ></span>
+            <span
+              class="links-area-element__body"
+              @mouseover="articlesLinkActive = true"
+              @mouseout="articlesLinkActive = false"
+              >Articles</span
+            >
+          </span>
           <div class="stack-backend">Backend</div>
           <div class="stack-frontend">Frontend</div>
           <div class="languages-box">
@@ -222,13 +227,17 @@ export default {
 }
 .links-area {
   display: block;
-  text-align: center;
+  text-align: left;
   background-color: #a1887f;
   font-size: 14px;
   font-weight: normal;
   line-height: 28px;
-  padding: 0 18px;
+  padding: 0 18px 3px;
   margin: 0;
+  &__header {
+    display: inline-block;
+    font-size: 1.2em;
+  }
 }
 .pencil-link::before {
   content: "✏";
@@ -237,7 +246,16 @@ export default {
   content: "✎";
 }
 .links-area-element {
-  padding-left: 8px;
-  cursor: pointer;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  &__body {
+    padding-left: 8px;
+    cursor: pointer;
+    border-bottom: 1px dashed white;
+  }
+  &__body:hover {
+    border-bottom: 0;
+  }
 }
 </style>
