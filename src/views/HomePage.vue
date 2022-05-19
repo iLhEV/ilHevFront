@@ -21,7 +21,13 @@
         </v-menu>
 
         <h1 class="title-box font-weight-light text-left grow pl-3">
-          <span class="title-box__middle">iLhEV</span>
+          <span v-if="showName">iL</span>
+          <span class="title-box__small">
+            <span v-if="showRestOfName">[ia]</span>
+            <span v-if="showRestOfSurname">[Domys]</span>
+          </span>
+          <span v-if="isAnimationFinished"></span>
+          <span v-if="showSurname">hEV</span>
         </h1>
 
         <v-avatar
@@ -102,6 +108,9 @@ import AuthDialog from "@/components/auth/AuthDialog";
 import { isAuth } from "@/helpers/auth";
 import { ROUTES } from "@/settings/routes";
 
+const ANIMATION_TIMEOUT = 700;
+const ANIMATION_RUN_NUMBER = 1;
+
 export default {
   name: "HomePage",
   components: { AuthDialog },
@@ -112,10 +121,41 @@ export default {
       workPlaces: WORK_PLACES,
       avatarShift: false,
       articlesLinkActive: false,
+      showName: true,
+      showSurname: false,
+      showRestOfName: false,
+      showRestOfSurname: false,
+      isAnimationFinished: false,
+      animationRunNumber: 0,
     };
   },
-  mounted() {},
+  mounted() {
+    this.runAnimation(ANIMATION_RUN_NUMBER);
+  },
   methods: {
+    runAnimation(runNumber) {
+      if (!runNumber) {
+        return;
+      }
+      setTimeout(() => {
+        this.isAnimationFinished = false;
+        this.showRestOfName = true;
+      }, ANIMATION_TIMEOUT);
+      setTimeout(() => {
+        this.showRestOfSurname = true;
+      }, ANIMATION_TIMEOUT * 2);
+      setTimeout(() => {
+        this.showSurname = true;
+      }, ANIMATION_TIMEOUT * 3);
+      setTimeout(() => {
+        this.showRestOfName = false;
+        this.showRestOfSurname = false;
+        this.isAnimationFinished = true;
+      }, ANIMATION_TIMEOUT * 4);
+      setTimeout(() => {
+        this.runAnimation(runNumber - 1);
+      }, ANIMATION_TIMEOUT * 4.5);
+    },
     processMenuAction(name) {
       console.log(name);
     },
@@ -145,11 +185,12 @@ export default {
 }
 .title-box {
   padding-top: 3px;
-  font-size: 0.65em;
+  font-size: 1.25em;
   color: #eee;
-  &__middle {
-    font-size: 1.4em;
-    font-weight: 400;
+  font-weight: 400;
+
+  &__small {
+    font-size: 0.8em;
   }
 }
 .login-avatar {
@@ -247,8 +288,9 @@ export default {
 }
 .articles-element {
   position: absolute;
-  right: 65px;
+  right: 66px;
   top: 18px;
+  user-select: none;
   &__body {
     padding-left: 8px;
     cursor: pointer;
