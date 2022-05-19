@@ -26,7 +26,7 @@
             <span v-if="showRestOfName">[ia]</span>
             <span v-if="showRestOfSurname">[Domys]</span>
           </span>
-          <span v-if="isAnimationFinished"></span>
+          <span v-if="isAnimationFinished">'</span>
           <span v-if="showSurname">hEV</span>
         </h1>
 
