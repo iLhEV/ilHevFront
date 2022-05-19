@@ -44,12 +44,12 @@
         gradient="to top, rgba(0,0,0,.44), rgba(0,0,0,.44)"
       >
         <v-container class="picture-box fill-height">
-          <span class="links-area-element">
+          <span class="articles-element">
             <span
               :class="articlesLinkActive ? 'pencil-link' : 'pencil-link-active'"
             ></span>
             <span
-              class="links-area-element__body"
+              class="articles-element__body"
               @mouseover="articlesLinkActive = true"
               @mouseout="articlesLinkActive = false"
               >Articles</span
@@ -245,10 +245,10 @@ export default {
 .pencil-link-active::before {
   content: "✎";
 }
-.links-area-element {
+.articles-element {
   position: absolute;
-  right: 15px;
-  top: 15px;
+  right: 65px;
+  top: 18px;
   &__body {
     padding-left: 8px;
     cursor: pointer;
