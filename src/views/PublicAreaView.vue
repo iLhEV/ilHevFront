@@ -65,7 +65,7 @@ const ANIMATION_TIMEOUT = 700;
 const ANIMATION_RUN_NUMBER = 1;
 
 export default {
-  name: "HomePage",
+  name: "PublicAreaView",
   components: { ForestBlock, ArticlesTab, AuthDialog, WorkPlacesTab },
   data() {
     return {

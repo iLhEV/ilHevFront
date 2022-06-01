@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomePage from "@/views/HomePage";
+import PublicAreaView from "@/views/PublicAreaView";
 import { ROUTES } from "@/settings/routes";
 import { LOCAL_STORAGE_TOKEN_FIELD } from "@/settings/auth";
 
@@ -10,26 +10,26 @@ const routes = [
   {
     path: ROUTES.HOME,
     name: "home",
-    component: HomePage,
+    component: PublicAreaView,
   },
   {
     path: ROUTES.WORK_PLACES,
     name: "workPlaces",
-    component: HomePage,
+    component: PublicAreaView,
   },
   {
     path: ROUTES.ARTICLES,
     name: "articles",
-    component: HomePage,
+    component: PublicAreaView,
   },
   {
     path: ROUTES.PRIVATE_ZONE,
-    name: "privateZone",
+    name: "privateArea",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/PrivateZone.vue"),
+      import(/* webpackChunkName: "about" */ "../views/PrivateAreaView.vue"),
   },
 ];
 

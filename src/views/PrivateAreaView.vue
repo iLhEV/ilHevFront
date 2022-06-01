@@ -20,7 +20,7 @@ import { LOCAL_STORAGE_TOKEN_FIELD } from "@/settings/auth";
 import { toastSuccess } from "@/helpers/toasts";
 import { lang } from "@/settings/lang";
 export default {
-  name: "PrivateZone",
+  name: "PrivateAreaView",
   components: { ArticleList },
   data() {
     return {};
