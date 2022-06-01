@@ -77,7 +77,7 @@
 
 <script>
 import RULES from "@/settings/rules";
-import Lang from "@/settings/lang";
+import { lang } from "@/settings/lang";
 import { ROUTES } from "@/settings/routes";
 import { API_ROUTES } from "@/settings/api";
 import { mapMutations } from "vuex";
@@ -118,11 +118,11 @@ export default {
       if (res.success) {
         this.setToken(res.permanentToken);
         localStorage.setItem("token", res.permanentToken);
-        toastSuccess(Lang.RESULT_LOGIN_SUCCESS);
+        toastSuccess(lang.RESULT_LOGIN_SUCCESS);
         await this.$router.push(ROUTES.PRIVATE_ZONE);
         return;
       } else {
-        toastError(Lang.TOKEN_IS_INVALID);
+        toastError(lang.TOKEN_IS_INVALID);
       }
     },
     closeDialog() {

@@ -10,7 +10,7 @@
     <v-form ref="form">
       <v-card class="pb-3">
         <v-card-title>
-          {{ id ? $lang.TITLE_EDIT_ARTICLE : $lang.TITLE_ADD_ARTICLE }}
+          {{ id ? lang.TITLE_EDIT_ARTICLE : lang.TITLE_ADD_ARTICLE }}
         </v-card-title>
         <v-card-text class="pt-2">
           <v-form>
@@ -19,10 +19,10 @@
         </v-card-text>
         <v-card-actions class="d-flex justify-end pr-6">
           <v-btn depressed small class="mr-5" @click="close">
-            {{ $lang.BUTTON_CLOSE }}
+            {{ lang.BUTTON_CLOSE }}
           </v-btn>
           <v-btn @click="save" color="primary" depressed small>{{
-            $lang.BUTTON_SAVE
+            lang.BUTTON_SAVE
           }}</v-btn>
         </v-card-actions>
       </v-card>
@@ -32,7 +32,7 @@
 
 <script>
 import { VueEditor } from "vue2-editor";
-import Lang from "@/settings/lang";
+import { lang } from "@/settings/lang";
 import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
 import { toastError, toastSuccess } from "@/helpers/toasts";
@@ -74,7 +74,7 @@ export default {
       if (res.success) {
         this.$emit("updateList");
         toastSuccess(
-          this.id ? Lang.ARTICLE_UPDATE_SUCCESS : Lang.ARTICLE_CREATE_SUCCESS
+          this.id ? lang.ARTICLE_UPDATE_SUCCESS : lang.ARTICLE_CREATE_SUCCESS
         );
         this.close();
       }
@@ -89,7 +89,7 @@ export default {
       if (res.success) {
         this.text = res.data.text;
       } else {
-        toastError(Lang.UNKNOWN_ERROR);
+        toastError(lang.UNKNOWN_ERROR);
       }
     },
   },

@@ -58,6 +58,7 @@
               class="articles-element__body"
               @mouseover="articlesLinkActive = true"
               @mouseout="articlesLinkActive = false"
+              @click="showArticles"
               >Articles</span
             >
           </span>
@@ -74,51 +75,30 @@
     </v-card>
     <v-card>
       <v-card-text class="py-0">
-        <v-timeline align-top dense>
-          <v-timeline-item
-            v-for="(item, index) in workPlaces"
-            :key="index"
-            :color="index % 2 === 1 ? '#546E7A' : '#BCAAA4'"
-            small
-          >
-            <v-row class="pt-1">
-              <v-col cols="3">
-                <strong>{{ item.date }}</strong>
-              </v-col>
-              <v-col>
-                <strong
-                  ><a :href="item.link" target="blank">{{
-                    item.name
-                  }}</a></strong
-                >
-                <div class="text-caption">
-                  {{ item.text }}
-                </div>
-              </v-col>
-            </v-row>
-          </v-timeline-item>
-        </v-timeline>
+        <WorkPlacesTab v-if="tab === tabs.workPlaces" />
+        <ArticlesTab v-if="tab === tabs.articles" />
       </v-card-text>
     </v-card>
   </div>
 </template>
 <script>
-import WORK_PLACES from "@/settings/workPlaces";
 import AuthDialog from "@/components/auth/AuthDialog";
 import { isAuth } from "@/helpers/auth";
 import { ROUTES } from "@/settings/routes";
+import { defaultTab, tabs } from "@/settings/tabs";
+import WorkPlacesTab from "@/components/tabs/WorkPlacesTab";
+import ArticlesTab from "@/components/tabs/ArticlesTab";
 
 const ANIMATION_TIMEOUT = 700;
 const ANIMATION_RUN_NUMBER = 1;
 
 export default {
   name: "HomePage",
-  components: { AuthDialog },
+  components: { ArticlesTab, AuthDialog, WorkPlacesTab },
   data() {
     return {
       menuItems: [{ title: "Articles", name: "articles" }],
       showAuthDialog: false,
-      workPlaces: WORK_PLACES,
       avatarShift: false,
       articlesLinkActive: false,
       showName: true,
@@ -127,6 +107,8 @@ export default {
       showRestOfSurname: false,
       isAnimationFinished: false,
       animationRunNumber: 0,
+      tabs,
+      tab: defaultTab,
     };
   },
   mounted() {
@@ -174,6 +156,9 @@ export default {
     },
     deBounceAvatar() {
       this.avatarShift = false;
+    },
+    showArticles() {
+      this.tab = tabs.articles;
     },
   },
 };

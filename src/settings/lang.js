@@ -1,4 +1,4 @@
-export default {
+export const lang = {
   TOKEN_IS_INVALID: "Token is invalid.",
   RESULT_LOGIN_SUCCESS: "You were logged in.",
   RESULT_LOGOUT_SUCCESS: "You were logged out.",
