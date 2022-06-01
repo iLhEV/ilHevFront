@@ -138,4 +138,10 @@ export default {
 .pencil-link-active::before {
   content: "✎";
 }
+::v-deep {
+  a {
+    color: white !important;
+    font-weight: normal;
+  }
+}
 </style>

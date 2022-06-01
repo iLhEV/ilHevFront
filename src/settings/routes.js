@@ -1,8 +1,8 @@
 export const ROUTES = {
   HOME: "/",
-  WORK_PLACES: "/work_places",
+  WORK_PLACES: "/work-places",
   ARTICLES: "/articles",
-  PRIVATE_ZONE: "/private_zone",
+  PRIVATE_ZONE: "/private",
 };
 
 export const HOME_ROUTE_ALIAS = "workPlaces";
