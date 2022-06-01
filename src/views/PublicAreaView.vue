@@ -21,13 +21,15 @@
         </v-menu>
 
         <h1 class="title-box font-weight-light text-left grow pl-3">
-          <span v-if="showName">iL</span>
-          <span class="title-box__small">
-            <span v-if="showRestOfName">[ia]</span>
-            <span v-if="showRestOfSurname">[Domys]</span>
-          </span>
-          <span v-if="isAnimationFinished">'</span>
-          <span v-if="showSurname">hEV</span>
+          <RouterLink :to="ROUTES.HOME">
+            <span v-if="showName">iL</span>
+            <span class="title-box__small">
+              <span v-if="showRestOfName">[ia]</span>
+              <span v-if="showRestOfSurname">[Domys]</span>
+            </span>
+            <span v-if="isAnimationFinished">'</span>
+            <span v-if="showSurname">hEV</span>
+          </RouterLink>
         </h1>
 
         <v-avatar
@@ -182,5 +184,12 @@ export default {
 .top-bar {
   background-color: var(--v-chocolate-base);
   height: 56px;
+}
+::v-deep {
+  h1 a {
+    color: white !important;
+    font-weight: normal;
+    text-decoration: none;
+  }
 }
 </style>
