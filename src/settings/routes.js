@@ -4,3 +4,5 @@ export const ROUTES = {
   ARTICLES: "/articles",
   PRIVATE_ZONE: "/private_zone",
 };
+
+export const HOME_ROUTE_ALIAS = "workPlaces";

@@ -54,7 +54,7 @@
 <script>
 import AuthDialog from "@/components/auth/AuthDialog";
 import { isAuth } from "@/helpers/auth";
-import { ROUTES } from "@/settings/routes";
+import { HOME_ROUTE_ALIAS, ROUTES } from "@/settings/routes";
 import { defaultTab, tabs } from "@/settings/tabs";
 import WorkPlacesTab from "@/components/tabs/WorkPlacesTab";
 import ArticlesTab from "@/components/tabs/ArticlesTab";
@@ -96,8 +96,12 @@ export default {
   },
   watch: {
     $route(to) {
-      if (to.name !== this.tab) {
-        this.tab = to.name;
+      if (to.name === "home") {
+        this.tab = HOME_ROUTE_ALIAS;
+      } else {
+        if (to.name !== this.tab) {
+          this.tab = to.name;
+        }
       }
     },
   },
