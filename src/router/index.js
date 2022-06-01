@@ -13,6 +13,16 @@ const routes = [
     component: HomePage,
   },
   {
+    path: ROUTES.WORK_PLACES,
+    name: "workPlaces",
+    component: HomePage,
+  },
+  {
+    path: ROUTES.ARTICLES,
+    name: "articles",
+    component: HomePage,
+  },
+  {
     path: ROUTES.PRIVATE_ZONE,
     name: "privateZone",
     // route level code-splitting

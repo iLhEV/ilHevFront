@@ -54,12 +54,14 @@
             <span
               :class="articlesLinkActive ? 'pencil-link' : 'pencil-link-active'"
             ></span>
-            <span
+            <RouterLink
               class="articles-element__body"
               @mouseover="articlesLinkActive = true"
               @mouseout="articlesLinkActive = false"
-              @click="showArticles"
-              >Articles</span
+              :to="ROUTES.ARTICLES"
+              text
+              link
+              >Articles</RouterLink
             >
           </span>
           <div class="stack-backend">Backend</div>
@@ -89,6 +91,7 @@ import { defaultTab, tabs } from "@/settings/tabs";
 import WorkPlacesTab from "@/components/tabs/WorkPlacesTab";
 import ArticlesTab from "@/components/tabs/ArticlesTab";
 
+const ANIMATION_DELAY_BEFORE_START = 200;
 const ANIMATION_TIMEOUT = 700;
 const ANIMATION_RUN_NUMBER = 1;
 
@@ -109,10 +112,26 @@ export default {
       animationRunNumber: 0,
       tabs,
       tab: defaultTab,
+      ROUTES,
     };
   },
+  beforeMount() {
+    const currentRouteName = this.$router.currentRoute.name;
+    if (Object.keys(this.tabs).find((el) => el === currentRouteName)) {
+      this.tab = currentRouteName;
+    }
+  },
   mounted() {
-    this.runAnimation(ANIMATION_RUN_NUMBER);
+    setTimeout(() => {
+      this.runAnimation(ANIMATION_RUN_NUMBER);
+    }, ANIMATION_DELAY_BEFORE_START);
+  },
+  watch: {
+    $route(to) {
+      if (to.name !== this.tab) {
+        this.tab = to.name;
+      }
+    },
   },
   methods: {
     runAnimation(runNumber) {
@@ -133,7 +152,7 @@ export default {
         this.showRestOfName = false;
         this.showRestOfSurname = false;
         this.isAnimationFinished = true;
-      }, ANIMATION_TIMEOUT * 4);
+      }, ANIMATION_TIMEOUT * 12);
       setTimeout(() => {
         this.runAnimation(runNumber - 1);
       }, ANIMATION_TIMEOUT * 4.5);
@@ -158,7 +177,7 @@ export default {
       this.avatarShift = false;
     },
     showArticles() {
-      this.tab = tabs.articles;
+      this.$router.push(ROUTES.ARTICLES);
     },
   },
 };
@@ -278,8 +297,8 @@ export default {
   user-select: none;
   &__body {
     padding-left: 8px;
-    cursor: pointer;
-    border-bottom: 1px dashed white;
+    border-bottom: 1px dashed white !important;
+    text-decoration: none;
   }
   &__body:hover {
     border-bottom: 0;
