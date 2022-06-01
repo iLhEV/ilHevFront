@@ -1,6 +1,6 @@
 <template>
-  <v-card width="600" class="articles-list mx-auto" min-height="700">
-    <v-card-title>{{ $lang.TITLE_ARTICLES }} </v-card-title>
+  <v-card width="750" class="articles-list mx-auto" min-height="700">
+    <v-card-title>{{ lang.TITLE_ARTICLES }} </v-card-title>
     <v-card-text>
       <v-btn @click="addArticle" small depressed color="#C5E1A5" class="px-4"
         >Create</v-btn
@@ -31,7 +31,7 @@
           </v-list-item>
         </template>
         <div v-else class="pt-3">
-          {{ $lang.INFO_NO_ARTICLES }}
+          {{ lang.INFO_NO_ARTICLES }}
         </div>
       </v-list>
     </v-card-text>
@@ -47,7 +47,7 @@
 <script>
 import ArticleCard from "@/components/articles/ArticleCard";
 import ArticleDelete from "@/components/articles/ArticleDelete";
-import Lang from "@/settings/lang";
+import { lang } from "@/settings/lang";
 import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
 import { toastError, toastSuccess } from "@/helpers/toasts";
@@ -61,6 +61,7 @@ export default {
       articles: [],
       editId: null,
       articleDelete: null,
+      lang,
     };
   },
   async mounted() {
@@ -75,7 +76,7 @@ export default {
       if (res.success) {
         this.articles = res.data;
       } else {
-        toastError(Lang.GET_DATA_ERROR);
+        toastError(lang.GET_DATA_ERROR);
       }
     },
     updateList() {
@@ -83,7 +84,7 @@ export default {
     },
     updateListManually() {
       this.updateList();
-      toastSuccess(Lang.ARTICLES_LIST_UPDATED);
+      toastSuccess(lang.ARTICLES_LIST_UPDATED);
     },
     async editArticle(item) {
       this.editId = item.id;

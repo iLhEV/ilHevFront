@@ -9,7 +9,7 @@
   >
     <v-card v-if="article">
       <v-card-title>
-        {{ $lang.TITLE_DELETE_ARTICLE }}
+        {{ lang.TITLE_DELETE_ARTICLE }}
       </v-card-title>
       <v-card-text>
         <div class="highlighted-black">
@@ -26,10 +26,10 @@
       </v-card-text>
       <v-card-actions class="d-flex justify-end pr-6 pb-4">
         <v-btn depressed small class="mr-5" @click="close">{{
-          $lang.BUTTON_CLOSE
+          lang.BUTTON_CLOSE
         }}</v-btn>
         <v-btn @click="deleteArticle" color="error" depressed small>{{
-          $lang.BUTTON_DELETE
+          lang.BUTTON_DELETE
         }}</v-btn>
       </v-card-actions>
     </v-card>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import Lang from "@/settings/lang";
+import { lang } from "@/settings/lang";
 import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
 import { toastSuccess } from "@/helpers/toasts";
@@ -48,6 +48,7 @@ export default {
     return {
       dialog: false,
       showText: [0],
+      lang,
     };
   },
   model: {
@@ -75,7 +76,7 @@ export default {
       });
       if (res.success) {
         this.$emit("updateList");
-        toastSuccess(Lang.ARTICLE_DELETE_SUCCESS);
+        toastSuccess(lang.ARTICLE_DELETE_SUCCESS);
         this.close();
       }
     },

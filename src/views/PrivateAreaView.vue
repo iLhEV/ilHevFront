@@ -1,7 +1,9 @@
 <template>
   <div>
     <v-card outlined>
-      <v-card-text class="text-right d-flex justify-space-between">
+      <v-card-text
+        class="text-right d-flex justify-space-between navigation-area"
+      >
         <a @click="goToPublicArea" class="ilhev-button">Public area</a>
         <a @click="logout" class="ilhev-button">Logout</a>
       </v-card-text>
@@ -16,9 +18,9 @@ import { mapGetters } from "vuex";
 import { ROUTES } from "@/settings/routes";
 import { LOCAL_STORAGE_TOKEN_FIELD } from "@/settings/auth";
 import { toastSuccess } from "@/helpers/toasts";
-import Lang from "@/settings/lang";
+import { lang } from "@/settings/lang";
 export default {
-  name: "PrivateZone",
+  name: "PrivateAreaView",
   components: { ArticleList },
   data() {
     return {};
@@ -34,7 +36,7 @@ export default {
     logout() {
       localStorage.removeItem(LOCAL_STORAGE_TOKEN_FIELD);
       this.$router.push(ROUTES.HOME);
-      toastSuccess(Lang.RESULT_LOGOUT_SUCCESS);
+      toastSuccess(lang.RESULT_LOGOUT_SUCCESS);
     },
   },
 };
@@ -43,5 +45,8 @@ export default {
 <style lang="scss" scoped>
 .cabinet-page {
   margin-top: 100px;
+}
+.navigation-area {
+  min-height: 55px;
 }
 </style>
