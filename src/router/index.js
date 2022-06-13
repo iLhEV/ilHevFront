@@ -30,6 +30,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/PrivateAreaView.vue"),
+    meta: { requireAuth: true },
   },
 ];
 
@@ -41,7 +42,7 @@ const router = new VueRouter({
 // eslint-disable-next-line no-unused-vars
 router.beforeEach(async (to, from, next) => {
   if (
-    to.path !== ROUTES.HOME &&
+    to.meta?.requireAuth &&
     !localStorage.getItem(LOCAL_STORAGE_TOKEN_FIELD)
   ) {
     return next(ROUTES.HOME);

@@ -2,6 +2,6 @@ const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
   transpileDependencies: ["vuetify"],
   devServer: {
-    host: "ilhe.v",
+    host: "localhost",
   },
 });
