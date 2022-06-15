@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import PublicAreaView from "@/views/PublicAreaView";
 import { ROUTES } from "@/settings/routes";
 import { LOCAL_STORAGE_TOKEN_FIELD } from "@/settings/auth";
+import PrivateAreaView from "@/views/PrivateAreaView";
 
 Vue.use(VueRouter);
 
@@ -23,14 +24,20 @@ const routes = [
     component: PublicAreaView,
   },
   {
-    path: ROUTES.PRIVATE_ZONE,
-    name: "privateArea",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/PrivateAreaView.vue"),
-    meta: { requireAuth: true },
+    path: ROUTES.PRIVATE_ARTICLES,
+    name: "privateArticles",
+    component: PrivateAreaView,
+    meta: {
+      requireAuth: true,
+    },
+  },
+  {
+    path: ROUTES.PRIVATE_MEETINGS,
+    name: "privateMeetings",
+    component: PrivateAreaView,
+    meta: {
+      requireAuth: true,
+    },
   },
 ];
 

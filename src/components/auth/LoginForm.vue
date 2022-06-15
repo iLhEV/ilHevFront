@@ -122,7 +122,7 @@ export default {
         this.setToken(res.permanentToken);
         localStorage.setItem("token", res.permanentToken);
         toastSuccess(lang.RESULT_LOGIN_SUCCESS);
-        await this.$router.push(ROUTES.PRIVATE_ZONE);
+        await this.$router.push(ROUTES.PRIVATE_ARTICLES);
       } else {
         toastError(lang.TOKEN_IS_INVALID);
       }

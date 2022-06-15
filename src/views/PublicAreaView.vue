@@ -139,7 +139,7 @@ export default {
     },
     avatarAction() {
       if (isAuth()) {
-        this.$router.push(ROUTES.PRIVATE_ZONE);
+        this.$router.push(ROUTES.PRIVATE_ARTICLES);
       } else {
         this.showAuthDialog = true;
       }

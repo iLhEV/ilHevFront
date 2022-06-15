@@ -5,10 +5,13 @@
         class="text-right d-flex justify-space-between navigation-area"
       >
         <a @click="goToPublicArea" class="ilhev-button">Public area</a>
+        <a @click="goToArticlesPrivate" class="ilhev-button">Articles</a>
+        <a @click="goToMeetingsPrivate" class="ilhev-button">Meetings</a>
         <a @click="logout" class="ilhev-button">Logout</a>
       </v-card-text>
     </v-card>
-    <ArticleList />
+    <ArticleList v-if="tab === privateTabs.articles" />
+    <MeetingsPrivate v-if="tab === privateTabs.meetings" />
   </div>
 </template>
 
@@ -19,19 +22,40 @@ import { ROUTES } from "@/settings/routes";
 import { LOCAL_STORAGE_TOKEN_FIELD } from "@/settings/auth";
 import { toastSuccess } from "@/helpers/toasts";
 import { lang } from "@/settings/lang";
+import { privateDefaultTab, privateTabs } from "@/settings/tabs";
+import MeetingsPrivate from "@/components/articles/MeetingsPrivate";
 export default {
   name: "PrivateAreaView",
-  components: { ArticleList },
+  components: { MeetingsPrivate, ArticleList },
   data() {
-    return {};
+    return {
+      privateTabs,
+      tab: privateDefaultTab,
+      ROUTES,
+    };
   },
   computed: {
     ...mapGetters("auth", ["token"]),
+  },
+  watch: {
+    $route(to) {
+      this.tab = to.name;
+    },
   },
   mounted() {},
   methods: {
     goToPublicArea() {
       this.$router.push(ROUTES.HOME);
+    },
+    goToMeetingsPrivate() {
+      if (this.$route.fullPath !== ROUTES.PRIVATE_MEETINGS) {
+        this.$router.push(ROUTES.PRIVATE_MEETINGS);
+      }
+    },
+    goToArticlesPrivate() {
+      if (this.$route.fullPath !== ROUTES.PRIVATE_ARTICLES) {
+        this.$router.push(ROUTES.PRIVATE_ARTICLES);
+      }
     },
     logout() {
       localStorage.removeItem(LOCAL_STORAGE_TOKEN_FIELD);

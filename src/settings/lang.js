@@ -9,6 +9,7 @@ export const lang = {
   UNKNOWN_ERROR: "Unknown error.",
   GET_DATA_ERROR: "Error get data.",
   TITLE_ARTICLES: "Articles.",
+  TITLE_MEETINGS: "Meetings.",
   TITLE_LOGIN: "Login.",
   TITLE_REGISTER: "Register.",
   INFO_NO_ARTICLES: "No articles yet.",
