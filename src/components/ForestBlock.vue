@@ -139,7 +139,7 @@ export default {
   content: "✎";
 }
 ::v-deep {
-  a {
+  .picture-box a {
     color: white !important;
     font-weight: normal;
   }
