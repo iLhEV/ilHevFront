@@ -10,7 +10,7 @@
     <v-form ref="form">
       <v-card class="pb-3">
         <v-card-title>
-          {{ id ? lang.TITLE_EDIT_ARTICLE : lang.TITLE_ADD_ARTICLE }}
+          {{ id ? lang.TITLE_EDIT_MEETING : lang.TITLE_ADD_MEETING }}
         </v-card-title>
         <v-card-text class="pt-2">
           <v-form>
@@ -37,7 +37,7 @@ import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
 import { toastError, toastSuccess } from "@/helpers/toasts";
 export default {
-  name: "ArticleCard",
+  name: "MeetingCard",
   components: { VueEditor },
   props: {
     value: Boolean,

@@ -2,8 +2,8 @@
   <v-card width="750" class="articles-list mx-auto" min-height="700">
     <v-card-title>{{ lang.TITLE_MEETINGS }} </v-card-title>
     <v-card-text>
-      <v-btn @click="addArticle" small depressed color="#C5E1A5" class="px-4"
-        >Create</v-btn
+      <v-btn @click="addMeeting" small depressed color="#C5E1A5" class="px-4"
+        >Создать</v-btn
       >
       <v-btn
         small
@@ -35,8 +35,8 @@
         </div>
       </v-list>
     </v-card-text>
-    <ArticleCard
-      v-model="articleDialog"
+    <MeetingCard
+      v-model="meetingDialog"
       :id.sync="editId"
       @updateList="updateList"
     />
@@ -45,19 +45,19 @@
 </template>
 
 <script>
-import ArticleCard from "@/components/articles/ArticleCard";
 import ArticleDelete from "@/components/articles/ArticleDelete";
 import { lang } from "@/settings/lang";
 import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
 import { toastError, toastSuccess } from "@/helpers/toasts";
+import MeetingCard from "@/components/meetings/MeetingCard";
 
 export default {
   name: "MeetingsPrivate",
-  components: { ArticleCard, ArticleDelete },
+  components: { MeetingCard, ArticleDelete },
   data() {
     return {
-      articleDialog: false,
+      meetingDialog: false,
       articles: [],
       editId: null,
       articleDelete: null,
@@ -68,8 +68,8 @@ export default {
     await this.getArticles();
   },
   methods: {
-    addArticle() {
-      this.articleDialog = true;
+    addMeeting() {
+      this.meetingDialog = true;
     },
     async getArticles() {
       const res = await apiRequest({ path: API_ROUTES.ARTICLES });
