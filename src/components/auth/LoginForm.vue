@@ -39,8 +39,6 @@
       </v-btn>
       <v-text-field
         v-model="token"
-        maxlength="30"
-        :rules="[rules.token]"
         label="One-time token"
         class="pt-0 mt-0 token-input"
         :class="showEnterToken ? '' : 'd-none'"
@@ -108,11 +106,16 @@ export default {
     },
     async checkToken() {
       if (!this.$refs.loginForm.validate()) return;
+      let token = this.token;
+      const matches = token.match(/\*\* ([A-Za-z0-9)]{30}) \*\*/);
+      if (matches) {
+        token = matches[1];
+      }
       const res = await apiRequest({
         path: API_ROUTES.AUTH_WITH_ONE_TIME_TOKEN,
         method: "post",
         data: {
-          token: this.token,
+          token: token,
         },
       });
       if (res.success) {
@@ -120,7 +123,6 @@ export default {
         localStorage.setItem("token", res.permanentToken);
         toastSuccess(lang.RESULT_LOGIN_SUCCESS);
         await this.$router.push(ROUTES.PRIVATE_ZONE);
-        return;
       } else {
         toastError(lang.TOKEN_IS_INVALID);
       }
