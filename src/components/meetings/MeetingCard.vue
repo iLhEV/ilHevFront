@@ -25,13 +25,13 @@
               dense
             />
             <div v-if="selectedCustomer && selectedCustomer.price">
-              Стоимость:
+              Стоимость встречи:
               <span style="color: black"
                 >{{ selectedCustomer.price.amount }}
                 {{ selectedCustomer.price.currency }}</span
               >
             </div>
-            <div class="mt-n4" v-else>
+            <div v-else-if="selectedCustomer" class="mt-n4">
               Стоимость: <span style="color: black">не определена</span>
             </div>
             <v-btn

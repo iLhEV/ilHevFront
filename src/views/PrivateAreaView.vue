@@ -42,6 +42,16 @@ export default {
       this.tab = to.name;
     },
   },
+  beforeMount() {
+    const currentRouteName = this.$router.currentRoute.name;
+    if (
+      Object.keys(this.privateTabs).find(
+        (el) => this.privateTabs[el] === currentRouteName
+      )
+    ) {
+      this.tab = currentRouteName;
+    }
+  },
   mounted() {},
   methods: {
     goToPublicArea() {

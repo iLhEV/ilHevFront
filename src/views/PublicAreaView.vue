@@ -87,7 +87,9 @@ export default {
   },
   beforeMount() {
     const currentRouteName = this.$router.currentRoute.name;
-    if (Object.keys(this.tabs).find((el) => el === currentRouteName)) {
+    if (
+      Object.keys(this.tabs).find((el) => this.tabs[el] === currentRouteName)
+    ) {
       this.tab = currentRouteName;
     }
   },
