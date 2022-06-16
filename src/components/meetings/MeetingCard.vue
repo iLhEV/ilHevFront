@@ -14,7 +14,78 @@
         </v-card-title>
         <v-card-text class="pt-2">
           <v-form>
-            <VueEditor v-model.trim="text" />
+            <v-select
+              v-model="customer"
+              :items="customers"
+              label="Клиент"
+              item-text="name"
+              item-value="id"
+              style="width: 400px"
+              outlined
+              dense
+            />
+            <div v-if="selectedCustomer && selectedCustomer.price">
+              Стоимость:
+              <span style="color: black"
+                >{{ selectedCustomer.price.amount }}
+                {{ selectedCustomer.price.currency }}</span
+              >
+            </div>
+            <div class="mt-n4" v-else>
+              Стоимость: <span style="color: black">не определена</span>
+            </div>
+            <v-btn
+              @click="addTime()"
+              color="success"
+              class="mt-4 mb-1"
+              small
+              depressed
+              >Добавить время</v-btn
+            >
+            <div class="mt-4" v-if="meetingTimes.length">
+              <div
+                v-for="item in meetingTimes"
+                :key="item.dayOfWeek"
+                class="d-flex"
+              >
+                <v-select
+                  v-model="item.dayOfWeek"
+                  :items="daysOfWeek"
+                  item-text="rusName"
+                  item-value="name"
+                  label="День недели"
+                  class="mr-2"
+                  style="max-width: 170px"
+                  outlined
+                  dense
+                />
+                <v-select
+                  v-model="item.hour"
+                  :items="meetingHours"
+                  item-text="rusName"
+                  item-value="name"
+                  label="Часы"
+                  class="mr-2"
+                  style="max-width: 100px"
+                  outlined
+                  dense
+                />
+                <v-select
+                  v-model="item.minute"
+                  :items="meetingMinutes"
+                  item-text="rusName"
+                  item-value="name"
+                  label="Минуты"
+                  class="mr-2"
+                  style="max-width: 120px"
+                  outlined
+                  dense
+                />
+                <v-btn @click="deleteTime(item.timestamp)" icon
+                  ><v-icon>mdi-delete</v-icon></v-btn
+                >
+              </div>
+            </div>
           </v-form>
         </v-card-text>
         <v-card-actions class="d-flex justify-end pr-6">
@@ -31,14 +102,14 @@
 </template>
 
 <script>
-import { VueEditor } from "vue2-editor";
 import { lang } from "@/settings/lang";
 import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
 import { toastError, toastSuccess } from "@/helpers/toasts";
+import { daysOfWeek, meetingHours, meetingMinutes } from "@/settings/dates";
 export default {
   name: "MeetingCard",
-  components: { VueEditor },
+  components: {},
   props: {
     value: Boolean,
     id: Number,
@@ -47,7 +118,41 @@ export default {
     return {
       text: "",
       lang,
+      customer: "",
+      daysOfWeek,
+      meetingHours,
+      meetingMinutes,
+      newDayOfWeek: "",
+      newHour: "",
+      newMinute: "",
+      meetingTimes: [],
+      emptyItem: {
+        daysOfWeek: "",
+        hour: "",
+        minute: "",
+      },
     };
+  },
+  computed: {
+    customers() {
+      return [
+        {
+          id: 1,
+          name: "Ольга Ивановна",
+          price: {
+            amount: 4000,
+            currency: "rub",
+          },
+        },
+        {
+          id: 2,
+          name: "Андрей Петрович",
+        },
+      ];
+    },
+    selectedCustomer() {
+      return this.customers.find((el) => el.id === this.customer);
+    },
   },
   watch: {
     id(newVal) {
@@ -92,6 +197,15 @@ export default {
       } else {
         toastError(lang.UNKNOWN_ERROR);
       }
+    },
+    async addTime() {
+      this.meetingTimes.push({ ...this.emptyItem, timestamp: Date.now() });
+      console.log(this.meetingTimes);
+    },
+    async deleteTime(timestamp) {
+      this.meetingTimes = this.meetingTimes.filter(
+        (el) => el.timestamp !== timestamp
+      );
     },
   },
 };
