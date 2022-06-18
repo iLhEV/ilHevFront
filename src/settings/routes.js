@@ -4,6 +4,7 @@ export const ROUTES = {
   ARTICLES: "/articles",
   PRIVATE_ARTICLES: "/private/articles",
   PRIVATE_MEETINGS: "/private/meetings",
+  HTML_EXAMPLES: "/html-examples",
 };
 
 export const HOME_ROUTE_ALIAS = "workPlaces";

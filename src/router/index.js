@@ -4,6 +4,7 @@ import PublicAreaView from "@/views/PublicAreaView";
 import { ROUTES } from "@/settings/routes";
 import { LOCAL_STORAGE_TOKEN_FIELD } from "@/settings/auth";
 import PrivateAreaView from "@/views/PrivateAreaView";
+import HtmlExamples from "@/views/HtmlExamples";
 
 Vue.use(VueRouter);
 
@@ -38,6 +39,11 @@ const routes = [
     meta: {
       requireAuth: true,
     },
+  },
+  {
+    path: ROUTES.HTML_EXAMPLES,
+    name: "htmlExamples",
+    component: HtmlExamples,
   },
 ];
 
