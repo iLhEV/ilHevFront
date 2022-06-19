@@ -13,17 +13,22 @@
                 #1 - выравнивание по горизонтали<br />
                 и вертикали одновременно
               </h2>
-              <div class="example-description-wrapper">
-                <div class="example-description">
-                  Достигается за счёт назначения родительскому контейнеру трёх
-                  css-свойств:<br />
-                  display: flex;<br />
-                  justify-content: center;<br />
-                  align-items: center;.
-                  <v-divider />
-                  Первое свойство делает контейнер flex-контейнером. Второе
-                  устанавливает выравнивание по-горизонтали. Третье -
-                  по-вертикали.
+              <div class="example-css-properties">
+                display: flex;<br />
+                justify-content: center;<br />
+                align-items: center;.
+              </div>
+              <div class="example-description">
+                <div>
+                  <span class="css-property">display: flex</span> делает блок
+                  <span class="term">flex-контейнером</span>.<br />
+                  Все блоки внутри
+                  <span class="term">flex-контейнера</span> ведут себя, как
+                  <span class="term">flex-блоки</span>.
+                  <span class="css-property">justify-content: center</span>
+                  выравнивает блоки внутри контейнера по-горизонтали.
+                  <span class="css-property">align-items</span> выравнивает
+                  блоки внутри контейнера по-вертикали.
                 </div>
               </div>
             </div>
@@ -37,13 +42,14 @@
         <v-col class="cell-wrapper">
           <div class="example-container example-2">
             <h2>#2 - выравнивание только по горизонтали</h2>
-            <div class="example-description-wrapper">
-              <div class="example-description">
-                Используется два css-свойства:<br />
-                display: flex;<br />
-                justify-content: center;
-                <v-divider />
-                Второе свойство устанавливает выравнивание по-горизонтали.
+            <div class="example-css-properties">
+              display: flex;<br />
+              justify-content: center;
+            </div>
+            <div class="example-description">
+              <div>
+                <span class="css-property">justify-content: center</span>
+                выравнивает блоки внутри контейнера по-горизонтали.
               </div>
             </div>
             <div class="example-body">
@@ -56,13 +62,14 @@
         <v-col class="cell-wrapper">
           <div class="example-container example-3">
             <h2>#3 - выравнивание только по вертикали</h2>
-            <div class="example-description-wrapper">
-              <div class="example-description">
-                Используется два css-свойства:<br />
-                display: flex;<br />
-                align-items: center;
-                <v-divider />
-                Второе свойство устанавливает выравнивание по-вертикали.
+            <div class="example-css-properties">
+              display: flex;<br />
+              align-items: center;
+            </div>
+            <div class="example-description">
+              <div>
+                <span class="css-property">align-items: center</span>
+                выравнивает блоки внутри контейнера по-вертикали.
               </div>
             </div>
             <div class="example-body">
@@ -73,7 +80,7 @@
           </div>
         </v-col>
       </v-row>
-      <v-row class="row-wrapper">
+      <v-row v-if="false" class="row-wrapper">
         <v-col class="cell-wrapper">
           <div class="example-container example-4"></div>
         </v-col>
@@ -183,16 +190,37 @@ hr {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-top: 1px solid #ddd;
+  padding-top: 30px;
+  padding-bottom: 20px;
 }
-.example-description-wrapper {
+.example-css-properties {
   display: flex;
-  min-height: 230px;
-  padding-top: 8px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  min-height: 100px;
 }
 .example-description {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  padding-top: 10px;
+  min-height: 130px;
+}
+.css-property {
+  font-weight: 500;
+  font-size: 0.95em;
+  font-style: italic;
+  padding-right: 2px;
+}
+.term {
+  font-style: italic;
+  padding-right: 2px;
+  font-size: 0.95em;
 }
 </style>
