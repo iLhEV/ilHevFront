@@ -1,11 +1,11 @@
 export const daysOfWeek = [
-  { name: "monday", rusName: "Понедельник" },
-  { name: "tuesday", rusName: "Вторник" },
-  { name: "wednesday", rusName: "Среда" },
-  { name: "thursday", rusName: "Черверг" },
-  { name: "friday", rusName: "Пятница" },
-  { name: "saturday", rusName: "Суббота" },
-  { name: "sunday", rusName: "Воскресение" },
+  { name: "monday", rusName: "Пн" },
+  { name: "tuesday", rusName: "Вт" },
+  { name: "wednesday", rusName: "Ср" },
+  { name: "thursday", rusName: "Чт" },
+  { name: "friday", rusName: "Пт" },
+  { name: "saturday", rusName: "Сб" },
+  { name: "sunday", rusName: "Вс" },
 ];
 
 export const meetingHours = [

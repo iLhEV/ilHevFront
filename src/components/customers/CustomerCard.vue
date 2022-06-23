@@ -22,14 +22,14 @@
             />
             <div class="d-flex justify-space-between">
               <v-text-field
-                v-model="customerName"
-                label="Стоимость одной встречи"
+                v-model="customerCost"
+                label="Стоимость встречи"
                 outlined
                 dense
-                style="max-width: 250px"
+                style="max-width: 250px; margin-right: 16px"
               />
               <v-select
-                v-model="customerCost"
+                v-model="customerCurrency"
                 :items="currencies"
                 label="Валюта"
                 item-text="name"
@@ -39,18 +39,13 @@
                 dense
               />
             </div>
-            <v-btn
-              @click="addTime()"
-              color="success"
-              class="mt-4 mb-1"
-              small
-              depressed
+            <v-btn @click="addTime()" class="mb-1" small depressed
               >Добавить время</v-btn
             >
-            <div class="mt-4" v-if="meetingTimes.length">
+            <div class="mt-4" v-if="customerMeetingTimes.length">
               <div
-                v-for="item in meetingTimes"
-                :key="item.dayOfWeek"
+                v-for="item in customerMeetingTimes"
+                :key="item.timestamp"
                 class="d-flex"
               >
                 <v-select
@@ -94,10 +89,10 @@
           </v-form>
         </v-card-text>
         <v-card-actions class="d-flex justify-end pr-6">
-          <v-btn depressed small class="mr-5" @click="close">
+          <v-btn depressed class="mr-5" @click="close">
             {{ lang.BUTTON_CLOSE }}
           </v-btn>
-          <v-btn @click="save" color="primary" depressed small>{{
+          <v-btn @click="save" color="primary" depressed>{{
             lang.BUTTON_SAVE
           }}</v-btn>
         </v-card-actions>
@@ -130,14 +125,15 @@ export default {
       newDayOfWeek: "",
       newHour: "",
       newMinute: "",
-      meetingTimes: [],
+      customerMeetingTimes: [],
       emptyItem: {
-        daysOfWeek: "",
+        dayOfWeek: "",
         hour: "",
         minute: "",
       },
       customerName: "",
-      customerCost: 0,
+      customerCost: "",
+      customerCurrency: "",
       currencies: ["GEL", "RUB", "USD", "EUR"],
     };
   },
@@ -165,7 +161,7 @@ export default {
   watch: {
     id(newVal) {
       if (newVal) {
-        this.getArticle(newVal);
+        this.getCustomer(newVal);
         this.$emit("input", true);
       }
     },
@@ -178,17 +174,20 @@ export default {
     },
     async save() {
       const res = await apiRequest({
-        path: API_ROUTES.ARTICLE,
+        path: API_ROUTES.CUSTOMER,
         method: "post",
         data: {
           id: this.id,
-          text: this.text,
+          name: this.customerName,
+          cost: this.customerCost,
+          currency: this.customerCurrency,
+          times: this.customerMeetingTimes,
         },
       });
       if (res.success) {
         this.$emit("updateList");
         toastSuccess(
-          this.id ? lang.ARTICLE_UPDATE_SUCCESS : lang.ARTICLE_CREATE_SUCCESS
+          this.id ? lang.CUSTOMER_UPDATE_SUCCESS : lang.CUSTOMER_CREATE_SUCCESS
         );
         this.close();
       }
@@ -196,9 +195,9 @@ export default {
     clean() {
       this.text = "";
     },
-    async getArticle() {
+    async getCustomer() {
       const res = await apiRequest({
-        path: `${API_ROUTES.ARTICLE}/${this.id}`,
+        path: `${API_ROUTES.CUSTOMER}/${this.id}`,
       });
       if (res.success) {
         this.text = res.data.text;
@@ -207,11 +206,14 @@ export default {
       }
     },
     async addTime() {
-      this.meetingTimes.push({ ...this.emptyItem, timestamp: Date.now() });
-      console.log(this.meetingTimes);
+      this.customerMeetingTimes.push({
+        ...this.emptyItem,
+        timestamp: Date.now(),
+      });
+      console.log(this.customerMeetingTimes);
     },
     async deleteTime(timestamp) {
-      this.meetingTimes = this.meetingTimes.filter(
+      this.customerMeetingTimes = this.customerMeetingTimes.filter(
         (el) => el.timestamp !== timestamp
       );
     },
