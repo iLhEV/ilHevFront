@@ -52,7 +52,7 @@
 <script>
 import AuthDialog from "@/components/auth/AuthDialog";
 import { isAuth } from "@/helpers/auth";
-import { HOME_ROUTE_ALIAS, ROUTES } from "@/settings/routes";
+import { HOME_ROUTE_ALIAS, PRIVATE_ROUTES, ROUTES } from "@/settings/routes";
 import { defaultTab, tabs } from "@/settings/tabs";
 import WorkPlacesTab from "@/components/tabs/WorkPlacesTab";
 import ArticlesTab from "@/components/tabs/ArticlesTab";
@@ -135,7 +135,7 @@ export default {
     },
     avatarAction() {
       if (isAuth()) {
-        this.$router.push(ROUTES.PRIVATE_ARTICLES);
+        this.$router.push(PRIVATE_ROUTES.ARTICLES);
       } else {
         this.showAuthDialog = true;
       }

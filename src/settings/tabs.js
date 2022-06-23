@@ -6,6 +6,7 @@ export const tabs = {
 export const privateTabs = {
   articles: "privateArticles",
   meetings: "privateMeetings",
+  customers: "privateCustomers",
 };
 
 export const defaultTab = tabs.workPlaces;

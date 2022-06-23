@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import PublicAreaView from "@/views/PublicAreaView";
-import { ROUTES } from "@/settings/routes";
+import { PRIVATE_ROUTES, ROUTES } from "@/settings/routes";
 import { LOCAL_STORAGE_TOKEN_FIELD } from "@/settings/auth";
 import PrivateAreaView from "@/views/PrivateAreaView";
 import HtmlExamples from "@/views/HtmlExamples";
@@ -25,7 +25,7 @@ const routes = [
     component: PublicAreaView,
   },
   {
-    path: ROUTES.PRIVATE_ARTICLES,
+    path: PRIVATE_ROUTES.ARTICLES,
     name: "privateArticles",
     component: PrivateAreaView,
     meta: {
@@ -33,8 +33,16 @@ const routes = [
     },
   },
   {
-    path: ROUTES.PRIVATE_MEETINGS,
+    path: PRIVATE_ROUTES.MEETINGS,
     name: "privateMeetings",
+    component: PrivateAreaView,
+    meta: {
+      requireAuth: true,
+    },
+  },
+  {
+    path: PRIVATE_ROUTES.CUSTOMERS,
+    name: "privateCustomers",
     component: PrivateAreaView,
     meta: {
       requireAuth: true,

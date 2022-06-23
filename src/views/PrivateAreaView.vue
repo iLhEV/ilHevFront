@@ -5,33 +5,42 @@
         class="text-right d-flex justify-space-between navigation-area"
       >
         <a @click="goToPublicArea" class="ilhev-button">Public area</a>
-        <a @click="goToArticlesPrivate" class="ilhev-button">Articles</a>
-        <a @click="goToMeetingsPrivate" class="ilhev-button">Meetings</a>
+        <RouterLink :to="PRIVATE_ROUTES.ARTICLES" class="ilhev-button"
+          >Articles</RouterLink
+        >
+        <RouterLink :to="PRIVATE_ROUTES.MEETINGS" class="ilhev-button"
+          >Встречи</RouterLink
+        >
+        <RouterLink :to="PRIVATE_ROUTES.CUSTOMERS" class="ilhev-button"
+          >Клиенты</RouterLink
+        >
         <a @click="logout" class="ilhev-button">Logout</a>
       </v-card-text>
     </v-card>
     <ArticleList v-if="tab === privateTabs.articles" />
     <MeetingsPrivate v-if="tab === privateTabs.meetings" />
+    <CustomersPrivate v-if="tab === privateTabs.customers" />
   </div>
 </template>
 
 <script>
 import ArticleList from "@/components/articles/ArticleList";
 import { mapGetters } from "vuex";
-import { ROUTES } from "@/settings/routes";
+import { PRIVATE_ROUTES, ROUTES } from "@/settings/routes";
 import { LOCAL_STORAGE_TOKEN_FIELD } from "@/settings/auth";
 import { toastSuccess } from "@/helpers/toasts";
 import { lang } from "@/settings/lang";
 import { privateDefaultTab, privateTabs } from "@/settings/tabs";
 import MeetingsPrivate from "@/components/articles/MeetingsPrivate";
+import CustomersPrivate from "@/components/customers/CustomersPrivate";
 export default {
   name: "PrivateAreaView",
-  components: { MeetingsPrivate, ArticleList },
+  components: { CustomersPrivate, MeetingsPrivate, ArticleList },
   data() {
     return {
       privateTabs,
       tab: privateDefaultTab,
-      ROUTES,
+      PRIVATE_ROUTES,
     };
   },
   computed: {
@@ -57,16 +66,6 @@ export default {
     goToPublicArea() {
       this.$router.push(ROUTES.HOME);
     },
-    goToMeetingsPrivate() {
-      if (this.$route.fullPath !== ROUTES.PRIVATE_MEETINGS) {
-        this.$router.push(ROUTES.PRIVATE_MEETINGS);
-      }
-    },
-    goToArticlesPrivate() {
-      if (this.$route.fullPath !== ROUTES.PRIVATE_ARTICLES) {
-        this.$router.push(ROUTES.PRIVATE_ARTICLES);
-      }
-    },
     logout() {
       localStorage.removeItem(LOCAL_STORAGE_TOKEN_FIELD);
       this.$router.push(ROUTES.HOME);
@@ -82,5 +81,8 @@ export default {
 }
 .navigation-area {
   min-height: 55px;
+}
+a {
+  text-decoration: none !important;
 }
 </style>

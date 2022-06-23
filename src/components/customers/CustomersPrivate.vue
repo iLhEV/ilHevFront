@@ -1,9 +1,9 @@
 <template>
   <v-card width="750" class="articles-list mx-auto" min-height="700">
-    <v-card-title>{{ lang.TITLE_MEETINGS }} </v-card-title>
+    <v-card-title>{{ lang.TITLE_CUSTOMERS }} </v-card-title>
     <v-card-text>
-      <v-btn @click="addMeeting" small depressed color="#C5E1A5" class="px-4"
-        >Запланировать</v-btn
+      <v-btn @click="addCustomer" small depressed color="#C5E1A5" class="px-4"
+        >Добавить</v-btn
       >
       <v-btn
         small
@@ -35,8 +35,8 @@
         </div>
       </v-list>
     </v-card-text>
-    <MeetingCard
-      v-model="meetingDialog"
+    <CustomerCard
+      v-model="customerDialog"
       :id.sync="editId"
       @updateList="updateList"
     />
@@ -50,14 +50,14 @@ import { lang } from "@/settings/lang";
 import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
 import { toastError, toastSuccess } from "@/helpers/toasts";
-import MeetingCard from "@/components/meetings/MeetingCard";
+import CustomerCard from "@/components/customers/CustomerCard";
 
 export default {
-  name: "MeetingsPrivate",
-  components: { MeetingCard, ArticleDelete },
+  name: "CustomersPrivate",
+  components: { CustomerCard, ArticleDelete },
   data() {
     return {
-      meetingDialog: false,
+      customerDialog: false,
       articles: [],
       editId: null,
       articleDelete: null,
@@ -68,8 +68,8 @@ export default {
     await this.getArticles();
   },
   methods: {
-    addMeeting() {
-      this.meetingDialog = true;
+    addCustomer() {
+      this.customerDialog = true;
     },
     async getArticles() {
       const res = await apiRequest({ path: API_ROUTES.ARTICLES });
