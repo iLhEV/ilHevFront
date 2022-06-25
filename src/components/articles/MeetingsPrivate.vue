@@ -31,7 +31,7 @@
           </v-list-item>
         </template>
         <div v-else class="pt-3">
-          {{ lang.INFO_NO_ARTICLES }}
+          {{ showLang("errors.noMeetings") }}
         </div>
       </v-list>
     </v-card-text>
@@ -46,7 +46,7 @@
 
 <script>
 import ArticleDelete from "@/components/articles/ArticleDelete";
-import { lang } from "@/settings/lang";
+import { lang, showLang } from "@/settings/lang";
 import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
 import { toastError, toastSuccess } from "@/helpers/toasts";
@@ -62,6 +62,7 @@ export default {
       editId: null,
       articleDelete: null,
       lang,
+      showLang,
     };
   },
   async mounted() {

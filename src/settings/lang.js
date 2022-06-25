@@ -23,8 +23,6 @@ export const lang = {
   TITLE_CUSTOMERS: "Клиенты.",
   TITLE_LOGIN: "Login.",
   TITLE_REGISTER: "Register.",
-  INFO_NO_ARTICLES: "No articles yet.",
-  INFO_NO_CUSTOMERS: "Список клиентов пуст.",
   TITLE_ADD_ARTICLE: "Add article.",
   TITLE_EDIT_ARTICLE: "Edit article.",
   TITLE_DELETE_ARTICLE: "Delete article.",

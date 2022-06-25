@@ -15,7 +15,7 @@
           :to="ROUTES.ARTICLES"
           text
           link
-          >Articles</RouterLink
+          >{{ showLang("menus._public.forestBlock.articles") }}</RouterLink
         >
       </span>
       <div class="stack-backend">Backend</div>
@@ -32,6 +32,7 @@
 
 <script>
 import { ROUTES } from "@/settings/routes";
+import { showLang } from "@/settings/lang";
 
 export default {
   name: "ForestBlock",
@@ -39,6 +40,7 @@ export default {
     return {
       articlesLinkActive: false,
       ROUTES,
+      showLang,
     };
   },
 };

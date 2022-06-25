@@ -4,17 +4,21 @@
       <v-card-text
         class="text-right d-flex justify-space-between navigation-area"
       >
-        <a @click="goToPublicArea" class="ilhev-button">Public area</a>
+        <a @click="goToPublicArea" class="ilhev-button font-weight-bold">{{
+          showLang("menus._private.top.publicArea")
+        }}</a>
         <RouterLink :to="PRIVATE_ROUTES.ARTICLES" class="ilhev-button">{{
           showLang("menus._private.top.articles")
         }}</RouterLink>
         <RouterLink :to="PRIVATE_ROUTES.MEETINGS" class="ilhev-button">{{
           showLang("menus._private.top.meetings")
         }}</RouterLink>
-        <RouterLink :to="PRIVATE_ROUTES.CUSTOMERS" class="ilhev-button"
-          >Клиенты</RouterLink
-        >
-        <a @click="logout" class="ilhev-button">Logout</a>
+        <RouterLink :to="PRIVATE_ROUTES.CUSTOMERS" class="ilhev-button">{{
+          showLang("menus._private.top.customers")
+        }}</RouterLink>
+        <a @click="logout" class="ilhev-button font-weight-bold">{{
+          showLang("menus._private.top.logout")
+        }}</a>
       </v-card-text>
     </v-card>
     <ArticleList v-if="tab === privateTabs.articles" />
