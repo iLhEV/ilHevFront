@@ -5,12 +5,12 @@
         class="text-right d-flex justify-space-between navigation-area"
       >
         <a @click="goToPublicArea" class="ilhev-button">Public area</a>
-        <RouterLink :to="PRIVATE_ROUTES.ARTICLES" class="ilhev-button"
-          >Articles</RouterLink
-        >
-        <RouterLink :to="PRIVATE_ROUTES.MEETINGS" class="ilhev-button"
-          >Встречи</RouterLink
-        >
+        <RouterLink :to="PRIVATE_ROUTES.ARTICLES" class="ilhev-button">{{
+          showLang("menus._private.top.articles")
+        }}</RouterLink>
+        <RouterLink :to="PRIVATE_ROUTES.MEETINGS" class="ilhev-button">{{
+          showLang("menus._private.top.meetings")
+        }}</RouterLink>
         <RouterLink :to="PRIVATE_ROUTES.CUSTOMERS" class="ilhev-button"
           >Клиенты</RouterLink
         >
@@ -19,7 +19,7 @@
     </v-card>
     <ArticleList v-if="tab === privateTabs.articles" />
     <MeetingsPrivate v-if="tab === privateTabs.meetings" />
-    <CustomersPrivate v-if="tab === privateTabs.customers" />
+    <Customers v-if="tab === privateTabs.customers" />
   </div>
 </template>
 
@@ -29,18 +29,19 @@ import { mapGetters } from "vuex";
 import { PRIVATE_ROUTES, ROUTES } from "@/settings/routes";
 import { LOCAL_STORAGE_TOKEN_FIELD } from "@/settings/auth";
 import { toastSuccess } from "@/helpers/toasts";
-import { lang } from "@/settings/lang";
+import { lang, showLang } from "@/settings/lang";
 import { privateDefaultTab, privateTabs } from "@/settings/tabs";
 import MeetingsPrivate from "@/components/articles/MeetingsPrivate";
-import CustomersPrivate from "@/components/customers/CustomersPrivate";
+import Customers from "@/components/customers/Customers";
 export default {
   name: "PrivateAreaView",
-  components: { CustomersPrivate, MeetingsPrivate, ArticleList },
+  components: { Customers, MeetingsPrivate, ArticleList },
   data() {
     return {
       privateTabs,
       tab: privateDefaultTab,
       PRIVATE_ROUTES,
+      showLang,
     };
   },
   computed: {
