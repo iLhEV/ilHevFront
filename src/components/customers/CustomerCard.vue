@@ -10,7 +10,11 @@
     <v-form ref="form">
       <v-card class="pb-3">
         <v-card-title>
-          {{ id ? lang.TITLE_EDIT_CUSTOMER : lang.TITLE_ADD_CUSTOMER }}
+          {{
+            id
+              ? showLang("titles.customers.edit")
+              : showLang("titles.customers.add")
+          }}
         </v-card-title>
         <v-card-text class="pt-2">
           <v-form style="max-width: 400px">
@@ -102,7 +106,7 @@
 </template>
 
 <script>
-import { lang } from "@/settings/lang";
+import { lang, showLang } from "@/settings/lang";
 import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
 import { toastError, toastSuccess } from "@/helpers/toasts";
@@ -116,6 +120,7 @@ export default {
   },
   data() {
     return {
+      showLang,
       text: "",
       lang,
       customer: "",

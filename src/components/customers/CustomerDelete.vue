@@ -9,7 +9,7 @@
   >
     <v-card v-if="customer">
       <v-card-title>
-        {{ lang.TITLE_DELETE_CUSTOMER }}
+        {{ showLang("titles.customers.delete") }}
       </v-card-title>
       <v-card-text>
         <div class="highlighted-black">
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { lang } from "@/settings/lang";
+import { lang, showLang } from "@/settings/lang";
 import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
 import { toastSuccess } from "@/helpers/toasts";
@@ -46,6 +46,7 @@ export default {
   name: "CustomerDelete",
   data() {
     return {
+      showLang,
       dialog: false,
       showText: [0],
       lang,

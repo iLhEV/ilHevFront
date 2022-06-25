@@ -10,7 +10,11 @@
     <v-form ref="form">
       <v-card class="pb-3">
         <v-card-title>
-          {{ id ? lang.TITLE_EDIT_ARTICLE : lang.TITLE_ADD_ARTICLE }}
+          {{
+            id
+              ? showLang("titles.articles.edit")
+              : showLang("titles.articles.add")
+          }}
         </v-card-title>
         <v-card-text class="pt-2">
           <v-form>
@@ -32,7 +36,7 @@
 
 <script>
 import { VueEditor } from "vue2-editor";
-import { lang } from "@/settings/lang";
+import { lang, showLang } from "@/settings/lang";
 import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
 import { toastError, toastSuccess } from "@/helpers/toasts";
@@ -45,6 +49,7 @@ export default {
   },
   data() {
     return {
+      showLang,
       text: "",
       lang,
     };
