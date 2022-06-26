@@ -10,15 +10,15 @@
       <v-card-title class="pb-3 d-block">
         <div>
           {{ mode === modes.login ? "Log-in" : "" }}
-          {{ mode === modes.registration ? lang.TITLE_REGISTER : "" }}
+          {{ mode === modes.registration ? showLang("titles.register") : "" }}
         </div>
         <div class="register-link">
           or&nbsp;
           <a v-if="mode === modes.login" @click="openRegistration">
-            {{ lang.TITLE_REGISTER.toLowerCase() }}
+            {{ showLang("titles.register").toLowerCase() }}
           </a>
           <a v-if="mode === modes.registration" @click="openLogin">
-            {{ lang.TITLE_LOGIN.toLowerCase() }}
+            {{ showLang("titles.login").toLowerCase() }}
           </a>
         </div>
       </v-card-title>
@@ -40,7 +40,7 @@
 <script>
 import LoginForm from "@/components/auth/LoginForm";
 import RegistrationForm from "@/components/auth/RegistrationForm";
-import { lang } from "@/settings/lang";
+import { showLang } from "@/settings/lang";
 
 const MODES = { login: "login", registration: "registration" };
 
@@ -55,7 +55,7 @@ export default {
       showDialog: false,
       modes: MODES,
       mode: MODES.login,
-      lang,
+      showLang,
     };
   },
   mounted() {},

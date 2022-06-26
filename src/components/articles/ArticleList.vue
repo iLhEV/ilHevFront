@@ -1,6 +1,6 @@
 <template>
   <v-card width="750" class="articles-list mx-auto" min-height="700">
-    <v-card-title>{{ lang.TITLE_ARTICLES }} </v-card-title>
+    <v-card-title>{{ showLang("titles.articles.list") }} </v-card-title>
     <v-card-text>
       <v-btn @click="addArticle" small depressed color="#C5E1A5" class="px-4"
         >Create</v-btn
@@ -77,7 +77,7 @@ export default {
       if (res.success) {
         this.articles = res.data;
       } else {
-        toastError(lang.GET_DATA_ERROR);
+        toastError(showLang("errors.getData"));
       }
     },
     updateList() {
@@ -85,7 +85,7 @@ export default {
     },
     updateListManually() {
       this.updateList();
-      toastSuccess(lang.ARTICLES_LIST_UPDATED);
+      toastSuccess(showLang("alerts.articles.listUpdateSuccess"));
     },
     async editArticle(item) {
       this.editId = item.id;

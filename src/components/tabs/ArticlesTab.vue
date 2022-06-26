@@ -46,7 +46,7 @@ export default {
       if (res.success) {
         this.articles = res.data;
       } else {
-        toastError(lang.GET_DATA_ERROR);
+        toastError(showLang("errors.getData"));
       }
     },
   },

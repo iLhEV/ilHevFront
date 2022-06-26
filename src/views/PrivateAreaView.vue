@@ -33,7 +33,7 @@ import { mapGetters } from "vuex";
 import { PRIVATE_ROUTES, ROUTES } from "@/settings/routes";
 import { LOCAL_STORAGE_TOKEN_FIELD } from "@/settings/auth";
 import { toastSuccess } from "@/helpers/toasts";
-import { lang, showLang } from "@/settings/lang";
+import { showLang } from "@/settings/lang";
 import { privateDefaultTab, privateTabs } from "@/settings/tabs";
 import MeetingsPrivate from "@/components/articles/MeetingsPrivate";
 import Customers from "@/components/customers/Customers";
@@ -74,7 +74,7 @@ export default {
     logout() {
       localStorage.removeItem(LOCAL_STORAGE_TOKEN_FIELD);
       this.$router.push(ROUTES.HOME);
-      toastSuccess(lang.RESULT_LOGOUT_SUCCESS);
+      toastSuccess(showLang("alerts.auth.logoutSuccess"));
     },
   },
 };

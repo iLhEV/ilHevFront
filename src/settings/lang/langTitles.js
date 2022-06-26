@@ -12,6 +12,10 @@ export const langTitles = {
       ru: "Удалить статью",
       en: "Delete article",
     },
+    list: {
+      ru: "Статьи",
+      en: "Articles",
+    },
   },
   customers: {
     add: {
@@ -25,6 +29,10 @@ export const langTitles = {
     delete: {
       ru: "Удалить клиента",
       en: "Delete customer",
+    },
+    list: {
+      ru: "Клиенты",
+      en: "Customers",
     },
   },
   meetings: {
@@ -40,5 +48,17 @@ export const langTitles = {
       ru: "Удалить встречу",
       en: "Delete meeting",
     },
+    list: {
+      ru: "Встречи",
+      en: "Meetings",
+    },
+  },
+  login: {
+    ru: "Войти",
+    en: "Login",
+  },
+  register: {
+    ru: "Регистрация",
+    en: "Register",
   },
 };

@@ -94,10 +94,10 @@
         </v-card-text>
         <v-card-actions class="d-flex justify-end pr-6">
           <v-btn depressed class="mr-5" @click="close">
-            {{ lang.BUTTON_CLOSE }}
+            {{ showLang("buttons.close") }}
           </v-btn>
           <v-btn @click="save" color="primary" depressed>{{
-            lang.BUTTON_SAVE
+            showLang("buttons.save")
           }}</v-btn>
         </v-card-actions>
       </v-card>
@@ -106,7 +106,7 @@
 </template>
 
 <script>
-import { lang, showLang } from "@/settings/lang";
+import { showLang } from "@/settings/lang";
 import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
 import { toastError, toastSuccess } from "@/helpers/toasts";
@@ -122,7 +122,6 @@ export default {
     return {
       showLang,
       text: "",
-      lang,
       customer: "",
       daysOfWeek,
       meetingHours,
@@ -192,7 +191,9 @@ export default {
       if (res.success) {
         this.$emit("updateList");
         toastSuccess(
-          this.id ? lang.CUSTOMER_UPDATE_SUCCESS : lang.CUSTOMER_CREATE_SUCCESS
+          this.id
+            ? showLang("alerts.customers.editSuccess")
+            : showLang("alerts.customers.addSuccess")
         );
         this.close();
       }
@@ -207,7 +208,7 @@ export default {
       if (res.success) {
         this.text = res.data.text;
       } else {
-        toastError(lang.UNKNOWN_ERROR);
+        toastError(showLang("errors.unknown"));
       }
     },
     async addTime() {

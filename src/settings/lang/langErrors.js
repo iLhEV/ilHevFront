@@ -3,6 +3,10 @@ export const langErrors = {
     ru: "Неизвестная ошибка",
     en: "Unknown error",
   },
+  getData: {
+    ru: "Ошибка получения данных",
+    en: "Error get data",
+  },
   noArticles: {
     ru: "Список статей пуст",
     en: "Articles list is empty",
@@ -14,5 +18,9 @@ export const langErrors = {
   noCustomers: {
     ru: "Список клиентов пуст",
     en: "Customers list is empty",
+  },
+  invalidToken: {
+    ru: "Неправильный токен",
+    en: "Token is invalid",
   },
 };

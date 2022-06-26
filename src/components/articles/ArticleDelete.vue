@@ -26,10 +26,10 @@
       </v-card-text>
       <v-card-actions class="d-flex justify-end pr-6 pb-4">
         <v-btn depressed small class="mr-5" @click="close">{{
-          lang.BUTTON_CLOSE
+          showLang("buttons.close")
         }}</v-btn>
         <v-btn @click="deleteArticle" color="error" depressed small>{{
-          lang.BUTTON_DELETE
+          showLang("buttons.delete")
         }}</v-btn>
       </v-card-actions>
     </v-card>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { lang, showLang } from "@/settings/lang";
+import { showLang } from "@/settings/lang";
 import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
 import { toastSuccess } from "@/helpers/toasts";
@@ -49,7 +49,6 @@ export default {
       showLang,
       dialog: false,
       showText: [0],
-      lang,
     };
   },
   model: {
@@ -77,7 +76,7 @@ export default {
       });
       if (res.success) {
         this.$emit("updateList");
-        toastSuccess(lang.ARTICLE_DELETE_SUCCESS);
+        toastSuccess(showLang("alerts.articles.deleteSuccess"));
         this.close();
       }
     },
