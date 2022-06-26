@@ -1,9 +1,9 @@
 <template>
-  <v-card width="750" class="articles-list mx-auto" min-height="700">
-    <v-card-title>{{ showLang("titles.articles.list") }} </v-card-title>
+  <v-card width="750" class="customers-list mx-auto" min-height="700">
+    <v-card-title>{{ showLang("titles.customers.list") }} </v-card-title>
     <v-card-text>
-      <v-btn @click="addArticle" small depressed color="#C5E1A5" class="px-4"
-        >Create</v-btn
+      <v-btn @click="addCustomer" small depressed color="#C5E1A5" class="px-4"
+        >Добавить</v-btn
       >
       <v-btn
         small
@@ -14,91 +14,91 @@
         ><v-icon small>mdi-cached</v-icon></v-btn
       >
       <v-list>
-        <template v-if="articles.length">
-          <v-list-item v-for="item in articles" :key="item.id">
+        <template v-if="customers.length">
+          <v-list-item v-for="item in customers" :key="item.id">
             <v-list-item-avatar>
               <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
             </v-list-item-avatar>
             <v-list-item-content v-html="item.text" />
             <v-list-item-action class="d-inline-block">
-              <v-btn @click="editArticle(item)" icon>
+              <v-btn @click="editCustomer(item)" icon>
                 <v-icon size="20">mdi-pencil</v-icon>
               </v-btn>
-              <v-btn @click="deleteArticle(item)" icon>
+              <v-btn @click="deleteCustomer(item)" icon>
                 <v-icon size="20">mdi-delete</v-icon>
               </v-btn>
             </v-list-item-action>
           </v-list-item>
         </template>
         <div v-else class="pt-3">
-          {{ showLang("errors.noArticles") }}
+          {{ showLang("errors.noCustomers") }}
         </div>
       </v-list>
     </v-card-text>
-    <ArticleCard
-      v-model="articleDialog"
+    <CustomerCard
+      v-model="customerDialog"
       :id.sync="editId"
       @updateList="updateList"
     />
-    <ArticleDelete v-model="articleDelete" @updateList="updateList" />
+    <CustomerDelete v-model="customerToDelete" @updateList="updateList" />
   </v-card>
 </template>
 
 <script>
-import ArticleCard from "@/components/articles/ArticleCard";
-import ArticleDelete from "@/components/articles/ArticleDelete";
+import CustomerDelete from "@/components/customers/CustomerDelete";
 import { lang, showLang } from "@/settings/lang";
 import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
 import { toastError, toastSuccess } from "@/helpers/toasts";
+import CustomerCard from "@/components/customers/CustomerCard";
 
 export default {
-  name: "ArticleList",
-  components: { ArticleCard, ArticleDelete },
+  name: "CustomersList",
+  components: { CustomerCard, CustomerDelete },
   data() {
     return {
-      articleDialog: false,
-      articles: [],
+      customerDialog: false,
+      customers: [],
       editId: null,
-      articleDelete: null,
+      customerToDelete: null,
       lang,
       showLang,
     };
   },
   async mounted() {
-    await this.getArticles();
+    await this.getCustomers();
   },
   methods: {
-    addArticle() {
-      this.articleDialog = true;
+    addCustomer() {
+      this.customerDialog = true;
     },
-    async getArticles() {
+    async getCustomers() {
       const res = await apiRequest({ path: API_ROUTES.ARTICLES });
       if (res.success) {
-        this.articles = res.data;
+        this.customers = res.data;
       } else {
         toastError(showLang("errors.getData"));
       }
     },
     updateList() {
-      this.getArticles();
+      this.getCustomers();
     },
     updateListManually() {
       this.updateList();
-      toastSuccess(showLang("alerts.articles.listUpdateSuccess"));
+      toastSuccess(showLang("alerts.customers.listUpdateSuccess"));
     },
-    async editArticle(item) {
+    async editCustomer(item) {
       this.editId = item.id;
     },
-    async deleteArticle(item) {
-      this.articleDelete = item;
+    async deleteCustomer(item) {
+      this.customerToDelete = item;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.articles-list {
+.customers-list {
   margin-top: 70px;
 }
 .v-list-item {

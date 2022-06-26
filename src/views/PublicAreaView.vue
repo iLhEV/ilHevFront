@@ -3,19 +3,15 @@
     <AuthDialog :show="showAuthDialog" @close="closeAuthDialog" />
     <v-card dark flat>
       <v-card-title class="pa-2 top-bar">
-        <v-menu offset-y v-if="false">
+        <v-menu offset-y v-if="true">
           <template v-slot:activator="{ on, attrs }">
             <v-btn v-on="on" v-bind="attrs" icon>
               <v-icon>mdi-menu</v-icon>
             </v-btn>
           </template>
           <v-list>
-            <v-list-item
-              v-for="(item, index) in menuItems"
-              :key="index"
-              @click="processMenuAction(item.name)"
-            >
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item v-for="(item, index) in publicMenuItems" :key="index">
+              <router-link :to="item.path">{{ item.title }}</router-link>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -56,11 +52,12 @@
 <script>
 import AuthDialog from "@/components/auth/AuthDialog";
 import { isAuth } from "@/helpers/auth";
-import { HOME_ROUTE_ALIAS, ROUTES } from "@/settings/routes";
+import { HOME_ROUTE_ALIAS, PRIVATE_ROUTES, ROUTES } from "@/settings/routes";
 import { defaultTab, tabs } from "@/settings/tabs";
 import WorkPlacesTab from "@/components/tabs/WorkPlacesTab";
 import ArticlesTab from "@/components/tabs/ArticlesTab";
 import ForestBlock from "@/components/ForestBlock";
+import { publicMenuItems } from "@/settings/publicMenu";
 
 const ANIMATION_DELAY_BEFORE_START = 200;
 const ANIMATION_TIMEOUT = 700;
@@ -71,7 +68,6 @@ export default {
   components: { ForestBlock, ArticlesTab, AuthDialog, WorkPlacesTab },
   data() {
     return {
-      menuItems: [{ title: "Articles", name: "articles" }],
       showAuthDialog: false,
       avatarShift: false,
       showName: true,
@@ -83,11 +79,14 @@ export default {
       tabs,
       tab: defaultTab,
       ROUTES,
+      publicMenuItems,
     };
   },
   beforeMount() {
     const currentRouteName = this.$router.currentRoute.name;
-    if (Object.keys(this.tabs).find((el) => el === currentRouteName)) {
+    if (
+      Object.keys(this.tabs).find((el) => this.tabs[el] === currentRouteName)
+    ) {
       this.tab = currentRouteName;
     }
   },
@@ -131,15 +130,12 @@ export default {
         this.runAnimation(runNumber - 1);
       }, ANIMATION_TIMEOUT * 4.5);
     },
-    processMenuAction(name) {
-      console.log(name);
-    },
     closeAuthDialog() {
       this.showAuthDialog = false;
     },
     avatarAction() {
       if (isAuth()) {
-        this.$router.push(ROUTES.PRIVATE_ZONE);
+        this.$router.push(PRIVATE_ROUTES.ARTICLES);
       } else {
         this.showAuthDialog = true;
       }
@@ -190,6 +186,9 @@ export default {
     color: white !important;
     font-weight: normal;
     text-decoration: none;
+  }
+  .v-list-item {
+    min-height: 32px;
   }
 }
 </style>

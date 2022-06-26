@@ -7,19 +7,19 @@
     overlay-opacity="0.3"
     persistent
   >
-    <v-card v-if="article">
+    <v-card v-if="customer">
       <v-card-title>
-        {{ showLang("titles.articles.delete") }}
+        {{ showLang("titles.customers.delete") }}
       </v-card-title>
       <v-card-text>
         <div class="highlighted-black">
-          Are you sure you want to delete article with id = {{ article.id }}?
+          Are you sure you want to delete customer with id = {{ customer.id }}?
         </div>
         <v-expansion-panels v-model="showText" class="mt-5" multiple>
           <v-expansion-panel>
             <v-expansion-panel-header>Article text</v-expansion-panel-header>
             <v-expansion-panel-content>
-              <div v-html="article.text" />
+              <div v-html="customer.text" />
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -28,7 +28,7 @@
         <v-btn depressed small class="mr-5" @click="close">{{
           showLang("buttons.close")
         }}</v-btn>
-        <v-btn @click="deleteArticle" color="error" depressed small>{{
+        <v-btn @click="deleteCustomer" color="error" depressed small>{{
           showLang("buttons.delete")
         }}</v-btn>
       </v-card-actions>
@@ -43,7 +43,7 @@ import { API_ROUTES } from "@/settings/api";
 import { toastSuccess } from "@/helpers/toasts";
 
 export default {
-  name: "ArticleDelete",
+  name: "CustomerDelete",
   data() {
     return {
       showLang,
@@ -52,13 +52,13 @@ export default {
     };
   },
   model: {
-    prop: "article",
+    prop: "customer",
   },
   props: {
-    article: Object,
+    customer: Object,
   },
   watch: {
-    article(newVal) {
+    customer(newVal) {
       if (newVal) {
         this.dialog = true;
       }
@@ -69,14 +69,14 @@ export default {
       this.$emit("input", null);
       this.dialog = false;
     },
-    async deleteArticle() {
+    async deleteCustomer() {
       const res = await apiRequest({
-        path: `${API_ROUTES.ARTICLE}/${this.article.id}`,
+        path: `${API_ROUTES.CUSTOMER}/${this.customer.id}`,
         method: "delete",
       });
       if (res.success) {
         this.$emit("updateList");
-        toastSuccess(showLang("alerts.articles.deleteSuccess"));
+        toastSuccess(showLang("alerts.customers.deleteSuccess"));
         this.close();
       }
     },

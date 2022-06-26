@@ -75,8 +75,8 @@
 
 <script>
 import RULES from "@/settings/rules";
-import { lang } from "@/settings/lang";
-import { ROUTES } from "@/settings/routes";
+import { showLang } from "@/settings/lang";
+import { PRIVATE_ROUTES } from "@/settings/routes";
 import { API_ROUTES } from "@/settings/api";
 import { mapMutations } from "vuex";
 import { apiRequest } from "@/api/api";
@@ -121,10 +121,10 @@ export default {
       if (res.success) {
         this.setToken(res.permanentToken);
         localStorage.setItem("token", res.permanentToken);
-        toastSuccess(lang.RESULT_LOGIN_SUCCESS);
-        await this.$router.push(ROUTES.PRIVATE_ZONE);
+        toastSuccess(showLang("alerts.auth.loginSuccess"));
+        await this.$router.push(PRIVATE_ROUTES.ARTICLES);
       } else {
-        toastError(lang.TOKEN_IS_INVALID);
+        toastError(showLang("errors.invalidToken"));
       }
     },
     closeDialog() {
