@@ -17,6 +17,9 @@ export const RULES = {
     if (!val) {
       return showLang("errors.inputRequired");
     }
+    if (typeof val !== "number") {
+      return showLang("errors.notNumber");
+    }
     if (val.length > 4) {
       return showLang("errors.inputTooLong");
     }

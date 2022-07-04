@@ -35,4 +35,8 @@ export const langErrors = {
     ru: "Пожалуйста, проверьте поля формы",
     en: "Please, check form input",
   },
+  notNumber: {
+    ru: "Значение должно быть числом",
+    en: "Value should be number",
+  },
 };

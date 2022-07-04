@@ -45,8 +45,8 @@ export const showLang = (address) => {
   }
 
   if (!translation) {
-    console.error("Error: translation not found", address);
-    return "translation_not_found";
+    console.error("Error: translation not found for address: ", address);
+    return address;
   } else {
     return translation;
   }

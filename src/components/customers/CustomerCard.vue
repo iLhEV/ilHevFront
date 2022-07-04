@@ -2,13 +2,12 @@
   <v-dialog
     :value="value"
     @input="$emit('input', $event)"
-    max-width="750"
+    max-width="550"
     overlay-color="var(--v-overlay-base)"
     overlay-opacity="0.3"
     persistent
   >
     <v-form ref="cardForm" v-model="formValid">
-      valid{{ formValid }}
       <v-card class="pb-3">
         <v-card-title>
           {{
@@ -18,92 +17,89 @@
           }}
         </v-card-title>
         <v-card-text class="pt-2">
-          <v-form style="max-width: 400px">
+          <v-text-field
+            v-model="customer.name"
+            label="Имя клиента"
+            :rules="[RULES.name]"
+            outlined
+            dense
+          />
+          <div class="d-flex justify-space-between">
             <v-text-field
-              v-model="customer.name"
-              label="Имя клиента"
-              :rules="[RULES.name]"
+              v-model.number="customer.price"
+              label="Стоимость встречи"
+              :rules="[RULES.price]"
+              outlined
+              dense
+              style="max-width: 250px; margin-right: 16px"
+            />
+            <v-select
+              v-model="customer.currency"
+              :items="currencies"
+              label="Валюта"
+              item-text="name"
+              item-value="id"
+              :rules="[RULES.currency]"
+              style="max-width: 100px"
               outlined
               dense
             />
-            <!--            <div class="d-flex justify-space-between">-->
-            <!--              <v-text-field-->
-            <!--                v-model="customer.price"-->
-            <!--                label="Стоимость встречи"-->
-            <!--                :rules="[RULES.price]"-->
-            <!--                outlined-->
-            <!--                dense-->
-            <!--                style="max-width: 250px; margin-right: 16px"-->
-            <!--              />-->
-            <!--              <v-select-->
-            <!--                v-model="customer.currency"-->
-            <!--                :items="currencies"-->
-            <!--                label="Валюта"-->
-            <!--                item-text="name"-->
-            <!--                item-value="id"-->
-            <!--                :rules="[RULES.currency]"-->
-            <!--                style="max-width: 100px"-->
-            <!--                outlined-->
-            <!--                dense-->
-            <!--              />-->
-            <!--            </div>-->
-            <!--            <v-btn @click="addTime()" class="mb-1" depressed-->
-            <!--              >Добавить время</v-btn-->
-            <!--            >-->
-            <!--            <div class="mt-4" v-if="customerMeetingTimes.length">-->
-            <!--              <div-->
-            <!--                v-for="item in customerMeetingTimes"-->
-            <!--                :key="item.timestamp"-->
-            <!--                class="d-flex"-->
-            <!--              >-->
-            <!--                <v-select-->
-            <!--                  v-model="item.dayOfWeek"-->
-            <!--                  :items="daysOfWeek"-->
-            <!--                  item-text="rusName"-->
-            <!--                  item-value="name"-->
-            <!--                  label="День недели"-->
-            <!--                  class="mr-2"-->
-            <!--                  style="max-width: 170px"-->
-            <!--                  outlined-->
-            <!--                  dense-->
-            <!--                />-->
-            <!--                <v-select-->
-            <!--                  v-model="item.hour"-->
-            <!--                  :items="meetingHours"-->
-            <!--                  item-text="rusName"-->
-            <!--                  item-value="name"-->
-            <!--                  label="Часы"-->
-            <!--                  class="mr-2"-->
-            <!--                  style="max-width: 100px"-->
-            <!--                  outlined-->
-            <!--                  dense-->
-            <!--                />-->
-            <!--                <v-select-->
-            <!--                  v-model="item.minute"-->
-            <!--                  :items="meetingMinutes"-->
-            <!--                  item-text="rusName"-->
-            <!--                  item-value="name"-->
-            <!--                  label="Минуты"-->
-            <!--                  class="mr-2"-->
-            <!--                  style="max-width: 120px"-->
-            <!--                  outlined-->
-            <!--                  dense-->
-            <!--                />-->
-            <!--                <v-btn @click="deleteTime(item.timestamp)" icon-->
-            <!--                  ><v-icon>mdi-delete</v-icon></v-btn-->
-            <!--                >-->
-            <!--              </div>-->
-            <!--            </div>-->
-          </v-form>
+          </div>
+          <v-btn @click="addTime()" class="mb-1" depressed
+            >Добавить время</v-btn
+          >
+          <div class="mt-4" v-if="customerMeetingTimes.length">
+            <div
+              v-for="item in customerMeetingTimes"
+              :key="item.timestamp"
+              class="d-flex"
+            >
+              <v-select
+                v-model="item.dayOfWeek"
+                :items="daysOfWeek"
+                item-text="rusName"
+                item-value="name"
+                label="День недели"
+                class="mr-2"
+                style="max-width: 170px"
+                outlined
+                dense
+              />
+              <v-select
+                v-model="item.hour"
+                :items="meetingHours"
+                item-text="rusName"
+                item-value="name"
+                label="Часы"
+                class="mr-2"
+                style="max-width: 100px"
+                outlined
+                dense
+              />
+              <v-select
+                v-model="item.minute"
+                :items="meetingMinutes"
+                item-text="rusName"
+                item-value="name"
+                label="Минуты"
+                class="mr-2"
+                style="max-width: 120px"
+                outlined
+                dense
+              />
+              <v-btn @click="deleteTime(item.timestamp)" icon
+                ><v-icon>mdi-delete</v-icon></v-btn
+              >
+            </div>
+          </div>
         </v-card-text>
         <v-card-actions class="d-flex justify-end pr-6">
           <v-btn depressed class="mr-5" @click="close">
             {{ showLang("buttons.close") }}
           </v-btn>
-          <v-btn color="primary" depressed>{{
+          <v-btn @click="save" color="primary" depressed>{{
             showLang("buttons.save")
           }}</v-btn>
-          <v-btn @click="validate">validate</v-btn>
         </v-card-actions>
       </v-card>
     </v-form>
@@ -162,23 +158,17 @@ export default {
   },
   methods: {
     close() {
+      this.$refs.cardForm.resetValidation();
       this.$emit("input", false);
       this.clean();
       this.$emit("update:id", null);
     },
-    validate() {
-      console.log(1);
-      this.$refs.cardForm.validate();
-      console.log(2);
-    },
     async save() {
       this.$refs.cardForm.validate();
       if (!this.formValid) {
-        toastError(showLang("plsCheckFormInput"));
+        toastError(showLang("errors.plsCheckFormInput"));
         return;
       }
-
-      console.log(3, this.formValid);
 
       const res = await apiRequest({
         path: API_ROUTES.CUSTOMER,
