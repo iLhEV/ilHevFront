@@ -48,9 +48,9 @@
           <v-btn @click="addTime()" class="mb-1" depressed
             >Добавить время</v-btn
           >
-          <div class="mt-4" v-if="customerMeetingTimes.length">
+          <div class="mt-4" v-if="customerTimeSlots.length">
             <div
-              v-for="item in customerMeetingTimes"
+              v-for="item in customerTimeSlots"
               :key="item.timestamp"
               class="d-flex"
             >
@@ -136,7 +136,7 @@ export default {
       newDayOfWeek: "",
       newHour: "",
       newMinute: "",
-      customerMeetingTimes: [],
+      customerTimeSlots: [],
       emptyItem: {
         dayOfWeek: "",
         hour: "",
@@ -170,6 +170,8 @@ export default {
         return;
       }
 
+      this.customer.timeSlots = JSON.stringify(this.customerTimeSlots);
+
       const res = await apiRequest({
         path: API_ROUTES.CUSTOMER,
         method: "post",
@@ -200,21 +202,23 @@ export default {
       });
       if (res.success) {
         this.customer = res.data;
+        if (res.data.time_slots && res.data.time_slots.length) {
+          this.customerTimeSlots = res.data.time_slots;
+        }
       } else {
         toastError(showLang("errors.unknown"));
       }
     },
 
     async addTime() {
-      this.customerMeetingTimes.push({
+      this.customerTimeSlots.push({
         ...this.emptyItem,
         timestamp: Date.now(),
       });
-      console.log(this.customerMeetingTimes);
     },
 
     async deleteTime(timestamp) {
-      this.customerMeetingTimes = this.customerMeetingTimes.filter(
+      this.customerTimeSlots = this.customerTimeSlots.filter(
         (el) => el.timestamp !== timestamp
       );
     },
