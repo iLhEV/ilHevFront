@@ -2,6 +2,7 @@ import axios from "axios";
 import { LOCAL_STORAGE_TOKEN_FIELD } from "@/settings/auth";
 import { showLang } from "@/settings/lang";
 import { toastError } from "@/helpers/toasts";
+import { ERRORS } from "@/settings/errors";
 
 const AXIOS_METHODS = {
   get: "get",
@@ -46,8 +47,15 @@ export const apiRequest = async (config) => {
       res = await axios.get(url, configAxios);
     }
   } catch (e) {
-    console.error("Axios error:", e);
-    toastError(showLang("errors.unknown"));
+    const errorText = e.response.data.error;
+    if (errorText === ERRORS.token_invalid) {
+      localStorage.removeItem(LOCAL_STORAGE_TOKEN_FIELD);
+      console.error(ERRORS.token_invalid);
+    } else {
+      console.error("Axios error:", e, errorText);
+    }
+
+    toastError(showLang("errors.getData"));
   }
   return res.data;
 };

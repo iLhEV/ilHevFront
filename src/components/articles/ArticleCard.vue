@@ -23,7 +23,7 @@
         </v-card-text>
         <v-card-actions class="d-flex justify-end pr-6">
           <v-btn depressed small class="mr-5" @click="close">
-            showLang("buttons.close")
+            {{ showLang("buttons.close") }}
           </v-btn>
           <v-btn @click="save" color="primary" depressed small>{{
             showLang("buttons.save")

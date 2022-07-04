@@ -3,4 +3,5 @@ export const API_ROUTES = {
   ARTICLE: "/article",
   ARTICLES: "/articles",
   CUSTOMER: "/customer",
+  CUSTOMERS: "/customers",
 };

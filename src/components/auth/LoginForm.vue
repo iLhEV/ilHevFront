@@ -74,13 +74,13 @@
 </template>
 
 <script>
-import RULES from "@/settings/rules";
 import { showLang } from "@/settings/lang";
 import { PRIVATE_ROUTES } from "@/settings/routes";
 import { API_ROUTES } from "@/settings/api";
 import { mapMutations } from "vuex";
 import { apiRequest } from "@/api/api";
 import { toastError, toastSuccess } from "@/helpers/toasts";
+import { RULES } from "@/settings/rules";
 
 export default {
   name: "LoginForm",
@@ -89,7 +89,7 @@ export default {
       valid: true,
       token: "",
       showEnterToken: false,
-      rules: RULES,
+      RULES,
       showInstructions: false,
       startInput: false,
     };

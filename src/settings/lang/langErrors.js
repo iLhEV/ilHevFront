@@ -23,4 +23,16 @@ export const langErrors = {
     ru: "Неправильный токен",
     en: "Token is invalid",
   },
+  inputTooLong: {
+    ru: "Слишком много символов",
+    en: "Too many symbols",
+  },
+  inputRequired: {
+    ru: "Заполнение обязательно",
+    en: "Input is required",
+  },
+  plsCheckFormInput: {
+    ru: "Пожалуйста, проверьте поля формы",
+    en: "Please, check form input",
+  },
 };

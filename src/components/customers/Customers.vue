@@ -19,7 +19,7 @@
             <v-list-item-avatar>
               <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
             </v-list-item-avatar>
-            <v-list-item-content v-html="item.text" />
+            <v-list-item-content v-html="item.name" />
             <v-list-item-action class="d-inline-block">
               <v-btn @click="editCustomer(item)" icon>
                 <v-icon size="20">mdi-pencil</v-icon>
@@ -73,7 +73,7 @@ export default {
       this.customerDialog = true;
     },
     async getCustomers() {
-      const res = await apiRequest({ path: API_ROUTES.ARTICLES });
+      const res = await apiRequest({ path: API_ROUTES.CUSTOMERS });
       if (res.success) {
         this.customers = res.data;
       } else {

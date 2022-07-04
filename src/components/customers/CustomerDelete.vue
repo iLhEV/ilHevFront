@@ -17,9 +17,9 @@
         </div>
         <v-expansion-panels v-model="showText" class="mt-5" multiple>
           <v-expansion-panel>
-            <v-expansion-panel-header>Article text</v-expansion-panel-header>
+            <v-expansion-panel-header>Клиент</v-expansion-panel-header>
             <v-expansion-panel-content>
-              <div v-html="customer.text" />
+              <div v-html="customer.name" />
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
