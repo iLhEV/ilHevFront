@@ -32,4 +32,22 @@ export const RULES = {
     }
     return true;
   },
+  dayOfWeek(val) {
+    if (!val) {
+      return showLang("errors.dayOfWeedRequired");
+    }
+    return true;
+  },
+  hour(val) {
+    if (!val) {
+      return showLang("errors.hourRequired");
+    }
+    return true;
+  },
+  minute(val) {
+    if (!val) {
+      return showLang("errors.minuteRequired");
+    }
+    return true;
+  },
 };

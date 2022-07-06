@@ -33,6 +33,15 @@ export const langErrors = {
     ru: `Цена встречи не может быть больше ${MAX_MEETING_PRICE}`,
     en: `Price of meeting couldn't be more then ${MAX_MEETING_PRICE}`,
   },
+  dayOfWeedRequired: {
+    ru: "`День недели` обязателен к заполнению",
+  },
+  hourRequired: {
+    ru: "`Час` обязателен к заполнению",
+  },
+  minuteRequired: {
+    ru: "`Минута` обязательна к заполнению",
+  },
   inputRequired: {
     ru: "Заполнение обязательно",
     en: "Input is required",

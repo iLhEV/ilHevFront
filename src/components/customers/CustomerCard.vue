@@ -56,6 +56,7 @@
             >
               <v-select
                 v-model="item.dayOfWeek"
+                :rules="[RULES.dayOfWeek]"
                 :items="daysOfWeek"
                 item-text="rusName"
                 item-value="name"
@@ -67,6 +68,7 @@
               />
               <v-select
                 v-model="item.hour"
+                :rules="[RULES.hour]"
                 :items="meetingHours"
                 item-text="rusName"
                 item-value="name"
@@ -78,6 +80,7 @@
               />
               <v-select
                 v-model="item.minute"
+                :rules="[RULES.minute]"
                 :items="meetingMinutes"
                 item-text="rusName"
                 item-value="name"
