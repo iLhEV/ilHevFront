@@ -1,4 +1,5 @@
 import { showLang } from "@/settings/lang";
+import { MAX_MEETING_PRICE } from "@/settings/prices";
 
 export const RULES = {
   token(val) {
@@ -20,8 +21,8 @@ export const RULES = {
     if (typeof val !== "number") {
       return showLang("errors.notNumber");
     }
-    if (val.length > 4) {
-      return showLang("errors.inputTooLong");
+    if (val > MAX_MEETING_PRICE) {
+      return showLang("errors.meetingPriceTooBig");
     }
     return true;
   },

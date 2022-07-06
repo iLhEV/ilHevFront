@@ -204,6 +204,9 @@ export default {
         this.customer = res.data;
         if (res.data.time_slots && res.data.time_slots.length) {
           this.customerTimeSlots = res.data.time_slots;
+          console.log(1, this.customerTimeSlots);
+        } else {
+          this.customerTimeSlots = [];
         }
       } else {
         toastError(showLang("errors.unknown"));

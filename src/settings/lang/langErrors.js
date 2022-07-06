@@ -1,3 +1,5 @@
+import { MAX_MEETING_PRICE } from "@/settings/prices";
+
 export const langErrors = {
   unknown: {
     ru: "Неизвестная ошибка",
@@ -26,6 +28,10 @@ export const langErrors = {
   inputTooLong: {
     ru: "Слишком много символов",
     en: "Too many symbols",
+  },
+  meetingPriceTooBig: {
+    ru: `Цена встречи не может быть больше ${MAX_MEETING_PRICE}`,
+    en: `Price of meeting couldn't be more then ${MAX_MEETING_PRICE}`,
   },
   inputRequired: {
     ru: "Заполнение обязательно",
