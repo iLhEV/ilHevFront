@@ -35,7 +35,7 @@ import { LOCAL_STORAGE_TOKEN_FIELD } from "@/settings/auth";
 import { toastSuccess } from "@/helpers/toasts";
 import { showLang } from "@/settings/lang";
 import { privateDefaultTab, privateTabs } from "@/settings/tabs";
-import MeetingsPrivate from "@/components/articles/MeetingsPrivate";
+import MeetingsPrivate from "@/components/meetings/MeetingsPlans";
 import Customers from "@/components/customers/Customers";
 export default {
   name: "PrivateAreaView",

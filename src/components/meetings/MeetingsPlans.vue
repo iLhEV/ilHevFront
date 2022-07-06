@@ -1,8 +1,14 @@
 <template>
-  <v-card width="750" class="articles-list mx-auto" min-height="700">
+  <v-card width="750" class="meetings-plans" min-height="700">
     <v-card-title>{{ showLang("titles.meetings.list") }} </v-card-title>
+    {{ customers }}
     <v-card-text>
-      <v-btn @click="addMeeting" small depressed color="#C5E1A5" class="px-4"
+      <v-btn
+        @click="addMeetingPlan"
+        small
+        depressed
+        color="#C5E1A5"
+        class="px-4"
         >Запланировать</v-btn
       >
       <v-btn
@@ -14,17 +20,21 @@
         ><v-icon small>mdi-cached</v-icon></v-btn
       >
       <v-list>
-        <template v-if="articles.length">
-          <v-list-item v-for="item in articles" :key="item.id">
+        <template v-if="meetingsPlans.length">
+          <v-list-item v-for="item in meetingsPlans" :key="item.id">
             <v-list-item-avatar>
               <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
             </v-list-item-avatar>
-            <v-list-item-content v-html="item.text" />
+            <v-list-item-content
+              >{{ item.dayOfWeek }}_{{ item.hour }}_{{
+                item.minute
+              }}</v-list-item-content
+            >
             <v-list-item-action class="d-inline-block">
-              <v-btn @click="editArticle(item)" icon>
+              <v-btn @click="editMeetingPlan(item)" icon>
                 <v-icon size="20">mdi-pencil</v-icon>
               </v-btn>
-              <v-btn @click="deleteArticle(item)" icon>
+              <v-btn @click="deleteMeetingPlan(item)" icon>
                 <v-icon size="20">mdi-delete</v-icon>
               </v-btn>
             </v-list-item-action>
@@ -36,11 +46,12 @@
       </v-list>
     </v-card-text>
     <MeetingCard
-      v-model="meetingDialog"
+      v-model="meetingPlanDialog"
       :id.sync="editId"
       @updateList="updateList"
     />
-    <ArticleDelete v-model="articleDelete" @updateList="updateList" />
+    <ArticleDelete v-model="meetingPlanDelete" @updateList="updateList" />
+    {{ meetingsPlans }}
   </v-card>
 </template>
 
@@ -53,53 +64,72 @@ import { toastError, toastSuccess } from "@/helpers/toasts";
 import MeetingCard from "@/components/meetings/MeetingCard";
 
 export default {
-  name: "MeetingsPrivate",
+  name: "MeetingsPlans",
   components: { MeetingCard, ArticleDelete },
   data() {
     return {
-      meetingDialog: false,
-      articles: [],
+      meetingPlanDialog: false,
+      meetingsPlans: [],
       editId: null,
-      articleDelete: null,
+      meetingPlanDelete: null,
+      customers: [],
       lang,
       showLang,
     };
   },
-  async mounted() {
-    await this.getArticles();
+
+  async beforeMount() {
+    await this.getCustomers();
+    this.createMeetingsPlans();
   },
   methods: {
-    addMeeting() {
-      this.meetingDialog = true;
+    addMeetingPlan() {
+      this.meetingPlanDialog = true;
     },
-    async getArticles() {
-      const res = await apiRequest({ path: API_ROUTES.ARTICLES });
+    updateList() {
+      this.createMeetingsPlans();
+    },
+    createMeetingsPlans() {
+      this.customers.forEach((el) => {
+        if (el.time_slots && el.time_slots.length) {
+          el.time_slots.forEach((slot) => {
+            this.meetingsPlans.push({
+              ...slot,
+              fromCustomer: true,
+              customerId: el.id,
+            });
+          });
+          console.log(el.name);
+        }
+      });
+    },
+    async getCustomers() {
+      const res = await apiRequest({ path: API_ROUTES.CUSTOMERS });
       if (res.success) {
-        this.articles = res.data;
+        this.customers = res.data;
       } else {
         toastError(showLang("errors.getData"));
       }
-    },
-    updateList() {
-      this.getArticles();
     },
     updateListManually() {
       this.updateList();
       toastSuccess(showLang("alerts.meetings.listUpdateSuccess"));
     },
-    async editArticle(item) {
+    async editMeetingPlan(item) {
       this.editId = item.id;
     },
-    async deleteArticle(item) {
-      this.articleDelete = item;
+    async deleteMeetingPlan(item) {
+      this.meetingPlanDelete = item;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.articles-list {
+.meetings-plans {
   margin-top: 70px;
+  margin-right: auto;
+  margin-left: auto;
 }
 .v-list-item {
   border-bottom: 1px solid #ddd;

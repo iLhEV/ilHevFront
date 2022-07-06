@@ -49,8 +49,8 @@ export const langTitles = {
       en: "Delete meeting",
     },
     list: {
-      ru: "Встречи",
-      en: "Meetings",
+      ru: "Планы встреч",
+      en: "Meetings plans",
     },
   },
   login: {

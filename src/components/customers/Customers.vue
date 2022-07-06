@@ -53,7 +53,7 @@ import { toastError, toastSuccess } from "@/helpers/toasts";
 import CustomerCard from "@/components/customers/CustomerCard";
 
 export default {
-  name: "CustomersList",
+  name: "Customers",
   components: { CustomerCard, CustomerDelete },
   data() {
     return {
