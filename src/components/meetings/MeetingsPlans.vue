@@ -1,7 +1,6 @@
 <template>
   <v-card width="750" class="meetings-plans" min-height="700">
     <v-card-title>{{ showLang("titles.meetings.list") }} </v-card-title>
-    {{ customers }}
     <v-card-text>
       <div class="d-flex">
         <v-btn
@@ -32,22 +31,26 @@
       <v-list>
         <template v-if="meetingsPlans.length">
           <v-list-item v-for="item in meetingsPlans" :key="item.id">
-            <v-list-item-avatar>
-              <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
-            </v-list-item-avatar>
-            <v-list-item-content
-              >{{ item.dayOfWeek }}_{{ item.hour }}_{{
-                item.minute
-              }}</v-list-item-content
-            >
-            <v-list-item-action class="d-inline-block">
-              <v-btn @click="editMeetingPlan(item)" icon>
-                <v-icon size="20">mdi-pencil</v-icon>
-              </v-btn>
-              <v-btn @click="deleteMeetingPlan(item)" icon>
-                <v-icon size="20">mdi-delete</v-icon>
-              </v-btn>
-            </v-list-item-action>
+            <v-list-item-content>
+              {{ item.dateFormatted }}
+              <div class="date-content">
+                <div
+                  v-for="slot in item.slots"
+                  :key="slot.timestamp"
+                  class="time-slot"
+                >
+                  <div class="time-slot__time">
+                    {{ slot.hour }}-{{ slot.minute }}
+                  </div>
+                  <div class="time-slot__customer">
+                    {{ slot.customer.name }}
+                  </div>
+                  <div class="time-slot__type">
+                    <span v-if="slot.regular"> регулярная запись</span>
+                  </div>
+                </div>
+              </div>
+            </v-list-item-content>
           </v-list-item>
         </template>
         <div v-else class="pt-3">
@@ -61,7 +64,6 @@
       @updateList="updateList"
     />
     <ArticleDelete v-model="meetingPlanDelete" @updateList="updateList" />
-    {{ meetingsPlans }}
   </v-card>
 </template>
 
@@ -73,7 +75,8 @@ import { API_ROUTES } from "@/settings/api";
 import { toastError, toastSuccess } from "@/helpers/toasts";
 import MeetingCard from "@/components/meetings/MeetingCard";
 import { defaultPeriodVariant, periodVariants } from "@/settings/dates";
-import { addDays, getDay } from "date-fns";
+import { addDays, format, getDay } from "date-fns";
+import { ru } from "date-fns/locale";
 
 export default {
   name: "MeetingsPlans",
@@ -111,7 +114,8 @@ export default {
           el.time_slots.forEach((slot) => {
             regularSlots.push({
               ...slot,
-              fromCustomerId: el.id,
+              customer: this.getCustomer(el.id),
+              regular: true,
             });
           });
         }
@@ -131,10 +135,14 @@ export default {
         slots = regularSlots.filter((el) => {
           return el.dayOfWeek === day;
         });
-        days.push({ date: current, slots });
+        days.push({
+          date: current,
+          dateFormatted: format(current, "d MMMM", { locale: ru }),
+          slots,
+        });
         iterator++;
       }
-      console.log(days);
+      this.meetingsPlans = days;
     },
     async getCustomers() {
       const res = await apiRequest({ path: API_ROUTES.CUSTOMERS });
@@ -154,6 +162,9 @@ export default {
     async deleteMeetingPlan(item) {
       this.meetingPlanDelete = item;
     },
+    getCustomer(id) {
+      return this.customers.find((el) => el.id === id);
+    },
   },
 };
 </script>
@@ -165,11 +176,43 @@ export default {
   margin-left: auto;
 }
 .v-list-item {
-  border-bottom: 1px solid #ddd;
-  padding: 20px 0;
+  border: 1px dashed #aaa;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+.date-content {
+  border-top: 1px solid #ddd;
+  margin-top: 7px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+.time-slot {
+  border: 1px dashed #aaa;
+  border-radius: 3px;
+  padding: 4px 20px;
+  margin-bottom: 17px;
+  display: flex;
+  justify-content: space-between;
+  &__time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 20px;
+    border-right: 1px dashed #aaa;
+    min-width: 58px;
+  }
+  &__customer {
+    padding: 20px;
+    border-right: 1px dashed #aaa;
+  }
+  &__type {
+  }
+}
+.time-slot:last-child {
+  margin-bottom: 0;
 }
 .v-list-item:first-child {
-  border-top: 1px dashed #ddd;
+  border-top: 1px dashed #aaa;
   margin-top: 20px;
 }
 .v-list-item:last-child {
