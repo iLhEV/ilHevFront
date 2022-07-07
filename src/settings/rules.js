@@ -33,7 +33,7 @@ export const RULES = {
     return true;
   },
   dayOfWeek(val) {
-    if (!val) {
+    if (val === "") {
       return showLang("errors.dayOfWeedRequired");
     }
     return true;

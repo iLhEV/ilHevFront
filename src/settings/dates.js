@@ -1,11 +1,11 @@
 export const daysOfWeek = [
-  { name: "monday", rusName: "Пн" },
-  { name: "tuesday", rusName: "Вт" },
-  { name: "wednesday", rusName: "Ср" },
-  { name: "thursday", rusName: "Чт" },
-  { name: "friday", rusName: "Пт" },
-  { name: "saturday", rusName: "Сб" },
-  { name: "sunday", rusName: "Вс" },
+  { name: 1, rusName: "Пн" },
+  { name: 2, rusName: "Вт" },
+  { name: 3, rusName: "Ср" },
+  { name: 4, rusName: "Чт" },
+  { name: 5, rusName: "Пт" },
+  { name: 6, rusName: "Сб" },
+  { name: 0, rusName: "Вс" },
 ];
 
 export const meetingHours = [
@@ -26,3 +26,7 @@ export const meetingMinutes = [
   "50",
   "55",
 ];
+
+export const periodVariants = [{ value: 7, text: "Ближайшие 7 дней" }];
+
+export const defaultPeriodVariant = periodVariants.find((el) => el.value === 7);

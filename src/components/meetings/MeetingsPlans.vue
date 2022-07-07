@@ -3,22 +3,32 @@
     <v-card-title>{{ showLang("titles.meetings.list") }} </v-card-title>
     {{ customers }}
     <v-card-text>
-      <v-btn
-        @click="addMeetingPlan"
-        small
-        depressed
-        color="#C5E1A5"
-        class="px-4"
-        >Запланировать</v-btn
-      >
-      <v-btn
-        small
-        depressed
-        color="#EFEBE9"
-        class="ml-5 px-0"
-        @click="updateListManually"
-        ><v-icon small>mdi-cached</v-icon></v-btn
-      >
+      <div class="d-flex">
+        <v-btn
+          @click="addMeetingPlan"
+          small
+          depressed
+          color="#C5E1A5"
+          class="px-4"
+          >Запланировать</v-btn
+        >
+        <v-btn
+          small
+          depressed
+          color="#EFEBE9"
+          class="ml-5 px-0"
+          @click="updateListManually"
+          ><v-icon small>mdi-cached</v-icon></v-btn
+        >
+        <v-select
+          v-model="periodVariant"
+          :items="periodVariants"
+          item-value="value"
+          item-text="text"
+          class="ml-5 mt-n2"
+          label="Период"
+        />
+      </div>
       <v-list>
         <template v-if="meetingsPlans.length">
           <v-list-item v-for="item in meetingsPlans" :key="item.id">
@@ -57,11 +67,13 @@
 
 <script>
 import ArticleDelete from "@/components/articles/ArticleDelete";
-import { lang, showLang } from "@/settings/lang";
+import { showLang } from "@/settings/lang";
 import { apiRequest } from "@/api/api";
 import { API_ROUTES } from "@/settings/api";
 import { toastError, toastSuccess } from "@/helpers/toasts";
 import MeetingCard from "@/components/meetings/MeetingCard";
+import { defaultPeriodVariant, periodVariants } from "@/settings/dates";
+import { addDays, getDay } from "date-fns";
 
 export default {
   name: "MeetingsPlans",
@@ -73,7 +85,9 @@ export default {
       editId: null,
       meetingPlanDelete: null,
       customers: [],
-      lang,
+      period: [],
+      periodVariants,
+      periodVariant: defaultPeriodVariant,
       showLang,
     };
   },
@@ -90,18 +104,37 @@ export default {
       this.createMeetingsPlans();
     },
     createMeetingsPlans() {
+      const regularSlots = [];
+      // Get list of customer's regular slots.
       this.customers.forEach((el) => {
         if (el.time_slots && el.time_slots.length) {
           el.time_slots.forEach((slot) => {
-            this.meetingsPlans.push({
+            regularSlots.push({
               ...slot,
-              fromCustomer: true,
-              customerId: el.id,
+              fromCustomerId: el.id,
             });
           });
-          console.log(el.name);
         }
       });
+      // Get time period.
+      const today = new Date();
+      let iterator = 1;
+      const periodLengthDays = this.periodVariant.value;
+      const days = [];
+      let slots = [];
+      let current = today;
+      let day = null;
+      console.log(2, periodLengthDays);
+      while (iterator <= periodLengthDays) {
+        current = addDays(today, iterator);
+        day = getDay(current);
+        slots = regularSlots.filter((el) => {
+          return el.dayOfWeek === day;
+        });
+        days.push({ date: current, slots });
+        iterator++;
+      }
+      console.log(days);
     },
     async getCustomers() {
       const res = await apiRequest({ path: API_ROUTES.CUSTOMERS });
