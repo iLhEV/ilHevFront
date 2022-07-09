@@ -4,7 +4,7 @@ import "vue-toastification/dist/index.css";
 
 const toastOptions = {
   position: "top-center",
-  timeout: 2200,
+  timeout: 1500,
   transition: "Vue-Toastification__fade",
   hideProgressBar: true,
   closeButton: false,

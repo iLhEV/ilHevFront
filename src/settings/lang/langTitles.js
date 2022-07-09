@@ -49,7 +49,7 @@ export const langTitles = {
       en: "Delete meeting",
     },
     list: {
-      ru: "Планы встреч",
+      ru: "Календарь встреч",
       en: "Meetings plans",
     },
   },

@@ -67,6 +67,9 @@
                   <div class="time-slot__type">
                     <span v-if="slot.regular"> регулярная запись</span>
                   </div>
+                  <div class="time-slot__actions">
+                    <v-switch label="Встреча состоялась" />
+                  </div>
                 </div>
               </div>
             </v-list-item-content>
@@ -135,6 +138,7 @@ export default {
               ...slot,
               customer: this.getCustomer(el.id),
               regular: true,
+              result: null,
             });
           });
         }
@@ -218,7 +222,7 @@ export default {
   padding: 4px 20px;
   margin-bottom: 17px;
   display: grid;
-  grid-template-columns: 0.5fr 2fr 1fr;
+  grid-template-columns: 0.5fr 1.5fr 0.8fr 1.1fr;
   justify-content: space-between;
   &__date-title {
     font-size: 1.4em;
@@ -231,13 +235,24 @@ export default {
     border-right: 1px dashed #d7ccc8;
   }
   &__customer {
+    display: flex;
+    align-items: center;
     padding: 20px;
     border-right: 1px dashed #d7ccc8;
   }
   &__type {
     display: flex;
-    padding-left: 25px;
+    padding-left: 10px;
     align-items: center;
+    border-right: 1px dashed #d7ccc8;
+  }
+  &__actions {
+    padding-left: 15px;
+    ::v-deep {
+      .v-label {
+        font-size: 0.9em;
+      }
+    }
   }
 }
 .time-slot:last-child {
