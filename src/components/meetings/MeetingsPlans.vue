@@ -182,13 +182,12 @@ export default {
   margin-left: auto;
 }
 .v-list-item {
-  border: 1px solid #999;
-  //background: #eceff1;
-  border-radius: 22px;
+  border: 3px solid #bcaaa4;
+  border-radius: 12px;
   margin-bottom: 20px;
 }
 .day-content {
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #cfd8dc;
   margin-top: 7px;
   padding-top: 20px;
   padding-bottom: 10px;
@@ -206,11 +205,11 @@ export default {
     align-items: center;
     justify-content: center;
     padding-right: 20px;
-    border-right: 1px dashed #aaa;
+    border-right: 1px dashed #d7ccc8;
   }
   &__customer {
     padding: 20px;
-    border-right: 1px dashed #aaa;
+    border-right: 1px dashed #d7ccc8;
   }
   &__type {
     display: flex;

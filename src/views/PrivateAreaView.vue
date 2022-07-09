@@ -39,8 +39,7 @@
           </v-col>
           <v-col cols="11">
             <v-row class="text-right">
-              <v-col> </v-col>
-              <v-col>
+              <v-col v-if="false">
                 <v-btn
                   :to="PRIVATE_ROUTES.ARTICLES"
                   small
