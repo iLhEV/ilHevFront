@@ -2,38 +2,42 @@
   <v-card width="750" class="meetings-plans" min-height="700">
     <v-card-title>{{ showLang("titles.meetings.list") }} </v-card-title>
     <v-card-text>
-      <div class="d-flex">
-        <v-btn
-          @click="addMeetingPlan"
-          small
-          depressed
-          color="#C5E1A5"
-          class="px-4"
-          >Запланировать</v-btn
-        >
-        <v-btn
-          small
-          depressed
-          color="#EFEBE9"
-          class="ml-5 px-0"
-          @click="updateListManually"
-          ><v-icon small>mdi-cached</v-icon></v-btn
-        >
-        <v-select
-          v-model="periodVariant"
-          :items="periodVariants"
-          item-value="value"
-          item-text="text"
-          class="ml-5 mt-n2"
-          label="Период"
-        />
-      </div>
+      <v-row>
+        <v-col class="mt-4">
+          <v-btn
+            @click="addMeetingPlan"
+            small
+            depressed
+            color="#C5E1A5"
+            class="px-4"
+            >Запланировать</v-btn
+          >
+          <v-btn
+            small
+            depressed
+            color="#EFEBE9"
+            class="ml-5 px-0"
+            @click="updateListManually"
+            ><v-icon small>mdi-cached</v-icon></v-btn
+          >
+        </v-col>
+        <v-col>
+          <v-select
+            v-model="periodVariant"
+            :items="periodVariants"
+            item-value="value"
+            item-text="text"
+            class="ml-1"
+            label="Период"
+          />
+        </v-col>
+      </v-row>
       <v-list>
         <template v-if="meetingsPlans.length">
           <v-list-item v-for="item in meetingsPlans" :key="item.id">
             <v-list-item-content>
               {{ item.dateFormatted }}
-              <div class="date-content text-center">
+              <div class="day-content text-center">
                 <div v-if="item.slots.length < 1">записей нет</div>
                 <div
                   v-for="slot in item.slots"
@@ -178,11 +182,12 @@ export default {
   margin-left: auto;
 }
 .v-list-item {
-  border: 1px dashed #aaa;
-  border-radius: 6px;
-  margin-bottom: 10px;
+  border: 1px solid #999;
+  //background: #eceff1;
+  border-radius: 22px;
+  margin-bottom: 20px;
 }
-.date-content {
+.day-content {
   border-top: 1px solid #ddd;
   margin-top: 7px;
   padding-top: 20px;
@@ -190,7 +195,7 @@ export default {
 }
 .time-slot {
   border: 1px dashed #aaa;
-  border-radius: 3px;
+  border-radius: 12px;
   padding: 4px 20px;
   margin-bottom: 17px;
   display: grid;
@@ -217,11 +222,11 @@ export default {
   margin-bottom: 0;
 }
 .v-list-item:first-child {
-  border-top: 1px dashed #aaa;
+  //border-top: 1px dashed #aaa;
   margin-top: 20px;
 }
 .v-list-item:last-child {
-  border-bottom: 1px dashed #ddd;
+  //border-bottom: 1px dashed #ddd;
   margin-top: 20px;
 }
 </style>

@@ -1,7 +1,9 @@
 <template>
   <v-app>
-    <v-main>
-      <router-view />
+    <v-main class="main-area">
+      <div class="px-2">
+        <router-view />
+      </div>
     </v-main>
   </v-app>
 </template>
