@@ -1,24 +1,75 @@
 <template>
   <div>
-    <v-card outlined>
-      <v-card-text
-        class="text-right d-flex justify-space-between navigation-area"
-      >
-        <a @click="goToPublicArea" class="ilhev-button font-weight-bold">{{
-          showLang("menus._private.top.publicArea")
-        }}</a>
-        <RouterLink :to="PRIVATE_ROUTES.ARTICLES" class="ilhev-button">{{
-          showLang("menus._private.top.articles")
-        }}</RouterLink>
-        <RouterLink :to="PRIVATE_ROUTES.MEETINGS" class="ilhev-button">{{
-          showLang("menus._private.top.meetings")
-        }}</RouterLink>
-        <RouterLink :to="PRIVATE_ROUTES.CUSTOMERS" class="ilhev-button">{{
-          showLang("menus._private.top.customers")
-        }}</RouterLink>
-        <a @click="logout" class="ilhev-button font-weight-bold">{{
-          showLang("menus._private.top.logout")
-        }}</a>
+    <v-card width="750" class="top-menu" outlined>
+      <v-card-text class="d-flex justify-space-between navigation-area">
+        <v-row>
+          <v-col cols="1">
+            <v-menu bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn icon v-bind="attrs" v-on="on">
+                  <v-icon>mdi-menu</v-icon>
+                </v-btn>
+              </template>
+
+              <v-list>
+                <v-list-item>
+                  <v-list-item-title>
+                    <v-btn
+                      :to="ROUTES.HOME"
+                      small
+                      elevation="1"
+                      color="primary"
+                      >{{ showLang("menus._private.top.publicArea") }}</v-btn
+                    >
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>
+                    <v-btn
+                      @click="logout"
+                      color="red lighten-3"
+                      small
+                      elevation="1"
+                      >{{ showLang("menus._private.top.logout") }}</v-btn
+                    >
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </v-col>
+          <v-col cols="11">
+            <v-row class="text-right">
+              <v-col> </v-col>
+              <v-col>
+                <v-btn
+                  :to="PRIVATE_ROUTES.ARTICLES"
+                  small
+                  elevation="1"
+                  color="#EFEBE9"
+                  >{{ showLang("menus._private.top.articles") }}</v-btn
+                >
+              </v-col>
+              <v-col>
+                <v-btn
+                  :to="PRIVATE_ROUTES.MEETINGS"
+                  small
+                  elevation="1"
+                  color="#EFEBE9"
+                  >{{ showLang("menus._private.top.meetings") }}</v-btn
+                >
+              </v-col>
+              <v-col>
+                <v-btn
+                  :to="PRIVATE_ROUTES.CUSTOMERS"
+                  small
+                  elevation="1"
+                  color="#EFEBE9"
+                  >{{ showLang("menus._private.top.customers") }}</v-btn
+                >
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
       </v-card-text>
     </v-card>
     <ArticleList v-if="tab === privateTabs.articles" />
@@ -45,6 +96,7 @@ export default {
       privateTabs,
       tab: privateDefaultTab,
       PRIVATE_ROUTES,
+      ROUTES,
       showLang,
     };
   },
@@ -89,5 +141,8 @@ export default {
 }
 a {
   text-decoration: none !important;
+}
+.top-menu {
+  margin: 5px auto 10px;
 }
 </style>

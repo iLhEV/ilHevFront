@@ -33,14 +33,17 @@
           <v-list-item v-for="item in meetingsPlans" :key="item.id">
             <v-list-item-content>
               {{ item.dateFormatted }}
-              <div class="date-content">
+              <div class="date-content text-center">
+                <div v-if="item.slots.length < 1">записей нет</div>
                 <div
                   v-for="slot in item.slots"
                   :key="slot.timestamp"
                   class="time-slot"
                 >
                   <div class="time-slot__time">
-                    {{ slot.hour }}-{{ slot.minute }}
+                    <span class="text-no-wrap"
+                      >{{ slot.hour }}-{{ slot.minute }}</span
+                    >
                   </div>
                   <div class="time-slot__customer">
                     {{ slot.customer.name }}
@@ -137,7 +140,7 @@ export default {
         });
         days.push({
           date: current,
-          dateFormatted: format(current, "d MMMM", { locale: ru }),
+          dateFormatted: format(current, "d MMMM: EEEE", { locale: ru }),
           slots,
         });
         iterator++;
@@ -171,7 +174,6 @@ export default {
 
 <style lang="scss" scoped>
 .meetings-plans {
-  margin-top: 70px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -191,7 +193,8 @@ export default {
   border-radius: 3px;
   padding: 4px 20px;
   margin-bottom: 17px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 1fr;
   justify-content: space-between;
   &__time {
     display: flex;
@@ -199,13 +202,15 @@ export default {
     justify-content: center;
     padding-right: 20px;
     border-right: 1px dashed #aaa;
-    min-width: 58px;
   }
   &__customer {
     padding: 20px;
     border-right: 1px dashed #aaa;
   }
   &__type {
+    display: flex;
+    padding-left: 25px;
+    align-items: center;
   }
 }
 .time-slot:last-child {

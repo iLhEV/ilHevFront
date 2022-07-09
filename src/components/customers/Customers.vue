@@ -1,16 +1,16 @@
 <template>
-  <v-card width="750" class="customers-list mx-auto" min-height="700">
+  <v-card width="750" class="mx-auto" min-height="700">
     <v-card-title>{{ showLang("titles.customers.list") }} </v-card-title>
     <v-card-text>
-      <v-btn @click="addCustomer" small depressed color="#C5E1A5" class="px-4"
+      <v-btn
+        @click="addCustomer"
+        small
+        color="#C5E1A5"
+        class="px-4"
+        elevation="1"
         >Добавить</v-btn
       >
-      <v-btn
-        small
-        depressed
-        color="#EFEBE9"
-        class="ml-5 px-0"
-        @click="updateListManually"
+      <v-btn small color="#EFEBE9" class="ml-5 px-0" @click="updateListManually"
         ><v-icon small>mdi-cached</v-icon></v-btn
       >
       <v-list>
@@ -98,9 +98,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.customers-list {
-  margin-top: 70px;
-}
 .v-list-item {
   border-bottom: 1px solid #ddd;
   padding: 20px 0;

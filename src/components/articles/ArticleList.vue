@@ -1,5 +1,5 @@
 <template>
-  <v-card width="750" class="articles-list mx-auto" min-height="700">
+  <v-card width="750" class="mx-auto" min-height="700">
     <v-card-title>{{ showLang("titles.articles.list") }} </v-card-title>
     <v-card-text>
       <v-btn @click="addArticle" small depressed color="#C5E1A5" class="px-4"
@@ -98,9 +98,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.articles-list {
-  margin-top: 70px;
-}
 .v-list-item {
   border-bottom: 1px solid #ddd;
   padding: 20px 0;

@@ -17,6 +17,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .v-main {
-  background: #f9fbe7;
+  background: #fff8dc;
 }
 </style>
