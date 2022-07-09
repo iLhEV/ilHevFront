@@ -62,13 +62,19 @@
                     >
                   </div>
                   <div class="time-slot__customer">
-                    {{ slot.customer.name }}
-                  </div>
-                  <div class="time-slot__type">
-                    <span v-if="slot.regular"> регулярная запись</span>
-                  </div>
-                  <div class="time-slot__actions">
-                    <v-switch label="Встреча состоялась" />
+                    <div class="time-slot__customer-name">
+                      {{ slot.customer.name }}
+                    </div>
+                    <div class="time-slot__meeting-type">
+                      <span v-if="slot.regular"> регулярная запись</span>
+                    </div>
+                    <div class="time-slot__meeting-result">
+                      <v-select
+                        :items="meetingResults"
+                        label="Результат"
+                        outlined
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -114,6 +120,7 @@ export default {
       periodVariants,
       periodVariant: defaultPeriodVariant,
       showLang,
+      meetingResults: ["Состоялась", "Перенесена", "Отменена"],
     };
   },
 
@@ -222,7 +229,7 @@ export default {
   padding: 4px 20px;
   margin-bottom: 17px;
   display: grid;
-  grid-template-columns: 0.5fr 1.5fr 0.8fr 1.1fr;
+  grid-template-columns: 50px 1.5fr;
   justify-content: space-between;
   &__date-title {
     font-size: 1.4em;
@@ -233,24 +240,29 @@ export default {
     justify-content: center;
     padding-right: 20px;
     border-right: 1px dashed #d7ccc8;
+    font-size: 1.5em;
   }
   &__customer {
-    display: flex;
-    align-items: center;
     padding: 20px;
-    border-right: 1px dashed #d7ccc8;
   }
-  &__type {
+  &__customer-name {
+    font-size: 1.5em;
+    padding-bottom: 10px;
+  }
+  &__meeting-type {
+  }
+  &__meeting-result {
+    padding-top: 20px;
     display: flex;
-    padding-left: 10px;
-    align-items: center;
-    border-right: 1px dashed #d7ccc8;
-  }
-  &__actions {
-    padding-left: 15px;
+    justify-content: center;
     ::v-deep {
-      .v-label {
-        font-size: 0.9em;
+      .v-input__slot {
+        margin-bottom: 0;
+      }
+      .v-input {
+        margin-top: 0;
+        padding-top: 0;
+        max-width: 200px;
       }
     }
   }
