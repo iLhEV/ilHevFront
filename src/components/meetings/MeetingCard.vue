@@ -206,7 +206,6 @@ export default {
     },
     async addTime() {
       this.meetingTimes.push({ ...this.emptyItem, timestamp: Date.now() });
-      console.log(this.meetingTimes);
     },
     async deleteTime(timestamp) {
       this.meetingTimes = this.meetingTimes.filter(

@@ -158,9 +158,7 @@ export default {
       let slots = [];
       let current = today;
       let day = null;
-      console.log(2, periodLengthDays);
       while (iterator <= periodLengthDays) {
-        current = addDays(today, iterator);
         day = getDay(current);
         slots = regularSlots.filter((el) => {
           return el.dayOfWeek === day;
@@ -172,6 +170,7 @@ export default {
           dayNumber: format(current, "i"),
           slots,
         });
+        current = addDays(today, iterator);
         iterator++;
       }
       this.meetingsPlans = days;
@@ -213,12 +212,12 @@ export default {
   margin-left: auto;
 }
 .v-list-item {
-  border: 3px solid #e8eaf6;
+  border: 3px solid #9fa8da;
   border-radius: 12px;
   margin-bottom: 20px;
 }
 .day-content {
-  border-top: 1px solid #cfd8dc;
+  border-top: 1px solid #5c6bc0;
   margin-top: 7px;
   padding-top: 20px;
   padding-bottom: 10px;
@@ -232,7 +231,7 @@ export default {
   grid-template-columns: 50px 1.5fr;
   justify-content: space-between;
   &__date-title {
-    font-size: 1.4em;
+    font-size: 1.7em;
   }
   &__time {
     display: flex;
