@@ -7,14 +7,14 @@
           <v-btn
             @click="addMeetingPlan"
             small
-            depressed
+            elevation="1"
             color="#C5E1A5"
             class="px-4"
             >Запланировать</v-btn
           >
           <v-btn
             small
-            depressed
+            elevation="1"
             color="#EFEBE9"
             class="ml-5 px-0"
             @click="updateListManually"
@@ -36,7 +36,19 @@
         <template v-if="meetingsPlans.length">
           <v-list-item v-for="item in meetingsPlans" :key="item.id">
             <v-list-item-content>
-              {{ item.dateFormatted }}
+              <div>
+                <v-badge
+                  :content="item.dayFormatted"
+                  :color="
+                    ['6', '7'].includes(item.dayNumber) ? 'red' : '#9FA8DA'
+                  "
+                  inline
+                >
+                  <span class="time-slot__date-title">{{
+                    item.dateFormatted
+                  }}</span></v-badge
+                >
+              </div>
               <div class="day-content text-center">
                 <div v-if="item.slots.length < 1">записей нет</div>
                 <div
@@ -144,7 +156,9 @@ export default {
         });
         days.push({
           date: current,
-          dateFormatted: format(current, "d MMMM: EEEE", { locale: ru }),
+          dateFormatted: format(current, "d MMMM", { locale: ru }),
+          dayFormatted: format(current, "EEEEEEE", { locale: ru }),
+          dayNumber: format(current, "i"),
           slots,
         });
         iterator++;
@@ -177,6 +191,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+::v-deep {
+  .v-badge__wrapper {
+    padding-left: 8px !important;
+  }
+}
+
 .meetings-plans {
   margin-right: auto;
   margin-left: auto;
@@ -200,6 +220,9 @@ export default {
   display: grid;
   grid-template-columns: 0.5fr 2fr 1fr;
   justify-content: space-between;
+  &__date-title {
+    font-size: 1.4em;
+  }
   &__time {
     display: flex;
     align-items: center;
