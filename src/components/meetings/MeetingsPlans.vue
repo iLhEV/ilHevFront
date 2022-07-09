@@ -32,6 +32,7 @@
           />
         </v-col>
       </v-row>
+      <div class="text-center">Период: {{ period[0] }} - {{ period[1] }}</div>
       <v-list>
         <template v-if="meetingsPlans.length">
           <v-list-item
@@ -116,7 +117,14 @@ import { ru } from "date-fns/locale";
 
 export default {
   name: "MeetingsPlans",
+
   components: { MeetingCard, ArticleDelete },
+
+  async beforeMount() {
+    await this.getCustomers();
+    this.createMeetingsPlans();
+  },
+
   data() {
     return {
       meetingPlanDialog: false,
@@ -132,10 +140,12 @@ export default {
     };
   },
 
-  async beforeMount() {
-    await this.getCustomers();
-    this.createMeetingsPlans();
+  watch: {
+    periodVariant() {
+      this.createMeetingsPlans();
+    },
   },
+
   methods: {
     addMeetingPlan() {
       this.meetingPlanDialog = true;
@@ -161,12 +171,19 @@ export default {
       // Get time period.
       const today = new Date();
       let iterator = 1;
-      const periodLengthDays = this.periodVariant.value;
+      const periodLengthDays = this.periodVariant;
       const days = [];
       let slots = [];
       let current = today;
       let day = null;
-      while (iterator <= periodLengthDays) {
+      this.period = [
+        format(current, "d MMMM", { locale: ru }),
+        format(addDays(current, periodLengthDays - 1), "d MMMM", {
+          locale: ru,
+        }),
+      ];
+
+      while (iterator < periodLengthDays + 1) {
         day = getDay(current);
         slots = regularSlots.filter((el) => {
           return el.dayOfWeek === day;
@@ -229,6 +246,9 @@ export default {
 .meetings-plans {
   margin-right: auto;
   margin-left: auto;
+}
+.v-list {
+  padding: 0;
 }
 .v-list-item {
   border: 3px solid;

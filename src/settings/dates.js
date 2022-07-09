@@ -27,6 +27,11 @@ export const meetingMinutes = [
   "55",
 ];
 
-export const periodVariants = [{ value: 7, text: "Ближайшие 7 дней" }];
+export const periodVariants = [
+  { value: -14, text: "Прошедшие 14 дней" },
+  { value: -7, text: "Прошедшие 7 дней" },
+  { value: 7, text: "Ближайшие 7 дней" },
+  { value: 14, text: "Ближайшие 14 дней" },
+];
 
-export const defaultPeriodVariant = periodVariants.find((el) => el.value === 7);
+export const defaultPeriodVariant = 7;
