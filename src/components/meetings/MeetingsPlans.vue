@@ -182,7 +182,7 @@ export default {
   margin-left: auto;
 }
 .v-list-item {
-  border: 3px solid #bcaaa4;
+  border: 3px solid #e8eaf6;
   border-radius: 12px;
   margin-bottom: 20px;
 }
