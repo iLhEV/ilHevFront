@@ -12,9 +12,7 @@
         {{ showLang("titles.customers.delete") }}
       </v-card-title>
       <v-card-text>
-        <div class="highlighted-black">
-          Are you sure you want to delete customer with id = {{ customer.id }}?
-        </div>
+        <div class="highlighted-black">Вы точно хотите удалить клиента?</div>
         <v-expansion-panels v-model="showText" class="mt-5" multiple>
           <v-expansion-panel>
             <v-expansion-panel-header>Клиент</v-expansion-panel-header>

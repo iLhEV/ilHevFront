@@ -34,13 +34,21 @@
       </v-row>
       <v-list>
         <template v-if="meetingsPlans.length">
-          <v-list-item v-for="item in meetingsPlans" :key="item.id">
+          <v-list-item
+            v-for="item in meetingsPlans"
+            :key="item.id"
+            :style="
+              ['6', '7'].includes(item.dayNumber)
+                ? 'border-color: #EF9A9A'
+                : 'border-color: #9fa8da'
+            "
+          >
             <v-list-item-content>
               <div>
                 <v-badge
                   :content="item.dayFormatted"
                   :color="
-                    ['6', '7'].includes(item.dayNumber) ? 'red' : '#9FA8DA'
+                    ['6', '7'].includes(item.dayNumber) ? '#E53935' : '#5C6BC0'
                   "
                   inline
                 >
@@ -163,6 +171,17 @@ export default {
         slots = regularSlots.filter((el) => {
           return el.dayOfWeek === day;
         });
+        slots.sort((a, b) => {
+          const aVal = a.hour * 60 + a.minute;
+          const bVal = b.hour * 60 + b.minute;
+          if (aVal < bVal) {
+            return -1;
+          } else if (aVal > bVal) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
         days.push({
           date: current,
           dateFormatted: format(current, "d MMMM", { locale: ru }),
@@ -212,7 +231,7 @@ export default {
   margin-left: auto;
 }
 .v-list-item {
-  border: 3px solid #9fa8da;
+  border: 3px solid;
   border-radius: 12px;
   margin-bottom: 20px;
 }
